@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test</title>
+    <link rel="stylesheet" href="entry.css" />
+    <script src="contests-data.js" defer></script>
+    <script src="cute/characters.js" defer></script>
+    <script src="narcissus-live2d.js" defer></script>
+    <script src="character-spine.js" defer></script>
+    <script src="contests.js" defer></script>
+  </head>
+  <body>
+    <main class="note dashboard">
+      <img class="home-avatar" src="assets/github-avatar.jpg" alt="Kieray" title="Kieray" width="44" height="44" />
+      <span class="eyebrow">TEST</span>
+      <svg class="spinning-pinwheel" viewBox="0 0 170 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="fold-pink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7cfda" /><stop offset="1" stop-color="#d99db2" /></linearGradient>
+          <linearGradient id="fold-mint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cbe3df" /><stop offset="1" stop-color="#8ebfc0" /></linearGradient>
+          <linearGradient id="fold-lilac" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ded0eb" /><stop offset="1" stop-color="#b49bd0" /></linearGradient>
+          <linearGradient id="fold-blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8e4f4" /><stop offset="1" stop-color="#9eb7dc" /></linearGradient>
+          <pattern id="folded-paper" width="14" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="4" cy="4" r="1.3" fill="#fff" opacity=".48" />
+            <circle cx="11" cy="10" r="1" fill="#75677d" opacity=".16" />
+            <path d="M0 12 12 0" stroke="#fff" stroke-width=".7" opacity=".25" />
+          </pattern>
+          <filter id="handmade-paper" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="1" seed="17" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale=".7" />
+          </filter>
+        </defs>
+        <path d="M83 52h6l-1 59h-4z" fill="#b58d69" />
+        <path d="M85 53v56" fill="none" stroke="#e2c29e" stroke-width="1.5" opacity=".8" />
+        <path d="M68 108q18-6 36 0l-3 8H71z" fill="#d3b18b" stroke="#9d7859" stroke-width="1.5" />
+        <g class="pinwheel-blades" filter="url(#handmade-paper)">
+          <path d="M85 50 49 18q25-9 42 0z" fill="url(#fold-pink)" stroke="#a4798a" stroke-width="1.7" />
+          <path d="m87 48 32-36q9 25 1 42z" fill="url(#fold-mint)" stroke="#73999c" stroke-width="1.7" />
+          <path d="m88 51 35 32q-25 9-42 1z" fill="url(#fold-lilac)" stroke="#8d77a8" stroke-width="1.7" />
+          <path d="m84 53-32 35q-9-25-1-42z" fill="url(#fold-blue)" stroke="#748aa8" stroke-width="1.7" />
+          <g fill="url(#folded-paper)" opacity=".7">
+            <path d="M85 50 49 18q25-9 42 0z" />
+            <path d="m87 48 32-36q9 25 1 42z" />
+            <path d="m88 51 35 32q-25 9-42 1z" />
+            <path d="m84 53-32 35q-9-25-1-42z" />
+          </g>
+          <path d="M85 50 49 18l31 27zm2-2 32-36-27 31zm1 3 35 32-31-27zm-4 2L52 88l27-31z" fill="#fff8e9" opacity=".76" />
+          <path d="M85 50 49 18m38 30 32-36M88 51l35 32M84 53 52 88" fill="none" stroke="#8e6f7c" stroke-width="1" opacity=".45" />
+          <circle cx="87.5" cy="52" r="7.5" fill="#806b72" opacity=".15" />
+          <circle cx="86" cy="50" r="7" fill="#c79564" stroke="#906948" stroke-width="1.4" />
+          <circle cx="84" cy="48" r="1.6" fill="#efd8b5" />
+        </g>
+        <path d="m141 30 1.5 4.5 4.5 1.5-4.5 1.5L141 42l-1.5-4.5L135 36l4.5-1.5zM29 61l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" fill="#d9ad53" />
+      </svg>
+      <h1>123，<br />456。</h1>
+      <p>998244353。</p>
+      <time class="live-clock" id="live-clock">
+        <span class="clock-date">UTC+8 · 时间正在加载…</span>
+        <strong class="clock-time">--:--:--</strong>
+        <span class="clock-lunar">日期正在加载…</span>
+      </time>
+      <nav class="buttons platform-links" aria-label="网站入口">
+        <a class="candy blue" href="https://codeforces.com/contests" target="_blank" rel="noopener noreferrer">
+          <span class="button-icon" aria-hidden="true"><img src="assets/platforms/codeforces.png" alt="" width="30" height="30" /></span>
+          <span>Codeforces</span>
+          <span class="arrow" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="candy lavender" href="https://atcoder.jp/contests/" target="_blank" rel="noopener noreferrer">
+          <span class="button-icon" aria-hidden="true"><img src="assets/platforms/atcoder.png" alt="" width="30" height="30" /></span>
+          <span>AtCoder</span>
+          <span class="arrow" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="candy mint" href="https://ac.nowcoder.com/acm/contest/vip-index" target="_blank" rel="noopener noreferrer">
+          <span class="button-icon" aria-hidden="true"><img src="assets/platforms/nowcoder-contest.png" alt="" width="30" height="30" /></span>
+          <span>牛客竞赛</span>
+          <span class="arrow" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="candy blue" href="https://cftracker.netlify.app/contests" target="_blank" rel="noopener noreferrer">
+          <span class="button-icon" aria-hidden="true"><img src="assets/platforms/codeforces.png" alt="" width="30" height="30" /></span>
+          <span>CF Tracker</span>
+          <span class="arrow" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="candy lavender" href="https://kenkoooo.com/atcoder/" target="_blank" rel="noopener noreferrer">
+          <span class="button-icon" aria-hidden="true"><img src="assets/platforms/atcoder.png" alt="" width="30" height="30" /></span>
+          <span>AtCoder Tracker</span>
+          <span class="arrow" aria-hidden="true">&nearr;</span>
+        </a>
+      </nav>
+      <section class="contest-board" aria-labelledby="contest-heading">
+        <div class="board-heading">
+          <div>
+            <span class="eyebrow">A DATE WITH CODE</span>
+            <h2 id="contest-heading">CONTEST SCHEDULE</h2>
+          </div>
+          <label class="platform-filter">筛选平台
+            <select id="platform-filter">
+              <option value="all">全部平台</option>
+              <option value="codeforces">Codeforces</option>
+              <option value="atcoder">AtCoder</option>
+              <option value="nowcoder">牛客竞赛</option>
+            </select>
+          </label>
+        </div>
+        <p class="calendar-help">UTC+8 · 仅收录牛客挑战赛、ARC、AGC、Codeforces Div. 1 / Div. 1 + 2</p>
+        <p id="data-status" class="data-status" role="status">正在读取赛程快照；若长时间未显示，请检查 contests-data.js 和 contests.js 是否完整。</p>
+        <div class="next-contest" id="next-contest" hidden>
+          <div><span class="eyebrow">NEXT CONTEST</span><a id="next-contest-link" target="_blank" rel="noopener noreferrer"></a></div>
+          <div class="countdown-wrap"><span>距离开始</span><output id="contest-countdown" aria-live="off"></output></div>
+        </div>
+        <noscript><p class="data-status">请启用 JavaScript 查看比赛表格，也可以使用上方按钮查看官方赛程。</p></noscript>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="近期比赛表，可横向滚动">
+          <table>
+            <caption>
+              <svg class="caption-sunrise" viewBox="0 0 170 105" aria-hidden="true">
+                <defs>
+                  <filter id="sun-crayon" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="21" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3" />
+                  </filter>
+                </defs>
+                <g filter="url(#sun-crayon)" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="86" cy="44" r="23" fill="#efc56d" opacity=".9" />
+                  <path d="M86 10v8M86 70v9M52 44h9m50 0h9M62 20l6 6m36 36 6 6m0-48-6 6M68 62l-6 6" fill="none" stroke="#d8a94d" stroke-width="4" />
+                  <path d="M18 82c17-18 34-21 52-9 15-17 35-18 55-1 10-6 19-7 29-1v25H18z" fill="#abc5ad" />
+                  <path d="M18 89c21-8 42-7 63 3 20-12 45-13 73-4v13H18z" fill="#86aa91" opacity=".9" />
+                  <path d="M38 88V73m-6 5c4 0 6 3 6 7m6-7c-4 0-6 3-6 7M133 91V76m-6 5c4 0 6 3 6 7m6-7c-4 0-6 3-6 7" fill="none" stroke="#587f68" stroke-width="2.5" />
+                  <circle cx="38" cy="71" r="4" fill="#d59aa5" />
+                  <circle cx="133" cy="74" r="4" fill="#9caad0" />
+                  <path d="M68 42c10-4 22-4 34 0M26 94c24-5 47-3 68 5" fill="none" stroke="#f7dfa9" stroke-width="1.8" stroke-dasharray="3 6" opacity=".75" />
+                </g>
+              </svg>
+              COMING SOON <span>进行中 · 全部已公布的未来比赛</span>
+            </caption>
+            <thead><tr><th scope="col">平台</th><th scope="col">比赛名称</th><th scope="col">开始时间</th><th scope="col">时长</th><th scope="col">状态</th></tr></thead>
+            <tbody id="upcoming-contests"><tr><td colspan="5" class="empty-row">正在加载比赛…</td></tr></tbody>
+          </table>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="最近结束比赛表，可横向滚动">
+          <table>
+            <caption>历史比赛 <span>按结束时间从近到远排列 20 场</span></caption>
+            <thead><tr><th scope="col">平台</th><th scope="col">比赛名称</th><th scope="col">开始时间</th><th scope="col">时长</th><th scope="col">状态</th></tr></thead>
+            <tbody id="recent-contests"><tr><td colspan="5" class="empty-row">正在加载比赛…</td></tr></tbody>
+          </table>
+        </div>
+        <p class="calendar-help">赛程来自 Codeforces API、AtCoder 赛程页和牛客挑战赛专页，不包含全部私有赛或训练赛。此列表为数据快照，并非实时接口；变更以官方公告为准。</p>
+      </section>
+      <section class="contest-board activity-board" aria-labelledby="activity-heading">
+        <div class="board-heading">
+          <div class="tracker-title">
+            <svg class="tracker-whale" viewBox="0 0 170 112" aria-hidden="true">
+              <defs>
+                <filter id="soft-crayon" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="13" result="noise" />
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.15" />
+                </filter>
+              </defs>
+              <g filter="url(#soft-crayon)" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M34 65c4-24 24-39 52-39 28 0 47 14 52 35 5 21-12 35-46 37-35 2-62-8-58-33z" fill="#96b9cb" stroke="#718fa0" stroke-width="2.4" />
+                <path d="M124 45c13-12 25-11 33-2-6 2-10 7-11 13 5 2 9 6 11 12-14 2-24-4-29-13" fill="#9daacb" stroke="#7583aa" stroke-width="2.2" />
+                <path d="M39 71c16 15 43 20 74 12-8 12-25 16-49 13-17-2-27-10-25-25z" fill="#f6e8d7" opacity=".96" />
+                <path d="M77 76c-9 3-15 10-18 20 13-1 22-7 27-16" fill="#7fa4b7" stroke="#718fa0" stroke-width="2" />
+                <circle cx="65" cy="54" r="2.5" fill="#526f7b" stroke="none" />
+                <path d="M84 28c0-10 7-17 14-18m-9 20c6-6 14-6 20-2m-22 1c-3-7-9-10-15-9" fill="none" stroke="#82a9bd" stroke-width="3" />
+                <path d="M48 44c18-12 45-14 69-4M44 51c20-10 49-10 75-1M48 59c22-7 47-6 68 1" fill="none" stroke="#c7dbe3" stroke-width="1.7" stroke-dasharray="4 7" opacity=".72" />
+                <path d="M28 91c8-5 16-5 24 0m63 7c8-5 16-5 24 0" fill="none" stroke="#a9c7c2" stroke-width="3" opacity=".8" />
+                <path d="m26 35 1.6 4.5L32 41l-4.4 1.5L26 47l-1.6-4.5L20 41l4.4-1.5z" fill="#e5b882" stroke="none" />
+                <path d="M137 20c3-5 10-2 9 3-1 4-7 8-9 10-2-2-8-6-9-10-1-5 6-8 9-3z" fill="#d9a7a1" stroke="none" opacity=".85" />
+              </g>
+            </svg>
+            <div>
+              <span class="eyebrow">KIERAY'S TRACKS</span>
+              <h2 id="activity-heading">SUBMISSION TRACKER <span class="count-pill" id="activity-count">0 场</span></h2>
+            </div>
+          </div>
+          <div class="problem-legend"><span class="solved">AC</span><span class="failed">WA / TLE</span><span class="unattempted">未尝试</span></div>
+        </div>
+        <p class="calendar-help">收录至少提交过一道题的比赛；显示最后提交状态、通过时间和 Tracker 难度评分。</p>
+        <div class="activity-controls">
+          <label>题目范围
+            <select id="activity-filter">
+              <option value="all">全部题目</option>
+              <option value="unaccepted">仅未 AC</option>
+            </select>
+          </label>
+          <label>排列方式
+            <select id="activity-sort">
+              <option value="contest">按比赛时间</option>
+              <option value="difficulty-asc">难度从低到高</option>
+              <option value="difficulty-desc">难度从高到低</option>
+            </select>
+          </label>
+        </div>
+        <p id="activity-status" class="data-status" role="status">正在读取 Kieray 的公开提交记录…</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Kieray 提交记录表，可横向滚动">
+          <table>
+            <thead><tr><th scope="col">平台</th><th scope="col">比赛</th><th scope="col">比赛时间</th><th scope="col">题目</th></tr></thead>
+            <tbody id="activity-contests"><tr><td colspan="4" class="empty-row">正在加载提交记录…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      <span class="footnote">made of curiosity and a little daydreaming</span>
+      <div class="bottom-clover" aria-hidden="true">🍀</div>
+    </main>
+    <div class="fixed-narcissus" id="fixed-narcissus" role="button" tabindex="0" aria-label="随机播放角色动作或语音" title="点击随机播放动作或语音">
+      <span class="narcissus-loading" id="narcissus-loading">角色加载中…</span>
+    </div>
+    <div class="narcissus-settings">
+      <button type="button" id="narcissus-toggle" aria-label="角色设置" title="角色设置" aria-expanded="false" aria-controls="narcissus-panel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m10 3-.6 2.2-1.8 1L5.4 5.6l-2 3.5L5 10.7v2.1l-1.6 1.6 2 3.5 2.2-.6 1.8 1L10 21h4l.6-2.7 1.8-1 2.2.6 2-3.5-1.6-1.6v-2.1l1.6-1.6-2-3.5-2.2.6-1.8-1L14 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+          <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+      </button>
+      <div class="narcissus-panel" id="narcissus-panel" hidden>
+        <label for="character-select">角色 / Character</label>
+        <select id="character-select" class="character-select"></select>
+        <label for="skin-select">皮肤 / Garment</label>
+        <select id="skin-select" class="character-select"></select>
+        <small id="character-selection-name"></small>
+        <label for="narcissus-size">大小 <output id="narcissus-size-value">100%</output></label>
+        <input id="narcissus-size" type="range" min="50" max="300" step="5" value="100" />
+        <label for="narcissus-speed">速度 <output id="narcissus-speed-value">1×</output></label>
+        <input id="narcissus-speed" type="range" min="0.25" max="3" step="0.25" value="1" />
+        <small id="narcissus-mode">正在初始化动画…</small>
+        <button type="button" class="narcissus-hide" id="character-retry" hidden>重新加载角色</button>
+        <button type="button" class="narcissus-hide" id="narcissus-hide" aria-pressed="false">隐藏角色</button>
+        <button type="button" class="narcissus-hide" id="narcissus-background" aria-pressed="true">后台播放：开启</button>
+        <a class="narcissus-more" href="https://uttu.merui.net" target="_blank" rel="noopener noreferrer">更多 ↗</a>
+      </div>
+    </div>
+    <audio id="narcissus-voice" preload="none"></audio>
+    <div class="voice-subtitle" id="voice-subtitle" role="status" aria-live="polite" hidden>
+      <span id="voice-label"></span>
+      <small id="voice-notice" role="alert" hidden></small>
+      <p id="voice-en" lang="en"></p>
+      <p id="voice-zh" lang="zh-CN"></p>
+    </div>
+  </body>
+</html>
