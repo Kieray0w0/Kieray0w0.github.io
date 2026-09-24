@@ -337,7 +337,7 @@ a:focus-visible { outline: 3px solid #81597d; outline-offset: 7px; }
 #page-nav-panel a { display: block; margin: 2px 0; padding: 9px; border-radius: 8px; color: #654d68; text-decoration: none; line-height: 1.5; overflow-wrap: anywhere; }
 #page-nav-panel a:hover, #page-nav-panel a[aria-current="location"] { background: #f0e7f5; }
 #page-nav-panel a.page-nav-subsection { padding-left: 23px; font-size: 11px; color: #856c72; }
-#page-top, #live-clock, #three-week-calendar, #platform-links, #contest-heading, #coming-soon, #recent-section, #activity-heading { scroll-margin-top: 64px; }
+#page-top, #live-clock, #three-week-calendar, #platform-links, #contest-heading, #coming-soon, #recent-section, #ccf-deadlines, #activity-heading { scroll-margin-top: 64px; }
 .narcissus-panel {
   position: absolute;
   left: 0;
@@ -464,6 +464,17 @@ a:focus-visible { outline: 3px solid #81597d; outline-offset: 7px; }
 .status-tag.upcoming { background: #fff0d5; color: #805d29; }
 .status-tag.running { background: #dcefe4; color: #38694c; }
 .status-tag.finished { background: #f0eae9; color: #7b676f; }
+.ccf-deadline-board { --ccf-ink: #3f6257; --ccf-paper: #eff6ef; }
+.ccf-next { border-color: #b9d0c0; background: var(--ccf-paper); }
+.ccf-category-tag { display: inline-grid; min-width: 34px; padding: 4px 8px; border-radius: 999px; background: #dfeee4; color: var(--ccf-ink); font: 700 11px/1.3 "Trebuchet MS", sans-serif; text-align: center; }
+.ccf-title-zh { min-width: 180px; color: #665c5c; line-height: 1.55; }
+.ccf-row-countdown { color: #795871; font: 700 12px/1.4 "Trebuchet MS", "Microsoft YaHei", sans-serif; font-variant-numeric: tabular-nums; }
+.ccf-source-link { color: inherit; text-decoration-color: #a8b5ae; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.ccf-source-link:hover { color: var(--ccf-ink); text-decoration-color: currentColor; }
+.deadline-passed { opacity: .55; }
+.journal-note { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin: 20px 0 0; padding: 14px 16px; border: 1px dashed #adc8b7; border-radius: 14px; background: #f4f8ef; color: #597167; font-size: 12px; line-height: 1.6; }
+.journal-note strong { color: #3f6257; white-space: nowrap; }
+.journal-note a { color: #5b5279; text-underline-offset: 3px; white-space: nowrap; }
 .count-pill { display: inline-block; padding: 3px 9px; border-radius: 12px; background: #eee5f7; color: #6c567b; font: 11px "Trebuchet MS", sans-serif; vertical-align: middle; }
 .problem-legend { display: flex; gap: 7px; font-size: 10px; }
 .problem-legend span, .problem-chip { display: inline-block; padding: 5px 8px; border-radius: 8px; }
@@ -517,6 +528,8 @@ a:focus-visible { outline: 3px solid #81597d; outline-offset: 7px; }
   .board-heading { align-items: flex-start; gap: 10px; }
   .activity-board .board-heading { flex-wrap: wrap; }
   .next-contest { align-items: stretch; flex-direction: column; gap: 12px; }
+  .journal-note { grid-template-columns: 1fr; gap: 5px; }
+  .journal-note a { white-space: normal; }
   .countdown-wrap { text-align: left; }
   .board-heading h2 { font-size: 22px; }
   .board-heading .eyebrow { font-size: 8px; letter-spacing: 1px; }

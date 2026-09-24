@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="entry.css" />
     <script src="contests-data.js" defer></script>
     <script src="calendar-data.js" defer></script>
+    <script src="ccf-deadlines-data.js" defer></script>
     <script src="cute/characters.js" defer></script>
     <script src="narcissus-live2d.js" defer></script>
     <script src="character-spine.js" defer></script>
     <script src="face-capture.js" defer></script>
     <script src="page-navigation.js" defer></script>
     <script src="contests.js" defer></script>
+    <script src="ccf-deadlines.js" defer></script>
   </head>
   <body>
     <aside class="page-navigation" aria-label="页面目录">
@@ -28,6 +30,7 @@
         <a href="#contest-heading">CONTEST SCHEDULE · 赛程</a>
         <a class="page-nav-subsection" href="#coming-soon">COMING SOON · 近期比赛</a>
         <a class="page-nav-subsection" href="#recent-section">历史比赛</a>
+        <a href="#ccf-deadlines">CCF A DEADLINES</a>
         <a href="#activity-heading">SUBMISSION TRACKER</a>
       </nav>
     </aside>
@@ -175,6 +178,44 @@
         </div>
         <p class="calendar-help">赛程来自 Codeforces API、AtCoder 赛程页和牛客挑战赛专页，不包含全部私有赛或训练赛。此列表为数据快照，并非实时接口；变更以官方公告为准。</p>
       </section>
+      <section class="contest-board ccf-deadline-board" id="ccf-deadlines" aria-labelledby="ccf-heading">
+        <div class="board-heading">
+          <div>
+            <span class="eyebrow">PAPER PLANE CALENDAR</span>
+            <h2 id="ccf-heading" tabindex="-1">CCF A DEADLINES</h2>
+          </div>
+          <label class="platform-filter">筛选方向
+            <select id="ccf-category-filter">
+              <option value="all">全部方向</option>
+              <option value="AI">人工智能</option><option value="CG">图形学与多媒体</option>
+              <option value="CT">计算机科学理论</option><option value="DB">数据库/数据挖掘/内容检索</option>
+              <option value="DS">体系结构/并行与分布/存储</option><option value="HI">人机交互与普适计算</option>
+              <option value="MX">交叉/综合/新兴</option><option value="NW">计算机网络</option>
+              <option value="SC">网络与信息安全</option><option value="SE">软件工程/系统软件/程序设计语言</option>
+            </select>
+          </label>
+        </div>
+        <p class="calendar-help">会议截止时间统一显示为北京时间（UTC+8）；同一会议的不同投稿轮次分别显示。</p>
+        <p id="ccf-data-status" class="data-status" role="status">正在读取 CCF A 会议 DDL 快照…</p>
+        <div class="next-contest ccf-next" id="next-ccf-deadline" hidden>
+          <div><span class="eyebrow">NEXT PAPER DEADLINE</span><a id="next-ccf-link" target="_blank" rel="noopener noreferrer"></a></div>
+          <div class="countdown-wrap"><span>距离截止</span><output id="ccf-countdown" aria-live="off"></output></div>
+        </div>
+        <noscript><p class="data-status">请启用 JavaScript 查看 CCF A 会议截止日期。</p></noscript>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="CCF A 会议截止日期表，可横向滚动">
+          <table>
+            <caption>CONFERENCE DDL <span>已公布且尚未截止</span></caption>
+            <thead><tr><th scope="col">方向</th><th scope="col">会议</th><th scope="col">中文名称</th><th scope="col">截止时间（UTC+8）</th><th scope="col">倒计时</th><th scope="col">轮次</th></tr></thead>
+            <tbody id="ccf-deadline-rows"><tr><td colspan="6" class="empty-row">正在加载截止日期…</td></tr></tbody>
+          </table>
+        </div>
+        <aside class="journal-note">
+          <strong>CCF A 类期刊</strong>
+          <span>多数采用全年滚动投稿，没有统一 DDL，因此不生成虚假倒计时。</span>
+          <a href="https://www.ccf.org.cn/Academic_Evaluation/By_category/" target="_blank" rel="noopener noreferrer">查看 CCF 官方推荐目录 &nearr;</a>
+        </aside>
+        <p class="calendar-help">会议数据来自 <a class="ccf-source-link" href="https://github.com/ccfddl/ccf-deadlines" target="_blank" rel="noopener noreferrer">CCFDDL</a>（MIT）；社区数据可能变更或延迟，投稿前必须以会议官网为准。</p>
+      </section>
       <section class="contest-board activity-board" aria-labelledby="activity-heading">
         <div class="board-heading">
           <div class="tracker-title">
@@ -286,6 +327,8 @@
         <button type="button" class="narcissus-hide" id="motion-capture-calibrate" hidden>校准正面姿态</button>
         <small>动捕仅在本机处理，不录制、不上传、不使用麦克风。切换角色、隐藏角色或离开页面会关闭摄像头。</small>
         <a class="narcissus-more" href="https://uttu.merui.net" target="_blank" rel="noopener noreferrer">更多 ↗</a>
+        <a class="narcissus-more" id="desktop-download" href="https://codeload.github.com/Kieray0w0/character_desktop/zip/refs/heads/main" aria-describedby="desktop-download-help">下载桌面版（ZIP）</a>
+        <small id="desktop-download-help">下载线上仓库源码包，启动步骤见包内 README。</small>
       </div>
     </div>
     <audio id="narcissus-voice" preload="none"></audio>
