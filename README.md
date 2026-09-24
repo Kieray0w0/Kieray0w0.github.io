@@ -1,6 +1,10 @@
 # Public Website
 
 Runtime-only copy of the local website. Serve the repository root with GitHub Pages.
+For local preview on Windows, double-click `start_local.bat` (requires Python).
+It opens `http://127.0.0.1:8001/` and serves this folder only; Ctrl+C stops it.
+This preview server has no data-refresh API. Port 8001 is separate from the
+private source folder's port 8000.
 The local test toolbar, Read directories, caches, generators, GIF fallback, OGG
 originals, source snapshots, archives and story backups are not part of this copy.
 Voice manifests contain MP3 paths only. All model dependencies are preserved.

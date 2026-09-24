@@ -6,13 +6,32 @@
     <title>Test</title>
     <link rel="stylesheet" href="entry.css" />
     <script src="contests-data.js" defer></script>
+    <script src="calendar-data.js" defer></script>
     <script src="cute/characters.js" defer></script>
     <script src="narcissus-live2d.js" defer></script>
     <script src="character-spine.js" defer></script>
+    <script src="face-capture.js" defer></script>
+    <script src="page-navigation.js" defer></script>
     <script src="contests.js" defer></script>
   </head>
   <body>
-    <main class="note dashboard">
+    <aside class="page-navigation" aria-label="页面目录">
+      <button type="button" id="page-nav-toggle" aria-label="打开页面目录" title="页面目录" aria-expanded="false" aria-controls="page-nav-panel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+      </button>
+      <nav id="page-nav-panel" aria-label="页面板块" hidden>
+        <span class="page-nav-title">CONTENTS · 页面目录</span>
+        <a href="#page-top">首页</a>
+        <a href="#live-clock">时钟</a>
+        <a href="#three-week-calendar">三周日历</a>
+        <a href="#platform-links">网站入口</a>
+        <a href="#contest-heading">CONTEST SCHEDULE · 赛程</a>
+        <a class="page-nav-subsection" href="#coming-soon">COMING SOON · 近期比赛</a>
+        <a class="page-nav-subsection" href="#recent-section">历史比赛</a>
+        <a href="#activity-heading">SUBMISSION TRACKER</a>
+      </nav>
+    </aside>
+    <main class="note dashboard" id="page-top" tabindex="-1">
       <img class="home-avatar" src="assets/github-avatar.jpg" alt="Kieray" title="Kieray" width="44" height="44" />
       <span class="eyebrow">TEST</span>
       <svg class="spinning-pinwheel" viewBox="0 0 170 120" aria-hidden="true">
@@ -55,12 +74,23 @@
       </svg>
       <h1>123，<br />456。</h1>
       <p>998244353。</p>
-      <time class="live-clock" id="live-clock">
+      <time class="live-clock" id="live-clock" tabindex="-1">
         <span class="clock-date">UTC+8 · 时间正在加载…</span>
         <strong class="clock-time">--:--:--</strong>
         <span class="clock-lunar">日期正在加载…</span>
       </time>
-      <nav class="buttons platform-links" aria-label="网站入口">
+      <section class="three-week-calendar" id="three-week-calendar" tabindex="-1" aria-label="最近三周日历，UTC+8">
+        <table>
+          <caption>THREE WEEKS <span id="calendar-range"></span></caption>
+          <thead><tr><th scope="col">周</th><th scope="col">一</th><th scope="col">二</th><th scope="col">三</th><th scope="col">四</th><th scope="col">五</th><th scope="col">六</th><th scope="col">日</th></tr></thead>
+          <tbody id="calendar-weeks"><tr><td colspan="8">正在加载日历…</td></tr></tbody>
+        </table>
+        <p class="calendar-guide">UTC+8 · 点击日期查看详情 · <span class="holiday-off">休</span> 放假 · <span class="holiday-work">班</span> 调休上班</p>
+        <div class="calendar-details" id="calendar-details" aria-live="polite"></div>
+        <p class="calendar-guide" id="calendar-holiday-status"></p>
+        <p class="calendar-guide">赛程为当前快照，随下方平台筛选变化；未列出不代表没有比赛。节日不等于放假，放假调休以官方通知为准。<a href="https://github.com/NateScarlet/holiday-cn" target="_blank" rel="noopener noreferrer">节假日来源</a></p>
+      </section>
+      <nav class="buttons platform-links" id="platform-links" tabindex="-1" aria-label="网站入口">
         <a class="candy blue" href="https://codeforces.com/contests" target="_blank" rel="noopener noreferrer">
           <span class="button-icon" aria-hidden="true"><img src="assets/platforms/codeforces.png" alt="" width="30" height="30" /></span>
           <span>Codeforces</span>
@@ -91,7 +121,7 @@
         <div class="board-heading">
           <div>
             <span class="eyebrow">A DATE WITH CODE</span>
-            <h2 id="contest-heading">CONTEST SCHEDULE</h2>
+            <h2 id="contest-heading" tabindex="-1">CONTEST SCHEDULE</h2>
           </div>
           <label class="platform-filter">筛选平台
             <select id="platform-filter">
@@ -109,7 +139,7 @@
           <div class="countdown-wrap"><span>距离开始</span><output id="contest-countdown" aria-live="off"></output></div>
         </div>
         <noscript><p class="data-status">请启用 JavaScript 查看比赛表格，也可以使用上方按钮查看官方赛程。</p></noscript>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="近期比赛表，可横向滚动">
+        <div class="table-scroll" id="coming-soon" tabindex="0" role="region" aria-label="近期比赛表，可横向滚动">
           <table>
             <caption>
               <svg class="caption-sunrise" viewBox="0 0 170 105" aria-hidden="true">
@@ -136,7 +166,7 @@
             <tbody id="upcoming-contests"><tr><td colspan="5" class="empty-row">正在加载比赛…</td></tr></tbody>
           </table>
         </div>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="最近结束比赛表，可横向滚动">
+        <div class="table-scroll" id="recent-section" tabindex="0" role="region" aria-label="最近结束比赛表，可横向滚动">
           <table>
             <caption>历史比赛 <span>按结束时间从近到远排列 20 场</span></caption>
             <thead><tr><th scope="col">平台</th><th scope="col">比赛名称</th><th scope="col">开始时间</th><th scope="col">时长</th><th scope="col">状态</th></tr></thead>
@@ -170,7 +200,7 @@
             </svg>
             <div>
               <span class="eyebrow">KIERAY'S TRACKS</span>
-              <h2 id="activity-heading">SUBMISSION TRACKER <span class="count-pill" id="activity-count">0 场</span></h2>
+              <h2 id="activity-heading" tabindex="-1">SUBMISSION TRACKER <span class="count-pill" id="activity-count">0 场</span></h2>
             </div>
           </div>
           <div class="problem-legend"><span class="solved">AC</span><span class="failed">WA / TLE</span><span class="unattempted">未尝试</span></div>
@@ -190,8 +220,30 @@
               <option value="difficulty-desc">难度从高到低</option>
             </select>
           </label>
+          <label>每页显示
+            <select id="activity-page-size" aria-describedby="activity-pagination-help">
+              <option value="10">10 条</option>
+              <option value="20" selected>20 条</option>
+              <option value="50">50 条</option>
+              <option value="100">100 条</option>
+              <option value="all">全部</option>
+            </select>
+          </label>
         </div>
+        <p class="calendar-help" id="activity-pagination-help">按比赛时间：一场比赛一条；按难度：一道题一条。</p>
         <p id="activity-status" class="data-status" role="status">正在读取 Kieray 的公开提交记录…</p>
+        <nav class="activity-pagination" aria-label="提交记录分页">
+          <button type="button" id="activity-prev" aria-controls="activity-contests" disabled>上一页</button>
+          <div id="activity-page-numbers" role="group" aria-label="选择页码"></div>
+          <span id="activity-page-info" role="status" aria-live="polite" aria-atomic="true">正在读取分页…</span>
+          <button type="button" id="activity-next" aria-controls="activity-contests" disabled>下一页</button>
+          <form id="activity-page-jump" novalidate>
+            <label for="activity-page-input">跳至</label>
+            <input id="activity-page-input" type="number" inputmode="numeric" min="1" step="1" required value="1" aria-label="目标页码" aria-describedby="activity-page-info" disabled />
+            <span>页</span>
+            <button type="submit" id="activity-page-go" aria-controls="activity-contests" disabled>跳转</button>
+          </form>
+        </nav>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Kieray 提交记录表，可横向滚动">
           <table>
             <thead><tr><th scope="col">平台</th><th scope="col">比赛</th><th scope="col">比赛时间</th><th scope="col">题目</th></tr></thead>
@@ -202,7 +254,7 @@
       <span class="footnote">made of curiosity and a little daydreaming</span>
       <div class="bottom-clover" aria-hidden="true">🍀</div>
     </main>
-    <div class="fixed-narcissus" id="fixed-narcissus" role="button" tabindex="0" aria-label="随机播放角色动作或语音" title="点击随机播放动作或语音">
+    <div class="fixed-narcissus" id="fixed-narcissus" role="button" tabindex="0" aria-label="单击播放动作或语音，按住拖动角色位置" title="单击互动，按住拖动位置">
       <span class="narcissus-loading" id="narcissus-loading">角色加载中…</span>
     </div>
     <div class="narcissus-settings">
@@ -225,7 +277,14 @@
         <small id="narcissus-mode">正在初始化动画…</small>
         <button type="button" class="narcissus-hide" id="character-retry" hidden>重新加载角色</button>
         <button type="button" class="narcissus-hide" id="narcissus-hide" aria-pressed="false">隐藏角色</button>
+        <button type="button" class="narcissus-hide" id="narcissus-reset-position">重置角色位置</button>
+        <small>按住角色可拖动，单击互动。拖动位置会自动保存。</small>
         <button type="button" class="narcissus-hide" id="narcissus-background" aria-pressed="true">后台播放：开启</button>
+        <button type="button" class="narcissus-hide" id="motion-capture-toggle" aria-pressed="false" aria-describedby="motion-capture-status" disabled>开启摄像头动捕</button>
+        <small id="motion-capture-status" role="status" aria-live="polite">角色加载后可开启动捕。</small>
+        <video id="motion-capture-preview" muted playsinline aria-label="摄像头镜像预览" hidden></video>
+        <button type="button" class="narcissus-hide" id="motion-capture-calibrate" hidden>校准正面姿态</button>
+        <small>动捕仅在本机处理，不录制、不上传、不使用麦克风。切换角色、隐藏角色或离开页面会关闭摄像头。</small>
         <a class="narcissus-more" href="https://uttu.merui.net" target="_blank" rel="noopener noreferrer">更多 ↗</a>
       </div>
     </div>

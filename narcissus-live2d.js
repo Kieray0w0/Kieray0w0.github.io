@@ -202,16 +202,25 @@ window.createNarcissusLive2D = async ({ container, skin = {
     if (physics) im.physics = runtime.createPhysics(core, physics);
     if (pose) im.pose = runtime.createPose(core, pose);
     const mm = im.motionManager;
-    const setExpression = async (name) => {
+    let captureActive = false;
+    let actionGeneration = 0;
+    const currentAction = (generation) => active() && !captureActive && generation === actionGeneration;
+    const expressionManager = mm.expressionManager;
+    if (expressionManager) {
+      const updateExpressions = expressionManager.update.bind(expressionManager);
+      expressionManager.update = (target, seconds) => !captureActive && updateExpressions(target, seconds);
+    }
+    const setExpression = async (name, generation = actionGeneration) => {
       guard();
-      const manager = mm.expressionManager;
-      if (!manager || !expressionNames.has(name)) return;
+      const manager = expressionManager;
+      if (!currentAction(generation) || !manager || !expressionNames.has(name)) return;
       const index = manager.getExpressionIndex(name);
       if (index < 0) throw new Error(`未知表情 ${name}`);
       if (!manager.expressions[index]) {
         const definition = settings.FileReferences.Expressions[index];
         const data = await loadJSON(definition.File);
         guard();
+        if (!currentAction(generation)) return;
         manager.expressions[index] = manager.createExpression(data, definition);
       }
       await wait(manager.setExpression(index));
@@ -237,6 +246,8 @@ window.createNarcissusLive2D = async ({ container, skin = {
     };
     const defaults = Array.from({ length: core.getParameterCount() }, (_, i) => core.getParameterDefaultValue(i));
     const partDefaults = Array.from({ length: core.getPartCount() }, (_, i) => core.getPartOpacityByIndex(i));
+    let neutralParameters = defaults;
+    let neutralParts = partDefaults;
     let busy = false;
     let playing = false;
     let lastAction = -1;
@@ -245,16 +256,18 @@ window.createNarcissusLive2D = async ({ container, skin = {
     let activeMouth = "t_bizui";
     let mouthRequest = 0;
     const updateMouth = async () => {
+      if (!active() || captureActive) return;
+      const generation = actionGeneration;
       const request = ++mouthRequest;
       const requested = speaking ? (activeMouth === "t_bizui" ? "t_idle" : activeMouth.replace("_bizui", "")) : activeMouth;
       const name = hasMotion(requested) ? requested : "t_bizui";
       try {
         const data = await loadJSON(motionFile(name));
-        if (active() && request === mouthRequest) {
+        if (currentAction(generation) && request === mouthRequest) {
           mouth.startMotion(motion(data, true), true, model.elapsedTime / 1000);
         }
       } catch {
-        if (active() && request === mouthRequest) {
+        if (currentAction(generation) && request === mouthRequest) {
           mouth.startMotion(motion(mouthJSON, true), true, model.elapsedTime / 1000);
         }
       }
@@ -263,11 +276,21 @@ window.createNarcissusLive2D = async ({ container, skin = {
     im.breath = undefined;
     im.eyeBlink = undefined;
     im.updateFocus = () => {};
-    idle.startMotion(motion(idleJSON, true), true, 0);
-    mouth.startMotion(motion(mouthJSON, true), true, 0);
+    // The first frame is also the deterministic capture baseline, without fade-in.
+    const initialIdle = motion(idleJSON, true);
+    const initialMouth = motion(mouthJSON, true);
+    initialIdle.setFadeInTime(0);
+    initialMouth.setFadeInTime(0);
+    idle.startMotion(initialIdle, true, 0);
+    mouth.startMotion(initialMouth, true, 0);
 
     // The running idle remains underneath the one-shot body layer during both fades.
     mm.update = (target, seconds) => {
+      if (captureActive) {
+        for (let i = 0; i < neutralParameters.length; i++) target.setParameterValueByIndex(i, neutralParameters[i]);
+        for (let i = 0; i < neutralParts.length; i++) target.setPartOpacityByIndex(i, neutralParts[i]);
+        return true;
+      }
       for (let i = 0; i < defaults.length; i++) target.setParameterValueByIndex(i, defaults[i]);
       for (let i = 0; i < partDefaults.length; i++) target.setPartOpacityByIndex(i, partDefaults[i]);
       idle.doUpdateMotion(target, seconds);
@@ -278,12 +301,13 @@ window.createNarcissusLive2D = async ({ container, skin = {
         playing = false;
         activeMouth = "t_bizui";
         updateMouth();
-        setExpression("e_idle").then(() => {
-          if (!active()) return;
+        const generation = actionGeneration;
+        setExpression("e_idle", generation).then(() => {
+          if (!currentAction(generation)) return;
           busy = false;
           container.dataset.action = "b_idle";
           report("Live2D · 待机");
-        }).catch(() => { if (active()) busy = false; });
+        }).catch(() => { if (currentAction(generation)) busy = false; });
       }
       return true;
     };
@@ -297,6 +321,48 @@ window.createNarcissusLive2D = async ({ container, skin = {
     await setExpression("e_idle");
     guard();
     im.update(0, 0);
+    // Cubism restores the pre-expression parameters after updating the mesh.
+    neutralParameters = defaults.map((_, i) => core.getParameterValueByIndex(i));
+    neutralParts = partDefaults.map((_, i) => core.getPartOpacityByIndex(i));
+    const parameterData = core.getModel().parameters;
+    // getParameterIndex() synthesizes missing IDs in this runtime; never use it here.
+    const parameterIndices = new Map(parameterData.ids.map((id, i) => [id, i]));
+    const sharedEyes = skin.id === "310504" || skin.id === "306604";
+    const spathodea = skin.id === "307301" || skin.id === "307304";
+    // Inputs use anatomical sides; 306605's authored L/R eye labels are reversed.
+    const mapping = [
+      ["ParamAngleX", "yaw", -30, 30, 0.7, true],
+      ["ParamAngleY", "pitch", -25, 25, 0.7, true],
+      ["ParamAngleZ", "roll", -25, 25, 0.7, true],
+      ["ParamEyeLOpen", sharedEyes ? "eyeOpen" : skin.id === "306605" ? "eyeOpenR" : "eyeOpenL", 0, 1],
+      [spathodea ? "ParamEyeLOpen2" : "ParamEyeROpen", skin.id === "306605" ? "eyeOpenL" : "eyeOpenR", 0, 1],
+      ["ParamMouthOpenY", "jawOpen", 0, 1],
+    ];
+    const smileGain = { "315701": 1, "315702": 1, "307301": -1, "307304": -1, "310504": 1, "306604": 1, "306605": 30 }[skin.id];
+    if (smileGain !== undefined) mapping.push(["ParamMouthForm", "smile", 0, 1, smileGain]);
+    if (skin.id === "315701" || skin.id === "315702") {
+      mapping.push(["ParamBrowLY", "browL", -1, 1], ["ParamBrowRY", "browR", -1, 1]);
+    }
+    const captureChannels = mapping.filter(([id]) => parameterIndices.has(id)).map(([id, key, low, high, gain = 1, offset = false]) => {
+      const index = parameterIndices.get(id);
+      return { index, key, low, high, gain, offset, min: parameterData.minimumValues[index], max: parameterData.maximumValues[index],
+        neutral: neutralParameters[index], value: neutralParameters[index] };
+    });
+    let captureValues = null;
+    let captureTime = performance.now();
+    im.on("beforeModelUpdate", () => {
+      if (!active() || !captureActive || !visible) return;
+      const now = performance.now();
+      const weight = 1 - Math.exp(-Math.max(0, now - captureTime) / 80);
+      captureTime = now;
+      for (const channel of captureChannels) {
+        const input = captureValues?.[channel.key];
+        const target = input === undefined ? channel.neutral : Math.max(channel.min, Math.min(channel.max,
+          (channel.offset ? channel.neutral : 0) + input * channel.gain));
+        channel.value += (target - channel.value) * weight;
+        core.setParameterValueByIndex(channel.index, channel.value);
+      }
+    });
 
     // Model bounds contain large transparent margins; fit the visible mesh instead.
     const bounds = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
@@ -380,16 +446,83 @@ window.createNarcissusLive2D = async ({ container, skin = {
       destroy,
       resize,
       actions: Object.freeze(actions.map(([name]) => name)),
-      get busy() { return active() && busy; },
-      setVisible(value) { if (active()) { visible = value; visibility(); } },
+      supportsMotionCapture: true,
+      get busy() { return active() && (busy || captureActive); },
+      setVisible(value) {
+        if (!active()) return;
+        visible = Boolean(value);
+        if (!visible) {
+          captureValues = null;
+          captureTime = performance.now();
+          for (const channel of captureChannels) channel.value = channel.neutral;
+        }
+        visibility();
+      },
+      setMotionCapture(value) {
+        if (!active() || captureActive === Boolean(value)) return;
+        captureActive = Boolean(value);
+        const generation = ++actionGeneration;
+        ++mouthRequest;
+        idle.stopAllMotions();
+        body.stopAllMotions();
+        mouth.stopAllMotions();
+        if (expressionManager) {
+          expressionManager.stopAllExpressions();
+          expressionManager.reserveExpressionIndex = -1;
+          // A stopped cached e_idle must not make setExpression() return early.
+          expressionManager.currentExpression = expressionManager.defaultExpression;
+        }
+        captureValues = null;
+        captureTime = performance.now();
+        for (const channel of captureChannels) channel.value = channel.neutral;
+        playing = restoreRequested = speaking = false;
+        activeMouth = "t_bizui";
+        container.dataset.speaking = "false";
+        busy = true;
+        if (captureActive) {
+          container.dataset.action = "motion_capture";
+          report("Live2D · 摄像头动捕");
+        } else {
+          const seconds = model.elapsedTime / 1000;
+          idle.startMotion(motion(idleJSON, true), true, seconds);
+          mouth.startMotion(motion(mouthJSON, true), true, seconds);
+          setExpression("e_idle", generation).then(() => {
+            if (!currentAction(generation)) return;
+            busy = false;
+            container.dataset.action = "b_idle";
+            report("Live2D · 待机");
+          }).catch((error) => {
+            if (!currentAction(generation)) return;
+            busy = false;
+            container.dataset.action = "b_idle";
+            report(`Live2D · 待机表情恢复失败：${error.message}`);
+          });
+        }
+      },
+      updateMotionCapture(values) {
+        if (!active() || !captureActive || !visible) return;
+        captureValues = null;
+        if (!values || typeof values !== "object") return;
+        const packet = {};
+        for (const channel of captureChannels) {
+          if (channel.key === "eyeOpen") {
+            const eyes = [values.eyeOpenL, values.eyeOpenR].filter(Number.isFinite).map(value => Math.max(0, Math.min(1, value)));
+            if (eyes.length) packet.eyeOpen = eyes.reduce((sum, value) => sum + value, 0) / eyes.length;
+          } else if (Number.isFinite(values[channel.key])) {
+            packet[channel.key] = Math.max(channel.low, Math.min(channel.high, values[channel.key]));
+          }
+        }
+        captureValues = packet;
+      },
       setSpeaking(value) {
-        if (!active() || speaking === value) return;
-        speaking = value;
-        container.dataset.speaking = String(value);
+        if (!active() || captureActive || speaking === Boolean(value)) return;
+        speaking = Boolean(value);
+        container.dataset.speaking = String(speaking);
         updateMouth();
       },
       async playSpecial() {
-        if (!active() || busy || !visible || !actions.length) return;
+        if (!active() || captureActive || busy || !visible || !actions.length) return;
+        const generation = ++actionGeneration;
         busy = true;
         let index = Math.floor(Math.random() * actions.length);
         if (index === lastAction) index = (index + 1) % actions.length;
@@ -401,8 +534,10 @@ window.createNarcissusLive2D = async ({ container, skin = {
             loadJSON(motionFile(bodyName)), loadJSON(motionFile(mouthName)),
           ]);
           guard();
-          await setExpression(expressionName);
+          if (!currentAction(generation)) return;
+          await setExpression(expressionName, generation);
           guard();
+          if (!currentAction(generation)) return;
           const seconds = model.elapsedTime / 1000;
           activeMouth = mouthName;
           updateMouth();
@@ -412,7 +547,7 @@ window.createNarcissusLive2D = async ({ container, skin = {
           container.dataset.action = bodyName;
           report(`Live2D · ${bodyName}`);
         } catch (error) {
-          if (active()) { busy = false; report(`动作加载失败，可重试：${error.message}`); }
+          if (currentAction(generation)) { busy = false; report(`动作加载失败，可重试：${error.message}`); }
         }
       },
       onError: null,

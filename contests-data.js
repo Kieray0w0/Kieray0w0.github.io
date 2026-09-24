@@ -1,7 +1,7 @@
 window.CONTEST_DATA = {
   "sources": {
     "codeforces": {
-      "updatedAt": 1789725637730,
+      "updatedAt": 1790235414049,
       "error": null,
       "contests": [
         {
@@ -151,7 +151,7 @@ window.CONTEST_DATA = {
       ]
     },
     "atcoder": {
-      "updatedAt": 1789725637730,
+      "updatedAt": 1790235414049,
       "error": null,
       "contests": [
         {
@@ -253,9 +253,69 @@ window.CONTEST_DATA = {
       ]
     },
     "nowcoder": {
-      "updatedAt": 1789725637730,
+      "updatedAt": 1790235414049,
       "error": null,
       "contests": [
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b82",
+          "url": "https://ac.nowcoder.com/acm/contest/117057",
+          "start": 1758279600000,
+          "end": 1758290400000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b83",
+          "url": "https://ac.nowcoder.com/acm/contest/121395",
+          "start": 1762513200000,
+          "end": 1762524000000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b84",
+          "url": "https://ac.nowcoder.com/acm/contest/124146",
+          "start": 1764932400000,
+          "end": 1764943200000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b85",
+          "url": "https://ac.nowcoder.com/acm/contest/126635",
+          "start": 1767956400000,
+          "end": 1767967200000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b86",
+          "url": "https://ac.nowcoder.com/acm/contest/129209",
+          "start": 1772794800000,
+          "end": 1772805600000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b87",
+          "url": "https://ac.nowcoder.com/acm/contest/130844",
+          "start": 1775214000000,
+          "end": 1775224800000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b88",
+          "url": "https://ac.nowcoder.com/acm/contest/134814",
+          "start": 1778842800000,
+          "end": 1778853600000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b89",
+          "url": "https://ac.nowcoder.com/acm/contest/136706",
+          "start": 1781262000000,
+          "end": 1781272800000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b90",
+          "url": "https://ac.nowcoder.com/acm/contest/137418",
+          "start": 1783681200000,
+          "end": 1783692000000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b91",
+          "url": "https://ac.nowcoder.com/acm/contest/139935",
+          "start": 1788519600000,
+          "end": 1788530400000
+        },
         {
           "name": "\u725b\u5ba2\u6311\u6218\u8d5b92",
           "url": "https://ac.nowcoder.com/acm/contest/140237",
@@ -267,7 +327,7 @@ window.CONTEST_DATA = {
   },
   "activity": {
     "codeforces": {
-      "updatedAt": 1789725637730,
+      "updatedAt": 1790235414049,
       "error": null,
       "contests": [
         {
@@ -356,7 +416,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "Hot Potatoes at the Fairy Warehouse",
               "url": "https://codeforces.com/contest/2255/problem/A",
-              "rating": 1200,
+              "rating": null,
               "key": "codeforces:2255:A",
               "attempts": 2,
               "status": "OK",
@@ -366,7 +426,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "A Ribbon for Tomorrow",
               "url": "https://codeforces.com/contest/2255/problem/B",
-              "rating": 1600,
+              "rating": null,
               "key": "codeforces:2255:B",
               "attempts": 1,
               "status": "OK",
@@ -376,7 +436,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "Even If the World Turns",
               "url": "https://codeforces.com/contest/2255/problem/C",
-              "rating": 2100,
+              "rating": null,
               "key": "codeforces:2255:C",
               "attempts": 1,
               "status": "OK",
@@ -386,7 +446,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "How Long Until Nothing Remains?",
               "url": "https://codeforces.com/contest/2255/problem/D",
-              "rating": 2300,
+              "rating": null,
               "key": "codeforces:2255:D",
               "attempts": 4,
               "status": "WRONG_ANSWER",
@@ -396,7 +456,7 @@ window.CONTEST_DATA = {
               "index": "E1",
               "name": "What Will Remain at the End? (Easy Version)",
               "url": "https://codeforces.com/contest/2255/problem/E1",
-              "rating": 2900,
+              "rating": null,
               "key": "codeforces:2255:E1",
               "attempts": 0,
               "status": null,
@@ -406,7 +466,7 @@ window.CONTEST_DATA = {
               "index": "E2",
               "name": "What Will Remain at the End? (Hard Version)",
               "url": "https://codeforces.com/contest/2255/problem/E2",
-              "rating": 3400,
+              "rating": null,
               "key": "codeforces:2255:E2",
               "attempts": 0,
               "status": null,
@@ -416,7 +476,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Who Will Witness the End?",
               "url": "https://codeforces.com/contest/2255/problem/F",
-              "rating": 3100,
+              "rating": null,
               "key": "codeforces:2255:F",
               "attempts": 1,
               "status": "OK",
@@ -433,7 +493,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "Rank Subsequence",
               "url": "https://codeforces.com/contest/2249/problem/A",
-              "rating": 1300,
+              "rating": null,
               "key": "codeforces:2249:A",
               "attempts": 1,
               "status": "OK",
@@ -443,7 +503,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "Permutation Cuts",
               "url": "https://codeforces.com/contest/2249/problem/B",
-              "rating": 1700,
+              "rating": null,
               "key": "codeforces:2249:B",
               "attempts": 1,
               "status": "OK",
@@ -453,7 +513,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "Double-Rift Dial",
               "url": "https://codeforces.com/contest/2249/problem/C",
-              "rating": 2000,
+              "rating": null,
               "key": "codeforces:2249:C",
               "attempts": 1,
               "status": "OK",
@@ -463,7 +523,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "Xor Permutation Matrix",
               "url": "https://codeforces.com/contest/2249/problem/D",
-              "rating": 2300,
+              "rating": null,
               "key": "codeforces:2249:D",
               "attempts": 1,
               "status": "OK",
@@ -473,7 +533,7 @@ window.CONTEST_DATA = {
               "index": "E1",
               "name": "String (Easy Version)",
               "url": "https://codeforces.com/contest/2249/problem/E1",
-              "rating": 2800,
+              "rating": null,
               "key": "codeforces:2249:E1",
               "attempts": 0,
               "status": null,
@@ -483,7 +543,7 @@ window.CONTEST_DATA = {
               "index": "E2",
               "name": "String (Hard Version)",
               "url": "https://codeforces.com/contest/2249/problem/E2",
-              "rating": 3000,
+              "rating": null,
               "key": "codeforces:2249:E2",
               "attempts": 0,
               "status": null,
@@ -493,7 +553,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Even Simple Path",
               "url": "https://codeforces.com/contest/2249/problem/F",
-              "rating": 3200,
+              "rating": null,
               "key": "codeforces:2249:F",
               "attempts": 0,
               "status": null,
@@ -510,7 +570,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "Who Watches the Watchpig?",
               "url": "https://codeforces.com/contest/2245/problem/A",
-              "rating": 800,
+              "rating": null,
               "key": "codeforces:2245:A",
               "attempts": 1,
               "status": "OK",
@@ -520,7 +580,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "Delete and Concatenate",
               "url": "https://codeforces.com/contest/2245/problem/B",
-              "rating": 1100,
+              "rating": null,
               "key": "codeforces:2245:B",
               "attempts": 1,
               "status": "OK",
@@ -530,7 +590,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "MEXOR",
               "url": "https://codeforces.com/contest/2245/problem/C",
-              "rating": 1400,
+              "rating": null,
               "key": "codeforces:2245:C",
               "attempts": 1,
               "status": "OK",
@@ -540,7 +600,7 @@ window.CONTEST_DATA = {
               "index": "D1",
               "name": "Construct an Array (Easy Version)",
               "url": "https://codeforces.com/contest/2245/problem/D1",
-              "rating": 1700,
+              "rating": null,
               "key": "codeforces:2245:D1",
               "attempts": 1,
               "status": "OK",
@@ -550,7 +610,7 @@ window.CONTEST_DATA = {
               "index": "D2",
               "name": "Construct an Array (Hard Version)",
               "url": "https://codeforces.com/contest/2245/problem/D2",
-              "rating": 2000,
+              "rating": null,
               "key": "codeforces:2245:D2",
               "attempts": 1,
               "status": "OK",
@@ -560,7 +620,7 @@ window.CONTEST_DATA = {
               "index": "E",
               "name": "Tom and Jerry",
               "url": "https://codeforces.com/contest/2245/problem/E",
-              "rating": 2300,
+              "rating": null,
               "key": "codeforces:2245:E",
               "attempts": 1,
               "status": "OK",
@@ -570,7 +630,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Familiar?",
               "url": "https://codeforces.com/contest/2245/problem/F",
-              "rating": 2800,
+              "rating": null,
               "key": "codeforces:2245:F",
               "attempts": 0,
               "status": null,
@@ -580,7 +640,7 @@ window.CONTEST_DATA = {
               "index": "G",
               "name": "NPC Challenge",
               "url": "https://codeforces.com/contest/2245/problem/G",
-              "rating": 3000,
+              "rating": null,
               "key": "codeforces:2245:G",
               "attempts": 0,
               "status": null,
@@ -590,7 +650,7 @@ window.CONTEST_DATA = {
               "index": "H",
               "name": "Connect Connect See",
               "url": "https://codeforces.com/contest/2245/problem/H",
-              "rating": 3500,
+              "rating": null,
               "key": "codeforces:2245:H",
               "attempts": 0,
               "status": null,
@@ -617,7 +677,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "Decidophobia",
               "url": "https://codeforces.com/contest/2239/problem/B",
-              "rating": 1500,
+              "rating": 1600,
               "key": "codeforces:2239:B",
               "attempts": 1,
               "status": "OK",
@@ -647,7 +707,7 @@ window.CONTEST_DATA = {
               "index": "E",
               "name": "The end of this world,",
               "url": "https://codeforces.com/contest/2239/problem/E",
-              "rating": 3300,
+              "rating": 3200,
               "key": "codeforces:2239:E",
               "attempts": 0,
               "status": null,
@@ -704,7 +764,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "Fullmetal Bitchemist",
               "url": "https://codeforces.com/contest/2237/problem/D",
-              "rating": 1500,
+              "rating": 1600,
               "key": "codeforces:2237:D",
               "attempts": 1,
               "status": "OK",
@@ -714,7 +774,7 @@ window.CONTEST_DATA = {
               "index": "E",
               "name": "Permutation Commutation",
               "url": "https://codeforces.com/contest/2237/problem/E",
-              "rating": 2000,
+              "rating": 2100,
               "key": "codeforces:2237:E",
               "attempts": 1,
               "status": "OK",
@@ -801,7 +861,7 @@ window.CONTEST_DATA = {
               "index": "C1",
               "name": "We Be Flipping (Easy Version)",
               "url": "https://codeforces.com/contest/2229/problem/C1",
-              "rating": 900,
+              "rating": 800,
               "key": "codeforces:2229:C1",
               "attempts": 1,
               "status": "OK",
@@ -851,7 +911,7 @@ window.CONTEST_DATA = {
               "index": "G",
               "name": "Roadworks",
               "url": "https://codeforces.com/contest/2229/problem/G",
-              "rating": 2900,
+              "rating": 3000,
               "key": "codeforces:2229:G",
               "attempts": 0,
               "status": null,
@@ -861,7 +921,7 @@ window.CONTEST_DATA = {
               "index": "H",
               "name": "Wowee Binary String",
               "url": "https://codeforces.com/contest/2229/problem/H",
-              "rating": 3200,
+              "rating": 3300,
               "key": "codeforces:2229:H",
               "attempts": 0,
               "status": null,
@@ -871,7 +931,7 @@ window.CONTEST_DATA = {
               "index": "I",
               "name": "The Endians",
               "url": "https://codeforces.com/contest/2229/problem/I",
-              "rating": 3400,
+              "rating": 3500,
               "key": "codeforces:2229:I",
               "attempts": 0,
               "status": null,
@@ -938,7 +998,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Zhily and Colorful Strings",
               "url": "https://codeforces.com/contest/2223/problem/F",
-              "rating": 3400,
+              "rating": 3500,
               "key": "codeforces:2223:F",
               "attempts": 0,
               "status": null,
@@ -1062,7 +1122,7 @@ window.CONTEST_DATA = {
               "index": "B2",
               "name": "Unique Values (Hard version)",
               "url": "https://codeforces.com/contest/2219/problem/B2",
-              "rating": 2000,
+              "rating": 1900,
               "key": "codeforces:2219:B2",
               "attempts": 2,
               "status": "OK",
@@ -1082,7 +1142,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "MEX Replacement on Tree",
               "url": "https://codeforces.com/contest/2219/problem/D",
-              "rating": 2700,
+              "rating": 2600,
               "key": "codeforces:2219:D",
               "attempts": 0,
               "status": null,
@@ -1119,7 +1179,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "Mickey Mouse Constructive",
               "url": "https://codeforces.com/contest/2211/problem/B",
-              "rating": 1100,
+              "rating": 1000,
               "key": "codeforces:2211:B",
               "attempts": 1,
               "status": "OK",
@@ -1129,7 +1189,7 @@ window.CONTEST_DATA = {
               "index": "C1",
               "name": "Equal Multisets (Easy Version)",
               "url": "https://codeforces.com/contest/2211/problem/C1",
-              "rating": 1300,
+              "rating": 1200,
               "key": "codeforces:2211:C1",
               "attempts": 1,
               "status": "OK",
@@ -1179,7 +1239,7 @@ window.CONTEST_DATA = {
               "index": "G",
               "name": "Rational Bubble Sort",
               "url": "https://codeforces.com/contest/2211/problem/G",
-              "rating": 2900,
+              "rating": 3100,
               "key": "codeforces:2211:G",
               "attempts": 0,
               "status": null,
@@ -1226,7 +1286,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "Where's My Water?",
               "url": "https://codeforces.com/contest/2207/problem/C",
-              "rating": 1600,
+              "rating": 1500,
               "key": "codeforces:2207:C",
               "attempts": 1,
               "status": "OK",
@@ -1246,7 +1306,7 @@ window.CONTEST_DATA = {
               "index": "E1",
               "name": "N-MEX (Constructive Version)",
               "url": "https://codeforces.com/contest/2207/problem/E1",
-              "rating": 2100,
+              "rating": 2200,
               "key": "codeforces:2207:E1",
               "attempts": 1,
               "status": "WRONG_ANSWER",
@@ -1266,7 +1326,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Hanabi",
               "url": "https://codeforces.com/contest/2207/problem/F",
-              "rating": 2900,
+              "rating": 3000,
               "key": "codeforces:2207:F",
               "attempts": 0,
               "status": null,
@@ -1286,7 +1346,7 @@ window.CONTEST_DATA = {
               "index": "H1",
               "name": "Bowser's Castle (Easy Version)",
               "url": "https://codeforces.com/contest/2207/problem/H1",
-              "rating": null,
+              "rating": 3500,
               "key": "codeforces:2207:H1",
               "attempts": 0,
               "status": null,
@@ -1296,7 +1356,7 @@ window.CONTEST_DATA = {
               "index": "H2",
               "name": "Bowser's Castle (Medium Version)",
               "url": "https://codeforces.com/contest/2207/problem/H2",
-              "rating": null,
+              "rating": 3500,
               "key": "codeforces:2207:H2",
               "attempts": 0,
               "status": null,
@@ -1306,7 +1366,7 @@ window.CONTEST_DATA = {
               "index": "H3",
               "name": "Bowser's Castle (Hard Version)",
               "url": "https://codeforces.com/contest/2207/problem/H3",
-              "rating": null,
+              "rating": 3500,
               "key": "codeforces:2207:H3",
               "attempts": 0,
               "status": null,
@@ -1323,7 +1383,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "Game",
               "url": "https://codeforces.com/contest/2199/problem/A",
-              "rating": 1000,
+              "rating": 900,
               "key": "codeforces:2199:A",
               "attempts": 2,
               "status": "OK",
@@ -1480,7 +1540,7 @@ window.CONTEST_DATA = {
               "index": "F1",
               "name": "Monotone Monochrome Matrices (Medium Version)",
               "url": "https://codeforces.com/contest/2201/problem/F1",
-              "rating": 2900,
+              "rating": 2800,
               "key": "codeforces:2201:F1",
               "attempts": 0,
               "status": null,
@@ -1490,7 +1550,7 @@ window.CONTEST_DATA = {
               "index": "F2",
               "name": "Monotone Monochrome Matrices (Hard Version)",
               "url": "https://codeforces.com/contest/2201/problem/F2",
-              "rating": 2800,
+              "rating": 2700,
               "key": "codeforces:2201:F2",
               "attempts": 0,
               "status": null,
@@ -1500,7 +1560,7 @@ window.CONTEST_DATA = {
               "index": "G",
               "name": "Codeforces Heuristic Contest 1001",
               "url": "https://codeforces.com/contest/2201/problem/G",
-              "rating": 3500,
+              "rating": null,
               "key": "codeforces:2201:G",
               "attempts": 0,
               "status": null,
@@ -1691,7 +1751,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "Sorting Game",
               "url": "https://codeforces.com/contest/2190/problem/A",
-              "rating": 1200,
+              "rating": 1100,
               "key": "codeforces:2190:A",
               "attempts": 1,
               "status": "OK",
@@ -1798,7 +1858,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "War Strategy",
               "url": "https://codeforces.com/contest/2183/problem/C",
-              "rating": 1500,
+              "rating": 1400,
               "key": "codeforces:2183:C",
               "attempts": 1,
               "status": "OK",
@@ -1905,7 +1965,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "Impost or Sus",
               "url": "https://codeforces.com/contest/2178/problem/B",
-              "rating": 900,
+              "rating": 800,
               "key": "codeforces:2178:B",
               "attempts": 1,
               "status": "OK",
@@ -2022,7 +2082,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "Insolvable Disks",
               "url": "https://codeforces.com/contest/2180/problem/D",
-              "rating": 1900,
+              "rating": 2000,
               "key": "codeforces:2180:D",
               "attempts": 1,
               "status": "OK",
@@ -2129,7 +2189,7 @@ window.CONTEST_DATA = {
               "index": "C2",
               "name": "Beautiful Patterns (Hard Version)",
               "url": "https://codeforces.com/contest/2174/problem/C2",
-              "rating": 2500,
+              "rating": 2400,
               "key": "codeforces:2174:C2",
               "attempts": 1,
               "status": "OK",
@@ -2139,7 +2199,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "Secret Message",
               "url": "https://codeforces.com/contest/2174/problem/D",
-              "rating": 3400,
+              "rating": 3300,
               "key": "codeforces:2174:D",
               "attempts": 0,
               "status": null,
@@ -2149,7 +2209,7 @@ window.CONTEST_DATA = {
               "index": "E1",
               "name": "Game of Scientists (Version 1)",
               "url": "https://codeforces.com/contest/2174/problem/E1",
-              "rating": 3100,
+              "rating": 3000,
               "key": "codeforces:2174:E1",
               "attempts": 0,
               "status": null,
@@ -2159,7 +2219,7 @@ window.CONTEST_DATA = {
               "index": "E2",
               "name": "Game of Scientists (Version 2)",
               "url": "https://codeforces.com/contest/2174/problem/E2",
-              "rating": 3200,
+              "rating": 3100,
               "key": "codeforces:2174:E2",
               "attempts": 0,
               "status": null,
@@ -2256,7 +2316,7 @@ window.CONTEST_DATA = {
               "index": "H",
               "name": "Keygen 3",
               "url": "https://codeforces.com/contest/2157/problem/H",
-              "rating": 3200,
+              "rating": 3300,
               "key": "codeforces:2157:H",
               "attempts": 0,
               "status": null,
@@ -2313,7 +2373,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "Path Split",
               "url": "https://codeforces.com/contest/2165/problem/D",
-              "rating": 2500,
+              "rating": 2600,
               "key": "codeforces:2165:D",
               "attempts": 1,
               "status": "OK",
@@ -2333,7 +2393,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Arctic Acquisition",
               "url": "https://codeforces.com/contest/2165/problem/F",
-              "rating": 3500,
+              "rating": 3400,
               "key": "codeforces:2165:F",
               "attempts": 0,
               "status": null,
@@ -2467,7 +2527,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "Loyalty",
               "url": "https://codeforces.com/contest/2161/problem/C",
-              "rating": 1200,
+              "rating": 1100,
               "key": "codeforces:2161:C",
               "attempts": 1,
               "status": "OK",
@@ -2574,7 +2634,7 @@ window.CONTEST_DATA = {
               "index": "E",
               "name": "Best Time to Buy and Sell Stock",
               "url": "https://codeforces.com/contest/2156/problem/E",
-              "rating": 2500,
+              "rating": 2400,
               "key": "codeforces:2156:E",
               "attempts": 1,
               "status": "OK",
@@ -2584,7 +2644,7 @@ window.CONTEST_DATA = {
               "index": "F1",
               "name": "Strange Operation (Easy Version)",
               "url": "https://codeforces.com/contest/2156/problem/F1",
-              "rating": 2200,
+              "rating": 2300,
               "key": "codeforces:2156:F1",
               "attempts": 0,
               "status": null,
@@ -2594,7 +2654,7 @@ window.CONTEST_DATA = {
               "index": "F2",
               "name": "Strange Operation (Hard Version)",
               "url": "https://codeforces.com/contest/2156/problem/F2",
-              "rating": 3000,
+              "rating": 3100,
               "key": "codeforces:2156:F2",
               "attempts": 0,
               "status": null,
@@ -2738,7 +2798,7 @@ window.CONTEST_DATA = {
               "index": "D2",
               "name": "Inverse Minimum Partition (Hard Version)",
               "url": "https://codeforces.com/contest/2159/problem/D2",
-              "rating": 3200,
+              "rating": 3100,
               "key": "codeforces:2159:D2",
               "attempts": 0,
               "status": null,
@@ -2785,7 +2845,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "Catching the Krug",
               "url": "https://codeforces.com/contest/2152/problem/B",
-              "rating": 1300,
+              "rating": 1200,
               "key": "codeforces:2152:B",
               "attempts": 1,
               "status": "OK",
@@ -2825,7 +2885,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Triple Attack",
               "url": "https://codeforces.com/contest/2152/problem/F",
-              "rating": 2500,
+              "rating": 2600,
               "key": "codeforces:2152:F",
               "attempts": 0,
               "status": null,
@@ -5296,7 +5356,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 959 \u043f\u0440\u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0435 NEAR (Div. 1 + Div. 2)",
+          "name": "Codeforces Round 959 sponsored by NEAR (Div. 1 + Div. 2)",
           "url": "https://codeforces.com/contest/1994",
           "start": 1721313300000,
           "problems": [
@@ -5490,7 +5550,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 955 (Div. 2, \u0441 \u043f\u0440\u0438\u0437\u0430\u043c\u0438 \u043e\u0442 NEAR!)",
+          "name": "Codeforces Round 955 (Div. 2, with prizes from NEAR!)",
           "url": "https://codeforces.com/contest/1982",
           "start": 1719326100000,
           "problems": [
@@ -6337,7 +6397,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 850 (Div. 1, \u043e\u0441\u043d\u043e\u0432\u0430\u043d \u043d\u0430 \u0424\u0438\u043d\u0430\u043b\u044c\u043d\u043e\u043c \u0440\u0430\u0443\u043d\u0434\u0435 VK Cup 2022)",
+          "name": "Codeforces Round 850 (Div. 1, based on VK Cup 2022 - Final Round)",
           "url": "https://codeforces.com/contest/1785",
           "start": 1675598700000,
           "problems": [
@@ -6481,7 +6541,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 844 (Div. 1 + Div. 2, \u043e\u0441\u043d\u043e\u0432\u0430\u043d \u043d\u0430 \u041e\u0442\u0431\u043e\u0440\u043e\u0447\u043d\u043e\u043c \u0440\u0430\u0443\u043d\u0434\u0435 VK Cup 2022)",
+          "name": "Codeforces Round 844 (Div. 1 + Div. 2, based on VK Cup 2022 - Elimination Round)",
           "url": "https://codeforces.com/contest/1782",
           "start": 1673784300000,
           "problems": [
@@ -8513,7 +8573,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Educational Codeforces Round 126 (\u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0439 \u0434\u043b\u044f Div. 2)",
+          "name": "Educational Codeforces Round 126 (Rated for Div. 2)",
           "url": "https://codeforces.com/contest/1661",
           "start": 1649514900000,
           "problems": [
@@ -8878,7 +8938,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 778 (Div. 1 + Div. 2, \u043e\u0441\u043d\u043e\u0432\u0430\u043d \u043d\u0430 \u0424\u0438\u043d\u0430\u043b\u0435 \u0422\u0435\u0445\u043d\u043e\u043a\u0443\u0431\u043a\u0430 2022)",
+          "name": "Codeforces Round 778 (Div. 1 + Div. 2, based on Technocup 2022 Final Round)",
           "url": "https://codeforces.com/contest/1654",
           "start": 1647776100000,
           "problems": [
@@ -9032,7 +9092,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Educational Codeforces Round 124 (\u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0439 \u0434\u043b\u044f Div. 2)",
+          "name": "Educational Codeforces Round 124 (Rated for Div. 2)",
           "url": "https://codeforces.com/contest/1651",
           "start": 1646922900000,
           "problems": [
@@ -9474,7 +9534,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 740 (Div. 1, \u043e\u0441\u043d\u043e\u0432\u0430\u043d \u043d\u0430 VK Cup 2021 - \u0424\u0438\u043d\u0430\u043b (Engine))",
+          "name": "Codeforces Round 740 (Div. 1, based on VK Cup 2021 - Final (Engine))",
           "url": "https://codeforces.com/contest/1558",
           "start": 1629815700000,
           "problems": [
@@ -9541,7 +9601,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 733 (Div. 1 + Div. 2, \u043e\u0441\u043d\u043e\u0432\u0430\u043d \u043d\u0430 VK Cup 2021 - \u041e\u0442\u0431\u043e\u0440 (Engine))",
+          "name": "Codeforces Round 733 (Div. 1 + Div. 2, based on VK Cup 2021 - Elimination (Engine))",
           "url": "https://codeforces.com/contest/1530",
           "start": 1626532500000,
           "problems": [
@@ -9772,7 +9832,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Educational Codeforces Round 85 (\u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0439 \u0434\u043b\u044f \u0414\u0438\u0432. 2)",
+          "name": "Educational Codeforces Round 85 (Rated for Div. 2)",
           "url": "https://codeforces.com/contest/1334",
           "start": 1586529300000,
           "problems": [
@@ -9993,7 +10053,7 @@ window.CONTEST_DATA = {
           ]
         },
         {
-          "name": "Codeforces Round 432 (Div. 1, \u043e\u0441\u043d\u043e\u0432\u0430\u043d \u043d\u0430 IndiaHacks Final Round 2017)",
+          "name": "Codeforces Round 432 (Div. 1, based on IndiaHacks Final Round 2017)",
           "url": "https://codeforces.com/contest/850",
           "start": 1504535700000,
           "problems": [
@@ -10166,7 +10226,7 @@ window.CONTEST_DATA = {
       ]
     },
     "atcoder": {
-      "updatedAt": 1789725637730,
+      "updatedAt": 1790235414049,
       "error": null,
       "contests": [
         {
@@ -18427,7 +18487,7 @@ window.CONTEST_DATA = {
       ]
     },
     "nowcoder": {
-      "updatedAt": 1789725637730,
+      "updatedAt": 1790235414049,
       "error": null,
       "contests": [
         {

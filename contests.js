@@ -84,6 +84,7 @@
     status.classList.toggle("warning", warning);
     scheduledContests = [...contests].sort((a, b) => a.start - b.start);
     updateCountdown();
+    renderCalendar(new Date(), true);
 
     for (const kind of ["upcoming", "recent"]) {
       const rows = contests.filter((contest) => kind === "upcoming"
@@ -127,6 +128,158 @@
   }
 
   filter.addEventListener("change", render);
+  let calendarDay = "";
+  let selectedCalendarDate = "";
+  let calendarDates = new Map();
+  const lunarCalendarFormatter = new Intl.DateTimeFormat("zh-CN-u-ca-chinese", { timeZone: "UTC", month: "numeric", day: "numeric" });
+  function calendarFestivals(date) {
+    const fixed = { "1-1": "元旦", "2-14": "情人节", "3-8": "妇女节", "3-12": "植树节", "5-1": "劳动节", "5-4": "青年节", "6-1": "儿童节", "7-1": "建党节", "8-1": "建军节", "9-10": "教师节", "10-1": "国庆节", "12-25": "圣诞节" };
+    const lunar = { "1-1": "春节", "1-15": "元宵节", "2-2": "龙抬头", "5-5": "端午节", "7-7": "七夕", "7-15": "中元节", "8-15": "中秋节", "9-9": "重阳节", "12-8": "腊八节" };
+    const parts = Object.fromEntries(lunarCalendarFormatter.formatToParts(date).map(p => [p.type, p.value]));
+    const tomorrow = Object.fromEntries(lunarCalendarFormatter.formatToParts(new Date(date.getTime() + day)).map(p => [p.type, p.value]));
+    return [fixed[`${date.getUTCMonth() + 1}-${date.getUTCDate()}`], lunar[`${parts.month}-${parts.day}`],
+      tomorrow.month === "1" && tomorrow.day === "1" ? "除夕" : null].filter(Boolean);
+  }
+  function showCalendarDate(key) {
+    const info = calendarDates.get(key);
+    if (!info) return;
+    selectedCalendarDate = key;
+    document.querySelectorAll("#calendar-weeks button[data-date]").forEach(button => {
+      button.setAttribute("aria-pressed", String(button.dataset.date === key));
+    });
+    const details = document.querySelector("#calendar-details");
+    details.replaceChildren();
+    const title = document.createElement("h3");
+    title.textContent = `${key} · 周${info.weekday}`;
+    details.append(title);
+    const labels = document.createElement("p");
+    labels.className = "calendar-guide";
+    const arrangement = info.holiday ? `${info.holiday.name} · ${info.holiday.isOffDay ? "放假" : "调休上班"}` : "";
+    labels.textContent = [...new Set([arrangement, ...info.festivals.filter(name => name !== info.holiday?.name)].filter(Boolean))].join(" / ") || "无特别节日标注";
+    details.append(labels);
+    if (!info.contests.length) {
+      const empty = document.createElement("p");
+      empty.className = "calendar-guide";
+      empty.textContent = "当前赛程快照中没有该日比赛。";
+      details.append(empty);
+    }
+    for (const contest of info.contests) {
+      const item = document.createElement("div");
+      item.className = `calendar-detail-event ${contest.platform}`;
+      const link = document.createElement("a");
+      link.href = contest.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = `${platforms[contest.platform]} · ${contest.name}`;
+      const time = document.createElement("small");
+      time.textContent = `${formatter.format(contest.start)} 至 ${formatter.format(contest.end)} (UTC+8)`;
+      item.append(link, time);
+      details.append(item);
+    }
+  }
+  function renderCalendar(now, force = false) {
+    // Use UTC arithmetic on the UTC+8 calendar date, independent of device timezone/DST.
+    const local = new Date(now.getTime() + 8 * 3600000);
+    const today = Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate());
+    const key = new Date(today).toISOString().slice(0, 10);
+    if (calendarDay === key && !force) return;
+    calendarDay = key;
+    const monday = today - ((new Date(today).getUTCDay() + 6) % 7) * day;
+    const start = monday - 7 * day;
+    const end = start + 20 * day;
+    const formatDate = stamp => {
+      const date = new Date(stamp);
+      return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
+    };
+    document.querySelector("#calendar-range").textContent = `${formatDate(start)} – ${formatDate(end)}`;
+    const body = document.querySelector("#calendar-weeks");
+    body.replaceChildren();
+    calendarDates = new Map();
+    const holidayData = window.CALENDAR_DATA?.years || {};
+    const visibleYears = new Set();
+    for (let week = 0; week < 3; week++) {
+      const row = body.insertRow();
+      if (week === 1) row.className = "current-week";
+      const heading = document.createElement("th");
+      heading.scope = "row";
+      heading.textContent = ["上周", "本周", "下周"][week];
+      row.append(heading);
+      for (let weekday = 0; weekday < 7; weekday++) {
+        const stamp = start + (week * 7 + weekday) * day;
+        const date = new Date(stamp);
+        const cell = row.insertCell();
+        if (weekday >= 5) cell.className = "weekend";
+        const dateKey = date.toISOString().slice(0, 10);
+        visibleYears.add(String(date.getUTCFullYear()));
+        const holiday = holidayData[date.getUTCFullYear()]?.days?.[dateKey];
+        const festivals = calendarFestivals(date);
+        const startUTC = stamp - 8 * 3600000;
+        const contests = scheduledContests.filter(contest => contest.start < startUTC + day && contest.end > startUTC);
+        calendarDates.set(dateKey, { weekday: "一二三四五六日"[weekday], holiday, festivals, contests });
+        if (holiday) cell.classList.add(holiday.isOffDay ? "day-off" : "workday");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "calendar-date";
+        button.dataset.date = dateKey;
+        button.setAttribute("aria-label", `${formatDate(stamp)}，${contests.length} 场比赛${holiday ? `，${holiday.isOffDay ? "放假" : "调休上班"}` : ""}`);
+        button.addEventListener("click", () => showCalendarDate(dateKey));
+        const time = document.createElement("time");
+        time.dateTime = dateKey;
+        time.title = formatDate(stamp);
+        time.setAttribute("aria-label", `${formatDate(stamp)} 周${"一二三四五六日"[weekday]}`);
+        if (stamp === today) time.setAttribute("aria-current", "date");
+        if (stamp === today) button.classList.add("is-today");
+        const month = document.createElement("small");
+        month.textContent = weekday === 0 || date.getUTCDate() === 1 ? `${date.getUTCMonth() + 1}月` : "";
+        const number = document.createElement("b");
+        number.textContent = date.getUTCDate();
+        time.append(month, number);
+        button.append(time);
+        if (holiday) {
+          const badge = document.createElement("span");
+          badge.className = holiday.isOffDay ? "holiday-off" : "holiday-work";
+          badge.textContent = holiday.isOffDay ? "休" : "班";
+          button.append(badge);
+        }
+        cell.append(button);
+        const festival = document.createElement("div");
+        festival.className = "calendar-festival";
+        festival.textContent = festivals.join(" / ") || (holiday?.isOffDay ? holiday.name : "");
+        cell.append(festival);
+        if (contests.length) {
+          const count = document.createElement("small");
+          count.className = "calendar-contest-count";
+          count.textContent = `${contests.length}赛`;
+          button.append(count);
+          const events = document.createElement("div");
+          events.className = "calendar-events";
+          for (const contest of contests) {
+            const link = document.createElement("a");
+            link.className = `calendar-event ${contest.platform}`;
+            link.href = contest.url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            let shortName;
+            if (contest.platform === "atcoder") shortName = new URL(contest.url).pathname.split("/").pop().toUpperCase();
+            else if (contest.platform === "nowcoder") shortName = `挑战赛 ${contest.name.match(/挑战赛\s*(\d+)/)?.[1] || ""}`;
+            else shortName = `CF ${contest.name.match(/Round\s+(\d+)/i)?.[1] || new URL(contest.url).pathname.split("/").pop()}`;
+            const startTime = new Date(contest.start + 8 * 3600000).toISOString().slice(11, 16);
+            link.textContent = `${shortName}\n${contest.start < startUTC ? "跨日比赛" : startTime}`;
+            link.title = `${contest.name} · ${formatter.format(contest.start)} (UTC+8)`;
+            events.append(link);
+          }
+          cell.append(events);
+        }
+      }
+    }
+    const warnings = [...visibleYears].flatMap(year => {
+      const data = holidayData[year];
+      if (!data || data.status !== "available") return [`${year} 年放假调休数据暂不可用`];
+      return data.error ? [`${year} 年节假日更新失败，沿用缓存`] : [];
+    });
+    document.querySelector("#calendar-holiday-status").textContent = warnings.join("；") || "中国大陆放假调休安排已加载。";
+    showCalendarDate(calendarDates.has(selectedCalendarDate) ? selectedCalendarDate : key);
+  }
   const updateClock = () => {
     const now = new Date();
     clock.dateTime = now.toISOString();
@@ -135,9 +288,17 @@
     const lunar = Object.fromEntries(lunarFormatter.formatToParts(now).map((part) => [part.type, part.value]));
     const lunarYear = lunar.yearName ? `${lunar.yearName}年` : `${lunar.relatedYear || ""}年`;
     clockLunar.textContent = `${lunarYear} ${lunar.month || ""}${lunarDays[Number(lunar.day)] || lunar.day || ""}`;
+    renderCalendar(now);
     updateCountdown();
   };
 
+  let activityPage = 1;
+  let activityPageCount = 1;
+  const activityPageSize = document.querySelector("#activity-page-size");
+  try {
+    const saved = localStorage.getItem("activity-page-size");
+    if ([...activityPageSize.options].some(option => option.value === saved)) activityPageSize.value = saved;
+  } catch { /* Pagination still works when storage is unavailable. */ }
   function renderActivity() {
     const activity = window.CONTEST_DATA?.activity;
     const hiddenProblems = new Set(window.CONTEST_DATA?.config?.hiddenProblems || []);
@@ -227,19 +388,76 @@
       for (const problem of problemsToShow) problems.append(createProblemChip(problem));
       row.insertCell().append(problems);
     };
+    // Paginate rendered rows, keeping every contest's problem group together.
+    const rows = [];
     if (sort === "contest") {
-      for (const contest of contests) {
-        const problems = entries.filter((entry) => entry.contest === contest).map((entry) => entry.problem);
-        if (problems.length) addRow(contest, problems);
+      const groups = new Map();
+      for (const { contest, problem } of entries) {
+        if (!groups.has(contest)) {
+          const problems = [];
+          groups.set(contest, problems);
+          rows.push({ contest, problems });
+        }
+        groups.get(contest).push(problem);
       }
     } else {
-      for (const entry of entries) addRow(entry.contest, [entry.problem]);
+      for (const { contest, problem } of entries) rows.push({ contest, problems: [problem] });
     }
+    const pageSize = activityPageSize.value === "all" ? Math.max(1, rows.length) : Number(activityPageSize.value);
+    const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
+    activityPageCount = pageCount;
+    activityPage = Math.max(1, Math.min(activityPage, pageCount));
+    const start = (activityPage - 1) * pageSize;
+    for (const row of rows.slice(start, start + pageSize)) addRow(row.contest, row.problems);
+    const unit = sort === "contest" ? "场比赛" : "道题目";
+    document.querySelector("#activity-page-info").textContent = rows.length
+      ? `第 ${activityPage} / ${pageCount} 页 · 显示 ${start + 1}–${Math.min(start + pageSize, rows.length)} / ${rows.length} ${unit}`
+      : "第 0 / 0 页 · 暂无符合条件的数据";
+    document.querySelector("#activity-prev").disabled = activityPage <= 1;
+    document.querySelector("#activity-next").disabled = activityPage >= pageCount;
+    const pageNumbers = document.querySelector("#activity-page-numbers");
+    const focusedPage = pageNumbers.contains(document.activeElement) ? document.activeElement.dataset.page : null;
+    pageNumbers.replaceChildren();
+    if (rows.length) {
+      const pages = new Set([1, pageCount]);
+      for (let page = Math.max(1, activityPage - 2); page <= Math.min(pageCount, activityPage + 2); page++) pages.add(page);
+      const ordered = [...pages].sort((a, b) => a - b);
+      let previous = 0;
+      for (const page of ordered) {
+        if (page - previous === 2) pages.add(previous + 1);
+        previous = page;
+      }
+      previous = 0;
+      for (const page of [...pages].sort((a, b) => a - b)) {
+        if (page - previous > 1) {
+          const gap = document.createElement("span");
+          gap.textContent = "…";
+          gap.setAttribute("aria-hidden", "true");
+          pageNumbers.append(gap);
+        }
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.page = String(page);
+        button.textContent = String(page);
+        button.setAttribute("aria-label", `第 ${page} 页`);
+        button.setAttribute("aria-controls", "activity-contests");
+        if (page === activityPage) button.setAttribute("aria-current", "page");
+        pageNumbers.append(button);
+        previous = page;
+      }
+    }
+    if (focusedPage) pageNumbers.querySelector(`[data-page="${activityPage}"]`)?.focus({ preventScroll: true });
+    const pageInput = document.querySelector("#activity-page-input");
+    pageInput.max = String(pageCount);
+    pageInput.value = rows.length ? String(activityPage) : "";
+    pageInput.disabled = !rows.length || pageCount === 1;
+    pageInput.setCustomValidity("");
+    document.querySelector("#activity-page-go").disabled = pageInput.disabled;
     if (!body.children.length) {
       const cell = body.insertRow().insertCell();
       cell.colSpan = 4;
       cell.className = "empty-row";
-      cell.textContent = "暂未找到 Kieray 的公开比赛提交记录。";
+      cell.textContent = problemFilter === "unaccepted" ? "当前筛选下没有未 AC 的题目。" : "暂未找到 Kieray 的公开比赛提交记录。";
     }
   }
 
@@ -270,6 +488,47 @@
     let playbackSpeed = Math.min(3, Math.max(0.25, readSetting("narcissus-speed", 1)));
     const initialSize = Math.min(300, Math.max(50, readSetting("narcissus-size", 100)));
     let characterRenderer;
+    const captureButton = document.querySelector("#motion-capture-toggle");
+    const captureStatus = document.querySelector("#motion-capture-status");
+    const calibrateButton = document.querySelector("#motion-capture-calibrate");
+    const capture = window.createFaceCapture({
+      video: document.querySelector("#motion-capture-preview"),
+      onSample: values => characterRenderer?.updateMotionCapture?.(values),
+      onState: ({ active, state, message }) => {
+        if (active) voice.stop();
+        characterRenderer?.setMotionCapture?.(active);
+        captureButton.textContent = active ? "关闭摄像头动捕" : "开启摄像头动捕";
+        captureButton.setAttribute("aria-pressed", String(active));
+        captureStatus.textContent = message;
+        captureStatus.dataset.state = state;
+        calibrateButton.hidden = !active || state === "loading";
+      },
+    });
+    const updateCaptureAvailability = () => {
+      const supported = Boolean(characterRenderer?.supportsMotionCapture);
+      captureButton.disabled = !supported || characterHidden;
+      if (!characterRenderer) captureStatus.textContent = "请先等待角色加载完成。";
+      else if (!supported) captureStatus.textContent = "夏利的 Spine 模型暂不支持动捕，请切换至 Live2D 角色。";
+      else if (characterHidden) captureStatus.textContent = "请先显示角色，再开启动捕。";
+      else {
+        // Preserve permission errors and the reason capture stopped across resize/visibility updates.
+        if (!capture.active && [undefined, "unavailable"].includes(captureStatus.dataset.state)) {
+          captureStatus.textContent = "支持头部、眨眼、张嘴；微笑和眉毛依皮肤支持。";
+          captureStatus.dataset.state = "ready";
+        }
+        return;
+      }
+      captureStatus.dataset.state = "unavailable";
+    };
+    captureButton.addEventListener("click", () => {
+      if (capture.active) capture.stop();
+      else if (characterRenderer?.supportsMotionCapture && !isCharacterHidden()) capture.start();
+    });
+    calibrateButton.addEventListener("click", () => capture.calibrate());
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && capture.active) capture.stop("页面已进入后台，摄像头已关闭；返回后需手动开启。");
+    });
+    window.addEventListener("pagehide", () => capture.stop());
     let characterHidden = readSetting("narcissus-hidden", 0) === 1;
     let backgroundPlayback = true;
     try { backgroundPlayback = localStorage.getItem("narcissus-background") !== "0"; } catch { /* Default enabled. */ }
@@ -279,21 +538,68 @@
       const rect = decoration.getBoundingClientRect();
       const width = document.documentElement.clientWidth;
       const height = window.innerHeight;
-      let left = isCharacterHidden() ? 12 : rect.right + 12;
+      let left = 12;
+      let right = 12;
       let bottom = 14;
       let maxHeight = height - 28;
-      // Use the space above the character if the right-hand column is too narrow.
-      if (!isCharacterHidden() && width - left - 12 < 180 && rect.top > 140) {
-        left = 12;
-        bottom = height - rect.top + 12;
-        maxHeight = rect.top - 24;
+      if (!isCharacterHidden()) {
+        const rightSpace = width - rect.right - 24;
+        const leftSpace = rect.left - 24;
+        // A freely positioned character can leave more room on either side.
+        if (Math.max(rightSpace, leftSpace) >= 180) {
+          if (rightSpace >= leftSpace) left = rect.right + 12;
+          else right = width - rect.left + 12;
+        } else if (rect.top >= 104 && rect.top >= height - rect.bottom) {
+          bottom = height - rect.top + 12;
+          maxHeight = rect.top - 24;
+        } else if (height - rect.bottom >= 106) {
+          maxHeight = height - rect.bottom - 26;
+        }
       }
       left = Math.max(12, Math.min(left, width - 192));
       subtitle.style.setProperty("--subtitle-left", `${left}px`);
+      subtitle.style.setProperty("--subtitle-right", `${Math.max(12, right)}px`);
       subtitle.style.setProperty("--subtitle-bottom", `${bottom}px`);
       subtitle.style.setProperty("--subtitle-max-height", `${Math.max(80, maxHeight)}px`);
     };
-    window.addEventListener("resize", updateSubtitlePlacement);
+    let position = { x: 0, y: 0 };
+    let drag = null;
+    try {
+      const saved = JSON.parse(localStorage.getItem("narcissus-position"));
+      if (saved && [saved.x, saved.y].every(value => Number.isFinite(value) && value >= 0 && value <= 1)) {
+        position = { x: saved.x, y: saved.y };
+      }
+    } catch { /* Start at the original bottom-left position. */ }
+    const applyPosition = () => {
+      const rect = decoration.getBoundingClientRect();
+      // Fractions of the available travel preserve edge positions across skins and sizes.
+      decoration.style.left = `${position.x * (document.documentElement.clientWidth - rect.width)}px`;
+      decoration.style.bottom = `${position.y * (window.innerHeight - rect.height)}px`;
+      updateSubtitlePlacement();
+    };
+    const finishDrag = () => {
+      const previous = drag;
+      drag = null;
+      decoration.classList.remove("is-dragging");
+      if (previous?.moved) saveSetting("narcissus-position", JSON.stringify(position));
+      if (previous && decoration.hasPointerCapture(previous.id)) decoration.releasePointerCapture(previous.id);
+    };
+    const refreshPosition = () => { finishDrag(); applyPosition(); };
+    window.addEventListener("resize", refreshPosition);
+    window.addEventListener("blur", finishDrag);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) finishDrag(); });
+    const positionObserver = new ResizeObserver(refreshPosition);
+    positionObserver.observe(decoration);
+    document.querySelector("#narcissus-reset-position").addEventListener("click", () => {
+      finishDrag();
+      position = { x: 0, y: 0 };
+      saveSetting("narcissus-position", JSON.stringify(position));
+      applyPosition();
+    });
+    window.addEventListener("pagehide", event => {
+      finishDrag();
+      if (!event.persisted) positionObserver.disconnect();
+    });
     let playAction = () => false;
     let actionBusy = () => true;
     const applyVisibility = () => {
@@ -307,7 +613,12 @@
       backgroundButton.setAttribute("aria-pressed", String(backgroundPlayback));
       characterRenderer?.setVisible(!hidden);
       updateSubtitlePlacement();
-      if (hidden) voice.stop();
+      if (hidden) {
+        finishDrag();
+        voice.stop();
+        if (capture.active) capture.stop("角色已隐藏，摄像头已关闭。");
+      }
+      updateCaptureAvailability();
     };
     applyVisibility();
     hideButton.addEventListener("click", () => {
@@ -322,7 +633,7 @@
     });
     let silentStreak = 0;
     const interact = () => {
-      if (isCharacterHidden() || actionBusy() || voice.busy) return;
+      if (drag || capture.active || isCharacterHidden() || actionBusy() || voice.busy) return;
       const speak = silentStreak >= 2 || Math.random() < 0.5;
       decoration.dataset.interaction = speak ? "voice" : "silent";
       playAction();
@@ -332,25 +643,42 @@
         voice.stop();
       }
     };
-    let touchStart;
-    let touchHandledAt = -Infinity;
     decoration.addEventListener("pointerdown", (event) => {
-      if (event.pointerType === "touch" || event.pointerType === "pen") {
-        touchStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
-      }
+      if (event.button !== 0 || !event.isPrimary || drag || isCharacterHidden()) return;
+      const rect = decoration.getBoundingClientRect();
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY,
+        left: rect.left, bottom: window.innerHeight - rect.bottom,
+        threshold: event.pointerType === "mouse" ? 6 : 10, moved: false };
+      decoration.setPointerCapture(event.pointerId);
     });
-    decoration.addEventListener("pointercancel", () => { touchStart = null; });
+    const moveDrag = (event) => {
+      if (!drag || drag.id !== event.pointerId) return;
+      const dx = event.clientX - drag.x, dy = event.clientY - drag.y;
+      if (!drag.moved && Math.hypot(dx, dy) < drag.threshold) return;
+      drag.moved = true;
+      decoration.classList.add("is-dragging");
+      const rect = decoration.getBoundingClientRect();
+      const travelX = document.documentElement.clientWidth - rect.width;
+      const travelY = window.innerHeight - rect.height;
+      // Negative travel lets oversized (up to 300%) models be panned, not lost offscreen.
+      position.x = Math.abs(travelX) < 1 ? 0 : Math.max(0, Math.min(1, (drag.left + dx) / travelX));
+      position.y = Math.abs(travelY) < 1 ? 0 : Math.max(0, Math.min(1, (drag.bottom - dy) / travelY));
+      applyPosition();
+    };
+    decoration.addEventListener("pointermove", moveDrag);
+    decoration.addEventListener("pointercancel", event => { if (drag?.id === event.pointerId) finishDrag(); });
+    decoration.addEventListener("lostpointercapture", event => { if (drag?.id === event.pointerId) finishDrag(); });
+    decoration.addEventListener("dragstart", event => event.preventDefault());
     decoration.addEventListener("pointerup", (event) => {
-      if (!touchStart || touchStart.id !== event.pointerId) return;
-      const moved = Math.hypot(event.clientX - touchStart.x, event.clientY - touchStart.y);
-      touchStart = null;
-      touchHandledAt = performance.now();
-      if (moved <= 12) interact();
+      if (!drag || drag.id !== event.pointerId) return;
+      moveDrag(event);
+      const click = !drag.moved;
+      finishDrag();
+      if (click) interact();
     });
     decoration.addEventListener("click", (event) => {
-      // Touch can produce both pointerup and a compatibility click.
-      if (event.detail !== 0 && performance.now() - touchHandledAt < 700) return;
-      interact();
+      // Physical clicks are handled once on pointerup; retain assistive/keyboard activation.
+      if (event.detail === 0) interact();
     });
     decoration.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -371,10 +699,11 @@
       audio.addEventListener(event, () => characterRenderer?.setSpeaking(false));
     }
     const applySize = (value) => {
+      finishDrag();
       decoration.style.setProperty("--narcissus-scale", String(value / 100));
       sizeValue.textContent = `${value}%`;
       characterRenderer?.resize();
-      updateSubtitlePlacement();
+      applyPosition();
     };
     const applySpeed = (value) => {
       playbackSpeed = value;
@@ -414,10 +743,13 @@
       const character = catalog.find(item => item.id === characterSelect.value);
       const skin = character?.skins.find(item => item.id === skinSelect.value);
       if (!skin) return;
+      finishDrag();
       const version = ++selectionVersion;
+      if (capture.active) capture.stop("已切换角色，摄像头已关闭。");
       selectionRequest?.abort();
       characterRenderer?.destroy();
       characterRenderer = null;
+      updateCaptureAvailability();
       selectionRequest = new AbortController();
       const request = selectionRequest;
       const current = () => version === selectionVersion && !request.signal.aborted;
@@ -428,7 +760,7 @@
       decoration.dataset.character = character.id;
       decoration.dataset.skin = skin.id;
       decoration.dataset.renderer = "loading";
-      decoration.setAttribute("aria-label", `随机播放${displayName(character)}的动作或语音`);
+      decoration.setAttribute("aria-label", `单击播放${displayName(character)}的动作或语音，按住拖动位置`);
       selectionName.textContent = `${displayName(character)} · ${displayName(skin)}`;
       loading.hidden = false;
       retryButton.hidden = true;
@@ -463,9 +795,11 @@
         applyVisibility();
         controller.onError = (error) => {
           if (!current()) return;
+          if (capture.active) capture.stop("角色显示中断，摄像头已关闭。", "error");
           voice.stop();
           controller.destroy();
           characterRenderer = null;
+          updateCaptureAvailability();
           playAction = () => false;
           actionBusy = () => true;
           loading.hidden = false;
@@ -636,9 +970,46 @@
     if (event.target.value === "unaccepted" && document.querySelector("#activity-sort").value === "contest") {
       document.querySelector("#activity-sort").value = "difficulty-asc";
     }
+    activityPage = 1;
     renderActivity();
   });
-  document.querySelector("#activity-sort").addEventListener("change", renderActivity);
+  document.querySelector("#activity-sort").addEventListener("change", () => {
+    activityPage = 1;
+    renderActivity();
+  });
+  activityPageSize.addEventListener("change", () => {
+    activityPage = 1;
+    try { localStorage.setItem("activity-page-size", activityPageSize.value); } catch { /* Optional preference. */ }
+    renderActivity();
+  });
+  document.querySelector("#activity-prev").addEventListener("click", () => {
+    activityPage--;
+    renderActivity();
+  });
+  document.querySelector("#activity-next").addEventListener("click", () => {
+    activityPage++;
+    renderActivity();
+  });
+  document.querySelector("#activity-page-numbers").addEventListener("click", event => {
+    const button = event.target.closest("button[data-page]");
+    if (!button) return;
+    activityPage = Number(button.dataset.page);
+    renderActivity();
+  });
+  const pageInput = document.querySelector("#activity-page-input");
+  pageInput.addEventListener("input", () => pageInput.setCustomValidity(""));
+  document.querySelector("#activity-page-jump").addEventListener("submit", event => {
+    event.preventDefault();
+    if (pageInput.disabled) return;
+    const page = Number(pageInput.value);
+    if (!Number.isSafeInteger(page) || page < 1 || page > activityPageCount) {
+      pageInput.setCustomValidity(`请输入 1 至 ${activityPageCount} 之间的整数页码。`);
+      pageInput.reportValidity();
+      return;
+    }
+    activityPage = page;
+    renderActivity();
+  });
   setInterval(updateClock, 1000);
   setInterval(render, 60000);
 })();
