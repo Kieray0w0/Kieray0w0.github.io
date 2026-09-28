@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-  const platforms = { codeforces: "Codeforces", atcoder: "AtCoder", nowcoder: "牛客竞赛" };
+  const platforms = { codeforces: "Codeforces", atcoder: "AtCoder", nowcoder: "Nowcoder" };
   const hosts = { codeforces: "codeforces.com", atcoder: "atcoder.jp", nowcoder: "ac.nowcoder.com" };
   const day = 86400000;
   const formatter = new Intl.DateTimeFormat("zh-CN", {
@@ -152,6 +152,12 @@
     const title = document.createElement("h3");
     title.textContent = `${key} · 周${info.weekday}`;
     details.append(title);
+    const lunarDate = document.createElement("p");
+    lunarDate.className = "calendar-guide";
+    const lunar = Object.fromEntries(lunarFormatter.formatToParts(new Date(`${key}T00:00:00+08:00`)).map(part => [part.type, part.value]));
+    const lunarYear = lunar.yearName || lunar.relatedYear || "";
+    lunarDate.textContent = `农历 ${lunarYear}年 ${lunar.month || ""}${lunarDays[Number(lunar.day)] || lunar.day || ""}`;
+    details.append(lunarDate);
     const labels = document.createElement("p");
     labels.className = "calendar-guide";
     const arrangement = info.holiday ? `${info.holiday.name} · ${info.holiday.isOffDay ? "放假" : "调休上班"}` : "";
@@ -202,7 +208,10 @@
       if (week === 1) row.className = "current-week";
       const heading = document.createElement("th");
       heading.scope = "row";
-      heading.textContent = ["上周", "本周", "下周"][week];
+      heading.className = "calendar-week-label";
+      heading.textContent = ["Prev", "", "Next"][week];
+      heading.title = ["Previous week", "This week", "Next week"][week];
+      heading.setAttribute("aria-label", heading.title);
       row.append(heading);
       for (let weekday = 0; weekday < 7; weekday++) {
         const stamp = start + (week * 7 + weekday) * day;
@@ -214,7 +223,7 @@
         const holiday = holidayData[date.getUTCFullYear()]?.days?.[dateKey];
         const festivals = calendarFestivals(date);
         const startUTC = stamp - 8 * 3600000;
-        const contests = scheduledContests.filter(contest => contest.start < startUTC + day && contest.end > startUTC);
+        const contests = scheduledContests.filter(contest => contest.start >= startUTC && contest.start < startUTC + day);
         calendarDates.set(dateKey, { weekday: "一二三四五六日"[weekday], holiday, festivals, contests });
         if (holiday) cell.classList.add(holiday.isOffDay ? "day-off" : "workday");
         const button = document.createElement("button");
@@ -247,10 +256,22 @@
         festival.textContent = festivals.join(" / ") || (holiday?.isOffDay ? holiday.name : "");
         cell.append(festival);
         if (contests.length) {
-          const count = document.createElement("small");
-          count.className = "calendar-contest-count";
-          count.textContent = `${contests.length}赛`;
-          button.append(count);
+          const series = document.createElement("small");
+          series.className = "calendar-contest-series";
+          const shownSeries = new Set();
+          for (const contest of contests) {
+            const label = contest.platform === "atcoder"
+              ? (/\/contests\/agc/i.test(contest.url) ? "AGC" : "ARC")
+              : contest.platform === "nowcoder" ? "NOW" : "CF";
+            if (shownSeries.has(label)) continue;
+            shownSeries.add(label);
+            const badge = document.createElement("span");
+            badge.className = `calendar-series-tag ${contest.platform}`;
+            badge.textContent = label;
+            series.append(badge);
+          }
+          series.title = contests.map(contest => contest.name).join("\n");
+          button.append(series);
           const events = document.createElement("div");
           events.className = "calendar-events";
           for (const contest of contests) {
@@ -264,7 +285,7 @@
             else if (contest.platform === "nowcoder") shortName = `挑战赛 ${contest.name.match(/挑战赛\s*(\d+)/)?.[1] || ""}`;
             else shortName = `CF ${contest.name.match(/Round\s+(\d+)/i)?.[1] || new URL(contest.url).pathname.split("/").pop()}`;
             const startTime = new Date(contest.start + 8 * 3600000).toISOString().slice(11, 16);
-            link.textContent = `${shortName}\n${contest.start < startUTC ? "跨日比赛" : startTime}`;
+            link.textContent = `${shortName}\n${startTime}`;
             link.title = `${contest.name} · ${formatter.format(contest.start)} (UTC+8)`;
             events.append(link);
           }

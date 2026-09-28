@@ -2,8 +2,8 @@ window.CALENDAR_DATA = {
   "source": "https://github.com/NateScarlet/holiday-cn",
   "years": {
     "2025": {
-      "checkedAt": 1790235414049,
-      "updatedAt": 1790235414049,
+      "checkedAt": 1790583153147,
+      "updatedAt": 1790583153147,
       "status": "available",
       "days": {
         "2025-01-01": {
@@ -144,8 +144,8 @@ window.CALENDAR_DATA = {
       ]
     },
     "2026": {
-      "checkedAt": 1790235414049,
-      "updatedAt": 1790235414049,
+      "checkedAt": 1790583153147,
+      "updatedAt": 1790583153147,
       "status": "available",
       "days": {
         "2026-01-01": {
@@ -310,8 +310,8 @@ window.CALENDAR_DATA = {
       ]
     },
     "2027": {
-      "checkedAt": 1790235414049,
-      "updatedAt": 1790235414049,
+      "checkedAt": 1790583153147,
+      "updatedAt": 1790583153147,
       "status": "available",
       "days": {},
       "papers": []

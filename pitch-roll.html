@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>唱歌音高 · 卷帘图</title>
+  <link rel="stylesheet" href="pitch-roll.css">
+  <script type="module" src="pitch-roll.js"></script>
+</head>
+<body>
+  <main>
+    <nav><a href="index.html">&larr; 返回主页</a><span>LOCAL AUDIO / NO UPLOAD</span></nav>
+    <header><p class="eyebrow">VOICE STUDY · 01</p></header>
+    <section class="input-panel" aria-labelledby="input-title">
+      <div><h2 id="input-title">参考轨：乐谱 / 原曲</h2><p>MIDI 0/1 乐谱或音频 · 最长 10 分钟 · 音频最大 100 MB，MIDI 最大 2 MB</p></div>
+      <label class="file-picker">选择参考文件<input id="audio-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac,.mid,.midi" aria-label="选择参考音频或 MIDI"></label>
+      <button id="cancel" type="button" hidden>取消分析</button>
+      <p id="file-name">尚未选择文件</p>
+      <progress id="progress" max="1" value="0" aria-label="音高分析进度" hidden></progress>
+      <p id="status" role="status">MIDI 读取音符作为标准参考；原曲通过音高检测生成估计参考。不支持图片、PDF 或 MusicXML。所有文件只在本机处理。</p>
+      <label id="midi-track-controls" hidden>旋律声部 <select id="midi-track" aria-label="选择 MIDI 旋律声部"></select></label>
+    </section>
+    <section class="recording-import" aria-labelledby="recording-import-title">
+      <div class="microphone-heading"><div><p class="eyebrow">RECORDED INPUT / ALIGNMENT</p><h2 id="recording-import-title">导入录音到麦克风轨</h2></div><label class="file-picker">选择录音文件<input id="recording-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac" aria-label="导入麦克风轨录音文件"></label></div>
+      <p class="hint">与现有麦克风轨重叠的区间会被覆盖，其余片段保留。反复移动会恢复导入前的旧位置，不会重复叠加。仅最近一次导入可移动；继续重录后需先撤销重录或重新导入。</p>
+      <button id="recording-cancel" type="button" hidden>取消录音导入</button><progress id="recording-progress" max="1" value="0" aria-label="导入录音音高分析进度" hidden></progress>
+      <p id="recording-import-status" role="status">支持 WAV、MP3、M4A 等浏览器可解码格式，最长 10 分钟、最大 100 MB；无需麦克风权限，文件不上传。</p>
+    </section>
+    <section class="microphone-panel" aria-labelledby="microphone-title">
+      <div class="microphone-heading"><div><p class="eyebrow">LIVE INPUT / PUNCH IN</p><h2 id="microphone-title">麦克风 / 钢琴录音</h2></div><button id="microphone-toggle" type="button" aria-pressed="false" aria-describedby="microphone-status" aria-keyshortcuts="." title="句号键：从当前位置开始 / 停止并保存录音">从当前位置开始录音</button></div>
+      <p class="hint"><kbd>.</kbd> 句号键从当前位置开始录音 / 停止并保存当前段；准备录音时再按句号可取消启动。输入框内打字不触发，长按不会反复切换，Shift＋句号不触发录音。</p>
+      <div class="record-options"><label>录音输入 <select id="recording-input" aria-label="录音输入"><option value="microphone">麦克风 + 钢琴</option><option value="piano">仅钢琴（无需麦克风）</option></select></label></div>
+      <output id="microphone-pitch" aria-live="off">等待麦克风输入</output>
+      <p id="microphone-status" role="status">点击后申请麦克风权限并开始录音。录音仅保存在浏览器内存，不上传；刷新或关闭前请导出。</p>
+      <div class="piano-panel" role="group" aria-label="钢琴键盘">
+        <div class="record-options"><label>中排音区 <select id="piano-octave" aria-label="钢琴中排音区"><option value="48">C3–C4</option><option value="60" selected>C4–C5</option></select></label><label><input id="piano-keyboard" type="checkbox" checked> 启用电脑键盘</label><button id="piano-release" type="button">松开全部琴键</button></div>
+        <div class="record-options playback-volumes"><label>钢琴音量 <input id="piano-volume" type="range" min="0" max="400" step="10" value="200" aria-label="独立钢琴监听音量"><output id="piano-volume-value" for="piano-volume">200%</output></label></div>
+        <p class="hint">独立控制现场琴音，0% 静音，默认 200%，最高 400%；不受下方“麦克风轨音量”或播放器静音影响。仅改变监听，不改变录入的琴音、回放或导出音量，静音时仍会录入。请逐步调高，出现失真时降低钢琴或伴奏音量。</p>
+        <p id="piano-high-label" class="piano-row-label"></p>
+        <div id="piano-high-keys" class="piano-keys" role="group" aria-labelledby="piano-high-label"></div>
+        <p id="piano-middle-label" class="piano-row-label"></p>
+        <div id="piano-keys" class="piano-keys" role="group" aria-labelledby="piano-middle-label"></div>
+        <p id="piano-low-label" class="piano-row-label"></p>
+        <div id="piano-low-keys" class="piano-keys" role="group" aria-labelledby="piano-low-label"></div>
+        <p id="piano-status" class="hint" role="status">上排 Q W E R T Y U I；中排 A S D F G H J K；下排 Z X C V B N M ,。</p>
+        <p class="hint">三排分别相差一个八度。黑键 = Shift＋其左侧白键，例如 Shift+A 为中排 C#，Shift+Q 为高八度 C#。也可按住 Shift 点击左侧白键；右侧没有黑键的白键不响应 Shift 组合。松开字母键停止该音；句号键用于录音，不占用琴键。</p>
+        <p class="hint">按住发声，松开停止；支持鼠标、触屏和电脑键盘。采用单音合成琴音，同时按多个键时以最后按下为准。未录音时仅试听；开始录音后，琴音与音高写入麦克风轨，可覆盖、撤销和导出 WAV。仅钢琴模式不申请麦克风权限；混合录音请戴耳机，避免扬声器琴音再次被麦克风录入。输入框内打字不会弹琴。</p>
+      </div>
+      <div class="record-options"><label><input id="play-reference" type="checkbox" checked> 录音时同步播放原曲（请戴耳机）</label><label>本次延迟补偿 <input id="latency" type="number" min="-1000" max="1000" step="10" value="0" aria-label="本次录音延迟补偿毫秒"> ms</label></div>
+      <p class="hint">补偿正数将本次录音与音高向左移动，负数向右移动，不修改旧片段。参考播放与录音共用音频时钟，但声卡和蓝牙延迟仍可能需要手动校准。MIDI 仅显示参考音符，不合成伴奏。</p>
+      <p class="hint">点击时间轴定位，再开始重唱；录音过程中点击图表会保存当前段并从新位置重新开始。仅覆盖实际录制区间，其余片段保留。参考结尾或时间轴 10 分钟处自动停止，进入后台也会停止。</p>
+      <div class="record-actions"><button id="undo-take" type="button" disabled>撤销上次操作</button><button id="export-recording" type="button" disabled>导出麦克风轨 WAV</button></div>
+      <p id="recording-summary" role="status">麦克风轨尚无录音。</p>
+      <audio id="recording-player" controls preload="metadata" aria-label="麦克风录音回放" hidden></audio>
+    </section>
+    <section class="roll-panel" aria-labelledby="roll-title">
+      <div class="roll-heading"><div><p class="eyebrow">PITCH / TIME</p><h2 id="roll-title">音高卷帘图</h2></div><label>横向缩放 <input id="zoom" type="range" min="24" max="160" value="64" aria-label="横向缩放"><output id="zoom-value">64 px/s</output></label></div>
+      <p id="summary">参考轨与麦克风轨共用时间轴，原有录音不会因更换参考而丢失。</p>
+      <p class="track-legend"><span class="reference-key">蓝色：参考</span><span class="matching-key">绿色：麦克风接近参考 / 无参考</span><span class="high-key">橙色：偏高</span><span class="low-key">红色：偏低</span> · 容差 ±50 音分</p>
+      <div id="roll-scroll" tabindex="0" role="region" aria-label="音高卷帘图，可横向滚动，点击图内定位播放">
+        <div id="roll-stage"><canvas id="roll" role="img" aria-label="尚无音高数据">音高卷帘图需要支持 Canvas 的浏览器。</canvas></div>
+      </div>
+      <div class="timeline-controls"><label for="timeline">时间轴定位</label><input id="timeline" type="range" min="0" max="10" step="0.01" value="0"><output id="position">0:00.0 / 0:10.0</output><label><input id="follow" type="checkbox" checked> 自动跟随</label><label>定位到 <input id="seek-seconds" type="number" min="0" max="600" step="0.01" value="0"> 秒</label><button id="seek-go" type="button">定位</button></div>
+      <div class="record-options"><label>文件起始位置 <input id="import-start" type="number" min="-600" max="600" step="0.001" value="0" aria-label="导入录音起始时间秒"> 秒</label><button id="import-use-cursor" type="button">使用当前游标</button><button id="import-earlier" type="button" disabled>提前 10 ms</button><button id="import-later" type="button" disabled>推迟 10 ms</button><button id="import-apply" type="button" disabled>应用起始时间</button></div>
+      <p id="placement-note" class="hint">尚无可移动的导入录音。</p>
+      <p class="hint">先设置起始时间再选文件；导入后可输入到毫秒并点击“应用”，或用 ±10 ms 按钮微调。声音与音高同步移动，参考轨不变。正数推迟开始，负数裁掉文件开头；时间轴 0–600 秒之外不写入。</p>
+      <div class="transport"><button id="dual-play" type="button" aria-pressed="false" aria-describedby="dual-status" aria-keyshortcuts="Space" title="空格：播放 / 暂停" disabled>双轨同步播放</button><span class="hint"><kbd>空格</kbd> 播放 / 暂停</span><span id="dual-status" role="status">从当前时间轴位置一起播放原曲和麦克风轨。</span></div>
+      <div class="record-options playback-volumes" role="group" aria-label="监听与回放音量">
+        <label>原曲音量 <input id="reference-volume" type="range" min="0" max="100" step="1" value="50" aria-label="原曲伴奏与回放音量"><output id="reference-volume-value" for="reference-volume">50%</output></label>
+        <label>麦克风轨音量 <input id="recording-volume" type="range" min="0" max="100" step="1" value="50" aria-label="麦克风轨回放音量"><output id="recording-volume-value" for="recording-volume">50%</output></label>
+      </div>
+      <p class="hint">原曲音量控制录音时的伴奏和原曲回放；麦克风轨音量只控制已录制或导入内容的回放，不控制现场琴音。两者均与单轨播放器联动，0% 为静音，默认各 50%。钢琴监听请用琴键上方的独立音量调节。所有音量调节均不改变录音采样、音高分析或导出 WAV。麦克风本身不实时返听，请戴耳机录音。</p>
+      <p class="hint">播放中点击时间轴可同步跳转；点击播放按钮或按空格可暂停 / 继续双轨播放。输入框、琴键及其他交互控件保留原有键盘操作；录音或导入期间不启用此快捷键。较短的一轨结束后另一轨继续；只有一条音频时播放该轨。MIDI 仅显示音符，不合成声音。开始录音、调整录音或导入文件时暂停同步播放。</p>
+      <div class="transport"><span>原曲单轨试听（录音时由程序同步播放）</span><audio id="player" controls preload="metadata" aria-label="原音频播放" hidden></audio></div>
+      <p class="hint">点击图内可定位；也可以使用播放器进度条。左侧简谱固定按 C 调（1=C）标注，并非自动识别歌曲调性：C4 = 无点的 1，每个上点／下点分别表示升高／降低一个八度，# 表示升半音。A4 = 440 Hz。灰色区域为黑键，空白片段表示未检测到可信音高。</p>
+    </section>
+    <footer><strong>麦克风和原曲检测仍是音高估计。</strong>检测范围约 C2–C6（65–1100 Hz）。带伴奏音频可能误检，MIDI 多声部请选演唱旋律。本页不做人声分离。WAV 导出包含麦克风轨上的导入音频与现场录音，空白时间段为静音，不混入参考音频。所有录音刷新后丢失。</footer>
+  </main>
+</body>
+</html>

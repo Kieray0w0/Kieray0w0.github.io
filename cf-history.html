@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CF 历史 Rating 档案</title>
+  <link rel="stylesheet" href="cf-history.css">
+  <script src="cf-history-data.js" defer></script>
+  <script src="cf-profiles-data.js" defer></script>
+  <script src="cf-history.js" type="module"></script>
+</head>
+<body>
+  <main>
+    <nav><a href="index.html">&larr; 返回主页</a><a href="https://codeforces.com/ratings" target="_blank" rel="noopener noreferrer">Codeforces 官方榜单 &nearr;</a></nav>
+    <header class="hero archive-header"><h1 class="sr-only">CF 历史 Rating 档案</h1><span class="eyebrow">CODEFORCES / THE RATING ARCHIVE</span><aside><strong><span id="range-days">365</span> <small>DAYS</small></strong><p id="coverage">正在读取本地档案…</p></aside></header>
+    <p class="notice">历史曲线与日期榜单展示的是<strong>已追踪选手之间的排名</strong>，不是完整历史全球榜，也不代表已找全所选时段的所有前十选手。可回溯至追踪选手最早的可靠 Rating 记录；没有记录的日期不补造分数。过去 Rating 来自官方 <code>user.rating</code>；真正观察到的主页前十另存于下方“主页快照”。时间统一为 UTC+8。</p>
+    <p id="data-status" role="status">尚无历史数据，请先运行 python update_rankings.py。</p>
+    <p id="backfill-status" class="notice" hidden></p>
+    <section class="workspace" aria-labelledby="timeline-title">
+      <div class="section-heading"><div><span class="eyebrow">01 / RATING IN MOTION</span><h2 id="timeline-title" class="sr-only">历史榜单日期与视图</h2></div><div class="options"><label>范围 <select id="period"><option value="30">最近 30 天</option><option value="90">最近 90 天</option><option value="365">最近一年</option><option value="1095">最近三年</option><option value="1825">最近五年</option><option value="all" selected>全部历史</option></select></label><label>视图 <select id="view"><option value="race">动态榜单</option><option value="chart">历史曲线对比</option></select></label><label id="metric-control" hidden>曲线 <select id="metric"><option value="rating">Rating</option><option value="rank">追踪组内排名</option></select></label></div></div>
+      <div class="window-controls"><label>曲线显示窗口 <select id="chart-window"><option value="m1">最近 1 个月</option><option value="m3" selected>最近 3 个月</option><option value="m6">最近 6 个月</option><option value="m12">最近 1 年</option><option value="custom">自定义天数</option><option value="full">固定显示回溯范围</option></select></label><label id="custom-window-control" hidden>窗口天数 <input id="custom-window-days" type="number" min="1" max="36500" step="1" value="90" inputmode="numeric" aria-describedby="window-error"></label><span id="window-summary" class="hint"></span></div>
+      <p id="window-error" class="window-error" role="alert" hidden>请输入 1 至 36500 的整数天数；修改前的窗口仍然有效。</p>
+      <div class="tracking-controls"><label>追踪方式 <select id="tracking-mode"><option value="auto" selected>自动榜单</option><option value="custom">自定义追踪</option></select></label><label>前 <input id="tracking-top-count" type="number" min="1" step="1" value="10" aria-label="榜单人数" aria-describedby="tracking-top-error"> 名</label><span id="tracking-summary" class="hint"></span><span id="tracking-top-error" class="window-error" role="status" hidden></span></div>
+      <section id="tracking-picker" class="tracking-picker" aria-label="选择追踪用户" hidden>
+        <div class="tracking-toolbar"><label>搜索 ID <input id="tracking-search" type="search" placeholder="输入用户名" autocomplete="off"></label><button id="tracking-current" type="button">选中当前前 10 名</button><button id="tracking-clear" type="button">清空选择</button></div>
+        <p class="hint">当前头像与国家／地区资料 · 按最新缓存 Rating 从高到低排序，不随历史播放日期变化。</p>
+        <div id="tracking-users" class="tracking-users"></div>
+        <p id="tracking-no-results" class="hint" hidden>没有找到匹配的本地用户。</p>
+        <div class="tracking-actions"><span id="tracking-count" class="hint" role="status"></span><button id="tracking-apply" type="button">应用选择</button></div>
+        <p class="hint">从本地档案中选择用户，点击“应用选择”后同时用于曲线图、条形图和历史对比。上方人数可用于快捷勾选当前前 N 名；自定义模式显示所有已选用户，不受自动榜单人数限制。“只看活跃选手”仍然生效。选择会保存在此浏览器中，暂不支持添加档案以外的 ID。</p>
+      </section>
+      <details class="series-color-editor">
+        <summary>选手颜色设置</summary>
+        <div class="series-color-controls">
+          <label>选手 ID <input id="series-color-user" type="text" list="series-color-users" placeholder="输入选手 ID" autocomplete="off" spellcheck="false" maxlength="64" aria-describedby="series-color-user-error"></label>
+          <datalist id="series-color-users"></datalist>
+          <label>颜色 <input id="series-color-picker" type="color" value="#800000"></label>
+          <label>色值 <input id="series-color-hex" type="text" value="#800000" maxlength="7" placeholder="#800000" spellcheck="false" aria-describedby="series-color-error"></label>
+          <button id="series-color-apply" type="button">应用颜色</button><button id="series-color-reset" type="button">恢复默认</button>
+        </div>
+        <p id="series-color-user-error" class="window-error" role="status" hidden>请输入本地档案中已有的选手 ID，不区分大小写。</p>
+        <p id="series-color-error" class="window-error" role="alert" hidden>请输入 # 加六位十六进制色值，例如 #800000。</p>
+        <p id="series-color-status" class="hint" role="status"></p>
+        <p class="hint">对自动榜单和自定义追踪都生效，刷新后保留。仅改变曲线、条形和图例，不改变 ID / Rating 等级色或加减分提示色。应用颜色时暂停播放。</p>
+      </details>
+      <p id="change-contest" class="hint"></p>
+      <section id="race-view" class="race-view" data-mode="curve" aria-label="动态 Rating 曲线榜">
+        <div class="race-heading"><div><span id="race-eyebrow" class="eyebrow">TRACKED PLAYERS / TOP 10</span><h3 id="curve-title">Codeforces <span>Rating Race</span></h3><p id="race-scope">当前前 10 名 · 掉榜后淡出 · 非历史全球榜</p></div><time id="race-date">----/--/--</time></div>
+        <div class="race-view-controls">
+          <div class="race-mode-switch" role="group" aria-label="动态榜单图形"><button id="race-mode-curve" type="button" aria-pressed="true">曲线图</button><button id="race-mode-bar" type="button" aria-pressed="false">条形图</button></div>
+          <label id="curve-scale-control" class="rating-scale-control">分数上限 <select id="curve-scale" aria-label="曲线图分数上限"><option value="record" selected>本段历史最高</option><option value="current">当前榜单最高</option></select></label>
+          <label id="bar-scale-control" class="rating-scale-control" hidden>分数上限 <select id="bar-scale" aria-label="条形图分数上限"><option value="current" selected>当前榜单最高</option><option value="record">本段历史最高</option></select></label>
+        </div>
+        <div id="race-playback-slot"><div id="playback-controls" class="playback-controls">
+          <div class="timeline"><button id="play" type="button" title="空格键：播放 / 暂停" aria-keyshortcuts="Space" disabled>播放</button><input id="day-slider" type="range" min="0" max="0" value="0" aria-label="比赛进度" disabled><label class="date-label">查看日期<input id="day-picker" type="date" disabled></label></div>
+          <div class="play-options"><label>播放速度 <select id="play-speed"><option value="2000">0.5×</option><option value="1000" selected>1×</option><option value="500">2×</option></select></label><label><input type="checkbox" id="skip-quiet" checked> <span id="skip-quiet-label">过滤不影响前 10 名的比赛</span></label></div>
+        </div></div>
+        <div class="race-scale"><span id="bar-contest-title"></span><span id="race-scale-start" hidden>Rating</span><span id="race-scale-end">选手 / Rating / 最近一场变化</span></div>
+        <div id="bar-record" class="history-record-content bar-record" aria-label="本段历史最高纪录" hidden><div class="history-record-peak"><span>本段历史最高</span><strong id="bar-record-score"></strong></div><div class="history-record-details"><strong id="bar-record-holder"></strong><span id="bar-record-age"></span><small id="bar-record-note"></small></div></div>
+        <div class="race-visual-scroll"><div class="race-visual">
+          <svg id="race-shared-chart" class="race-shared-chart" viewBox="0 0 860 640" role="group" aria-labelledby="shared-chart-title shared-chart-description"><title id="shared-chart-title">当前前 10 名选手 Rating 历史曲线</title><desc id="shared-chart-description">共用时间和 Rating 刻度，只显示所选日期排名前 10 的选手，掉榜后曲线和头像卡片淡出，重回前 10 时恢复显示。头像位于曲线终点右侧。比赛竖线可查看详情并打开赛事。开启活跃筛选时，只从活跃选手中取前 10 名。平滑部分只表示趋势。</desc></svg>
+          <div id="race-stage" class="race-stage" aria-hidden="true"></div>
+        </div></div>
+        <p id="race-empty" class="hint" hidden>该日期没有符合条件的记录。</p>
+        <div class="race-footer"><span id="race-progress"></span></div>
+        <p class="hint">比赛与不活跃退出各占一格；日期仅用于查询和窗口筛选。</p>
+        <p id="race-curve-hint" class="hint">“范围”控制可以回放的日期，“显示窗口”控制图中历史长度：起点为所选日期减去窗口大小，终点为所选日期，超出已有档案时从最早记录开始。月份按自然月回退，自定义按天数回退；也可恢复固定回溯范围。窗口同时用于历史曲线对比，不改变当日排名。纵轴上限默认等于“本段历史最高”，也可独立选择“当前榜单最高”，此时较高的历史曲线会被裁切；下限按当前显示选手调整。本段指所选“范围”的起点至当前节点，包含起点已有的 Rating，不会因显示窗口变大而纳入更早的峰值。自定义追踪时只统计所选用户。历史最高模式下，动态破纪录时上限与纪录数字同步过渡，到位后准确等于该节点的历史最高。未参赛日期保持水平，Rating 更新日追加局部过渡；头像跟随终点，缺失时段不连接。</p>
+        <p class="hint race-contest-hint">事件等距 · 比赛或退出各占一格。横轴不按现实时间长短分配宽度，同一时刻的事件合并为一个节点。比赛竖线标记分数过渡的中心，升降在竖线两侧平滑完成，其他区间保持水平；竖线是动画位置，真实比赛日期与最终分数不变。默认显示前 10 名，可自定义人数；仅收录影响赛前或赛后所设前 N 名的比赛，包括新人入榜。虚线编号可查看比赛和加减分。开启活跃筛选后，榜内选手失活时有独立的“退出”节点，曲线和头像在该单位内淡出，不再等下一场比赛；同一时刻失活的选手合并退出。比赛导致的掉榜仍在对应比赛节点淡出。</p>
+        <p id="race-bar-hint" class="hint" hidden>横条从 0 起算，默认上限等于当前可见榜单最高分，并随播放中的分数更新。也可选择“本段历史最高”，使用所选范围起点至当前节点的最高分，不受显示窗口大小影响。选手信息位于横条左侧。</p>
+        <p class="hint">分数旁标注截至所选日期、时间轴最近收录场次的变化：参加该场显示官方新分减旧分，未参加该场或分数未变显示 0，— 表示缺少该场旧分。被过滤的比赛不占用横轴，也不替换当前场次。没有新场次时不重复触发高亮；加分卡片为浅蓝，减分为浅灰，移动和暂停期间保持颜色，到位后淡回正常背景。换位和分数补间仅用于动画，准确数值见下表。头像和旗帜来自当前 CF 公开资料，并非历史资料；国家／地区字段不等同于国籍，未填写时显示问号。</p>
+      </section>
+      <div id="comparison-playback-slot"></div>
+      <div class="chart-wrap" id="chart-view" hidden><svg id="history-chart" viewBox="0 0 1040 340" role="img" aria-labelledby="chart-title chart-description"><title id="chart-title">追踪选手历史曲线</title><desc id="chart-description">选择日期后，可在下方表格读取准确数值。</desc></svg></div>
+      <p class="hint" id="chart-hint" hidden>横轴同样按比赛与退出事件等距排列，只展示截至所选日期的历史；比赛节点使用官方分数，任意日期查询使用该日末的已知分数。此对比视图保留阶梯线，动态过渡请使用“动态榜单”。线条颜色区分选手，用户名保留 CF 配色。图例只控制此视图的显示，不改变排名。</p>
+      <div id="legend" class="legend" aria-label="选择显示的选手曲线" hidden></div>
+      <div class="table-heading"><h3 id="selected-date">当日追踪榜</h3><label><input id="active-only" type="checkbox"> 只看该日近六个月活跃选手</label></div>
+      <p id="ranking-summary" class="hint"></p>
+      <div class="table-scroll"><table><caption class="sr-only">所选日期的追踪选手排名，非历史全球排名</caption><thead><tr><th scope="col">组内排名</th><th scope="col">选手</th><th scope="col">Rating</th><th scope="col">最近一场变化</th><th scope="col">个人最近计分比赛</th></tr></thead><tbody id="history-rows"></tbody></table></div>
+    </section>
+    <section class="snapshots" aria-labelledby="snapshot-title"><div class="section-heading"><div><span class="eyebrow">02 / OBSERVED, NOT INFERRED</span><h2 id="snapshot-title">主页快照</h2></div><label>抓取时刻 <select id="snapshot" disabled></select></label></div><p id="snapshot-note" class="hint">只列出实际保存的抓取记录，不补造未抓取日期。</p><ol id="snapshot-rows"></ol></section>
+    <footer>历史快照，不实时请求 CF。数据由维护者更新。历史回溯仅覆盖已追踪选手的可靠比赛记录，不会补造过去的主页榜单快照。</footer>
+  </main>
+</body>
+</html>

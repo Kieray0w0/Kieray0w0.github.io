@@ -1,5 +1,5 @@
 window.CCF_DEADLINE_DATA = {
-  "generatedAt": 1790244504936,
+  "generatedAt": 1790584044791,
   "source": "https://github.com/ccfddl/ccf-deadlines",
   "license": "MIT",
   "venueCount": 58,
@@ -16,18 +16,6 @@ window.CCF_DEADLINE_DATA = {
     "MX": "\u4ea4\u53c9/\u7efc\u5408/\u65b0\u5174"
   },
   "deadlines": [
-    {
-      "title": "USENIX Security",
-      "titleZh": "USENIX \u5b89\u5168\u7814\u8ba8\u4f1a",
-      "description": "USENIX Security Symposium",
-      "category": "SC",
-      "categoryName": "\u7f51\u7edc\u4e0e\u4fe1\u606f\u5b89\u5168",
-      "year": 2027,
-      "round": "Cycle 1 Deadline",
-      "url": "https://www.usenix.org/conference/usenixsecurity27",
-      "timezone": "UTC-12",
-      "deadline": 1787745599000
-    },
     {
       "title": "IEEE VR",
       "titleZh": "IEEE \u865a\u62df\u73b0\u5b9e\u4f1a\u8bae",
@@ -253,8 +241,8 @@ window.CCF_DEADLINE_DATA = {
       "year": 2027,
       "round": "second round",
       "url": "https://icde2027.github.io/",
-      "timezone": "UTC-7",
-      "deadline": 1794441600000
+      "timezone": "PT",
+      "deadline": 1794445200000
     },
     {
       "title": "PLDI",
@@ -365,6 +353,18 @@ window.CCF_DEADLINE_DATA = {
       "deadline": 1800532799000
     },
     {
+      "title": "SIGIR",
+      "titleZh": "ACM \u4fe1\u606f\u68c0\u7d22\u7814\u7a76\u4e0e\u53d1\u5c55\u56fd\u9645\u4f1a\u8bae",
+      "description": "International Conference on Research on Development in Information Retrieval",
+      "category": "DB",
+      "categoryName": "\u6570\u636e\u5e93/\u6570\u636e\u6316\u6398/\u5185\u5bb9\u68c0\u7d22",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://sigir2027.org/",
+      "timezone": "AoE",
+      "deadline": 1800619199000
+    },
+    {
       "title": "USENIX Security",
       "titleZh": "USENIX \u5b89\u5168\u7814\u8ba8\u4f1a",
       "description": "USENIX Security Symposium",
@@ -426,6 +426,17 @@ window.CCF_DEADLINE_DATA = {
       "timezone": "UTC-12"
     },
     {
+      "title": "ICCV",
+      "titleZh": "IEEE/CVF \u56fd\u9645\u8ba1\u7b97\u673a\u89c6\u89c9\u4f1a\u8bae",
+      "description": "IEEE International Conference on Computer Vision",
+      "category": "AI",
+      "categoryName": "\u4eba\u5de5\u667a\u80fd",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://iccv.thecvf.com/Conferences/2027",
+      "timezone": "AoE"
+    },
+    {
       "title": "ACM SIGGRAPH",
       "titleZh": "ACM \u8ba1\u7b97\u673a\u56fe\u5f62\u5b66\u4e0e\u4ea4\u4e92\u6280\u672f\u4f1a\u8bae",
       "description": "ACM SIGGRAPH Annual Conference",
@@ -437,6 +448,28 @@ window.CCF_DEADLINE_DATA = {
       "timezone": "UTC+0"
     },
     {
+      "title": "LICS",
+      "titleZh": "IEEE \u8ba1\u7b97\u673a\u79d1\u5b66\u903b\u8f91\u7814\u8ba8\u4f1a",
+      "description": "IEEE Symposium on Logic in Computer Science",
+      "category": "CT",
+      "categoryName": "\u8ba1\u7b97\u673a\u79d1\u5b66\u7406\u8bba",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://lics.siglog.org/lics27/",
+      "timezone": "AoE"
+    },
+    {
+      "title": "ISCA",
+      "titleZh": "\u8ba1\u7b97\u673a\u4f53\u7cfb\u7ed3\u6784\u56fd\u9645\u7814\u8ba8\u4f1a",
+      "description": "International Symposium on Computer Architecture",
+      "category": "DS",
+      "categoryName": "\u4f53\u7cfb\u7ed3\u6784/\u5e76\u884c\u4e0e\u5206\u5e03/\u5b58\u50a8",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://www.iscaconf.org/",
+      "timezone": "AoE"
+    },
+    {
       "title": "SIGCOMM",
       "titleZh": "ACM \u6570\u636e\u901a\u4fe1\u4f1a\u8bae",
       "description": "ACM International Conference on Applications, Technologies, Architectures, and Protocols for Computer Communication",
@@ -445,6 +478,28 @@ window.CCF_DEADLINE_DATA = {
       "year": 2027,
       "round": "\u8f6e\u6b21 1",
       "url": "https://conferences.sigcomm.org/sigcomm/2027/",
+      "timezone": "AoE"
+    },
+    {
+      "title": "CCS",
+      "titleZh": "ACM \u8ba1\u7b97\u673a\u4e0e\u901a\u4fe1\u5b89\u5168\u4f1a\u8bae",
+      "description": "ACM Conference on Computer and Communications Security",
+      "category": "SC",
+      "categoryName": "\u7f51\u7edc\u4e0e\u4fe1\u606f\u5b89\u5168",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://www.sigsac.org/ccs/CCS2027/",
+      "timezone": "AoE"
+    },
+    {
+      "title": "FM",
+      "titleZh": "\u5f62\u5f0f\u5316\u65b9\u6cd5\u56fd\u9645\u4f1a\u8bae",
+      "description": "International Symposium on Formal Methods",
+      "category": "SE",
+      "categoryName": "\u8f6f\u4ef6\u5de5\u7a0b/\u7cfb\u7edf\u8f6f\u4ef6/\u7a0b\u5e8f\u8bbe\u8ba1\u8bed\u8a00",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://www.fmeurope.org/feature/upcoming_conferences/",
       "timezone": "AoE"
     }
   ]

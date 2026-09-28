@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="entry.css" />
     <script src="contests-data.js" defer></script>
     <script src="calendar-data.js" defer></script>
-    <script src="ccf-deadlines-data.js" defer></script>
+    <script src="rankings-data.js" defer></script>
+    <script src="rankings.js" defer></script>
     <script src="cute/characters.js" defer></script>
     <script src="narcissus-live2d.js" defer></script>
     <script src="character-spine.js" defer></script>
     <script src="face-capture.js" defer></script>
     <script src="page-navigation.js" defer></script>
     <script src="contests.js" defer></script>
-    <script src="ccf-deadlines.js" defer></script>
+    <script src="subtitle-settings.js" defer></script>
   </head>
   <body>
     <aside class="page-navigation" aria-label="页面目录">
@@ -30,7 +31,6 @@
         <a href="#contest-heading">CONTEST SCHEDULE · 赛程</a>
         <a class="page-nav-subsection" href="#coming-soon">COMING SOON · 近期比赛</a>
         <a class="page-nav-subsection" href="#recent-section">历史比赛</a>
-        <a href="#ccf-deadlines">CCF A DEADLINES</a>
         <a href="#activity-heading">SUBMISSION TRACKER</a>
       </nav>
     </aside>
@@ -77,11 +77,29 @@
       </svg>
       <h1>123，<br />456。</h1>
       <p>998244353。</p>
+      <div class="clock-rankings">
+      <section class="rating-board rating-board-cf" aria-labelledby="cf-ranking-title">
+        <header><h2 id="cf-ranking-title"><span aria-hidden="true">&rarr;</span> Top rated <small>Codeforces</small></h2><a href="https://codeforces.com/ratings" target="_blank" rel="noopener noreferrer" aria-label="查看 Codeforces 官方排行榜">&nearr;</a></header>
+        <p class="rating-scope" title="从全部选手按最近一次 Rating 更新筛选近六个月参赛者，不使用 API 的一个月活跃开关">近六个月活跃选手 · 当前 Rating</p>
+        <div class="rating-columns" aria-hidden="true"><span>#</span><span>User</span><span>Rating</span></div>
+        <ol class="rating-list" id="cf-ranking-list" aria-label="Codeforces 前十名"></ol>
+        <p class="rating-status" id="cf-ranking-status" role="status">暂无榜单快照，请刷新本地数据。</p>
+        <a class="rating-history-link" href="cf-history.html">历史 Rating 档案 &rarr;</a>
+      </section>
       <time class="live-clock" id="live-clock" tabindex="-1">
         <span class="clock-date">UTC+8 · 时间正在加载…</span>
         <strong class="clock-time">--:--:--</strong>
         <span class="clock-lunar">日期正在加载…</span>
       </time>
+      <section class="rating-board rating-board-atc" aria-labelledby="atc-ranking-title">
+        <header><h2 id="atc-ranking-title">AtCoder <small>Ranking</small></h2><a href="https://atcoder.jp/ranking?contestType=algo" target="_blank" rel="noopener noreferrer" aria-label="查看 AtCoder 官方算法排行榜">&nearr;</a></header>
+        <div class="atc-ranking-category"><span>Algorithm</span><small>Active Users</small></div>
+        <p class="rating-scope" title="官网 Active Users：近两年参加过 Rated 比赛">近两年 Rated 参赛者 · 当前 Rating</p>
+        <div class="rating-columns" aria-hidden="true"><span>Rank</span><span>User</span><span>Rating</span></div>
+        <ol class="rating-list" id="atc-ranking-list" aria-label="AtCoder 前十名"></ol>
+        <p class="rating-status" id="atc-ranking-status" role="status">暂无榜单快照，请刷新本地数据。</p>
+      </section>
+      </div>
       <section class="three-week-calendar" id="three-week-calendar" tabindex="-1" aria-label="最近三周日历，UTC+8">
         <table>
           <caption>THREE WEEKS <span id="calendar-range"></span></caption>
@@ -106,7 +124,7 @@
         </a>
         <a class="candy mint" href="https://ac.nowcoder.com/acm/contest/vip-index" target="_blank" rel="noopener noreferrer">
           <span class="button-icon" aria-hidden="true"><img src="assets/platforms/nowcoder-contest.png" alt="" width="30" height="30" /></span>
-          <span>牛客竞赛</span>
+          <span>Nowcoder</span>
           <span class="arrow" aria-hidden="true">&nearr;</span>
         </a>
         <a class="candy blue" href="https://cftracker.netlify.app/contests" target="_blank" rel="noopener noreferrer">
@@ -118,6 +136,16 @@
           <span class="button-icon" aria-hidden="true"><img src="assets/platforms/atcoder.png" alt="" width="30" height="30" /></span>
           <span>AtCoder Tracker</span>
           <span class="arrow" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="candy pink" href="trash.html" title="Trash Bin | CCF A deadline page" aria-label="Trash Bin | CCF A deadline page">
+          <span class="button-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          <span>Trash Bin</span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="candy mint" href="pitch-roll.html" title="歌唱音高 · 卷帘图">
+          <span class="button-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13M9 9l11-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /><ellipse cx="6" cy="18" rx="3" ry="2.5" stroke="currentColor" stroke-width="1.6" /><ellipse cx="17" cy="16" rx="3" ry="2.5" stroke="currentColor" stroke-width="1.6" /></svg></span>
+          <span>Music</span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
         </a>
       </nav>
       <section class="contest-board" aria-labelledby="contest-heading">
@@ -131,7 +159,7 @@
               <option value="all">全部平台</option>
               <option value="codeforces">Codeforces</option>
               <option value="atcoder">AtCoder</option>
-              <option value="nowcoder">牛客竞赛</option>
+              <option value="nowcoder">Nowcoder</option>
             </select>
           </label>
         </div>
@@ -177,44 +205,6 @@
           </table>
         </div>
         <p class="calendar-help">赛程来自 Codeforces API、AtCoder 赛程页和牛客挑战赛专页，不包含全部私有赛或训练赛。此列表为数据快照，并非实时接口；变更以官方公告为准。</p>
-      </section>
-      <section class="contest-board ccf-deadline-board" id="ccf-deadlines" aria-labelledby="ccf-heading">
-        <div class="board-heading">
-          <div>
-            <span class="eyebrow">PAPER PLANE CALENDAR</span>
-            <h2 id="ccf-heading" tabindex="-1">CCF A DEADLINES</h2>
-          </div>
-          <label class="platform-filter">筛选方向
-            <select id="ccf-category-filter">
-              <option value="all">全部方向</option>
-              <option value="AI">人工智能</option><option value="CG">图形学与多媒体</option>
-              <option value="CT">计算机科学理论</option><option value="DB">数据库/数据挖掘/内容检索</option>
-              <option value="DS">体系结构/并行与分布/存储</option><option value="HI">人机交互与普适计算</option>
-              <option value="MX">交叉/综合/新兴</option><option value="NW">计算机网络</option>
-              <option value="SC">网络与信息安全</option><option value="SE">软件工程/系统软件/程序设计语言</option>
-            </select>
-          </label>
-        </div>
-        <p class="calendar-help">会议截止时间统一显示为北京时间（UTC+8）；同一会议的不同投稿轮次分别显示。</p>
-        <p id="ccf-data-status" class="data-status" role="status">正在读取 CCF A 会议 DDL 快照…</p>
-        <div class="next-contest ccf-next" id="next-ccf-deadline" hidden>
-          <div><span class="eyebrow">NEXT PAPER DEADLINE</span><a id="next-ccf-link" target="_blank" rel="noopener noreferrer"></a></div>
-          <div class="countdown-wrap"><span>距离截止</span><output id="ccf-countdown" aria-live="off"></output></div>
-        </div>
-        <noscript><p class="data-status">请启用 JavaScript 查看 CCF A 会议截止日期。</p></noscript>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="CCF A 会议截止日期表，可横向滚动">
-          <table>
-            <caption>CONFERENCE DDL <span>已公布且尚未截止</span></caption>
-            <thead><tr><th scope="col">方向</th><th scope="col">会议</th><th scope="col">中文名称</th><th scope="col">截止时间（UTC+8）</th><th scope="col">倒计时</th><th scope="col">轮次</th></tr></thead>
-            <tbody id="ccf-deadline-rows"><tr><td colspan="6" class="empty-row">正在加载截止日期…</td></tr></tbody>
-          </table>
-        </div>
-        <aside class="journal-note">
-          <strong>CCF A 类期刊</strong>
-          <span>多数采用全年滚动投稿，没有统一 DDL，因此不生成虚假倒计时。</span>
-          <a href="https://www.ccf.org.cn/Academic_Evaluation/By_category/" target="_blank" rel="noopener noreferrer">查看 CCF 官方推荐目录 &nearr;</a>
-        </aside>
-        <p class="calendar-help">会议数据来自 <a class="ccf-source-link" href="https://github.com/ccfddl/ccf-deadlines" target="_blank" rel="noopener noreferrer">CCFDDL</a>（MIT）；社区数据可能变更或延迟，投稿前必须以会议官网为准。</p>
       </section>
       <section class="contest-board activity-board" aria-labelledby="activity-heading">
         <div class="board-heading">
@@ -306,6 +296,7 @@
         </svg>
       </button>
       <div class="narcissus-panel" id="narcissus-panel" hidden>
+        <div class="narcissus-panel-content">
         <label for="character-select">角色 / Character</label>
         <select id="character-select" class="character-select"></select>
         <label for="skin-select">皮肤 / Garment</label>
@@ -315,6 +306,23 @@
         <input id="narcissus-size" type="range" min="50" max="300" step="5" value="100" />
         <label for="narcissus-speed">速度 <output id="narcissus-speed-value">1×</output></label>
         <input id="narcissus-speed" type="range" min="0.25" max="3" step="0.25" value="1" />
+        <section class="subtitle-settings" aria-label="字幕样式">
+          <label for="subtitle-font">字幕字体</label>
+          <select id="subtitle-font" class="character-select">
+            <option value="web">网页原字体 / UTTU</option>
+            <option value="classic">青苔手札 / Moss Notes</option>
+            <option value="archive" selected>暮色档案 / Dusk Archive</option>
+            <option value="yahei">微软雅黑</option>
+            <option value="simsun">宋体</option>
+            <option value="kaiti">楷体</option>
+            <option value="mono">等宽字体</option>
+          </select>
+          <label for="subtitle-size">字幕字号 <output id="subtitle-size-value">14 px</output></label>
+          <input id="subtitle-size" type="range" min="10" max="32" step="1" value="14" />
+          <div id="subtitle-style-preview" aria-label="字幕字体预览"><p>晚风拂过书页，故事还没有结束。</p><p class="subtitle-preview-en" lang="en">The story continues with you.</p></div>
+          <small>中英文字幕及标题同时生效，保存在此浏览器。未安装的系统字体会使用备用字体。</small>
+          <small id="subtitle-settings-status" role="status" hidden></small>
+        </section>
         <small id="narcissus-mode">正在初始化动画…</small>
         <button type="button" class="narcissus-hide" id="character-retry" hidden>重新加载角色</button>
         <button type="button" class="narcissus-hide" id="narcissus-hide" aria-pressed="false">隐藏角色</button>
@@ -329,6 +337,8 @@
         <a class="narcissus-more" href="https://uttu.merui.net" target="_blank" rel="noopener noreferrer">更多 ↗</a>
         <a class="narcissus-more" id="desktop-download" href="https://codeload.github.com/Kieray0w0/character_desktop/zip/refs/heads/main" aria-describedby="desktop-download-help">下载桌面版（ZIP）</a>
         <small id="desktop-download-help">下载线上仓库源码包，启动步骤见包内 README。</small>
+        <a class="narcissus-more" id="online-repository" href="https://github.com/Kieray0w0" target="_blank" rel="noopener noreferrer" aria-label="前往 Kieray0w0 的 GitHub 个人主页（新标签页）"><span aria-hidden="true">&nearr;</span> GitHub · Kieray0w0</a>
+        </div>
       </div>
     </div>
     <audio id="narcissus-voice" preload="none"></audio>
