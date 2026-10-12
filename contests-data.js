@@ -1,21 +1,9 @@
 window.CONTEST_DATA = {
   "sources": {
     "codeforces": {
-      "updatedAt": 1790584311235,
+      "updatedAt": 1791794098304,
       "error": null,
       "contests": [
-        {
-          "name": "Codeforces Round 1069 (Div. 1)",
-          "url": "https://codeforces.com/contest/2174",
-          "start": 1765008900000,
-          "end": 1765016100000
-        },
-        {
-          "name": "Codeforces Global Round 31 (Div. 1 + Div. 2)",
-          "url": "https://codeforces.com/contest/2180",
-          "start": 1766154900000,
-          "end": 1766163900000
-        },
         {
           "name": "Codeforces Round 1073 (Div. 1)",
           "url": "https://codeforces.com/contest/2190",
@@ -125,19 +113,19 @@ window.CONTEST_DATA = {
           "end": 1790442300000
         },
         {
-          "name": "Codeforces Round (Div. 1 + Div. 2)",
+          "name": "DeepInfra Round 1 (Codeforces Round 1126, Div. 1 + Div. 2)",
           "url": "https://codeforces.com/contest/2271",
           "start": 1791644700000,
           "end": 1791655500000
         },
         {
-          "name": "Codeforces Round (Div. 1)",
+          "name": "Codeforces Round 1127 (Div. 1, Based on Mexican Olympiad in Informatics 2026)",
           "url": "https://codeforces.com/contest/2273",
           "start": 1791743700000,
-          "end": 1791752700000
+          "end": 1791750900000
         },
         {
-          "name": "Codeforces Round (Div. 1 + Div. 2)",
+          "name": "WorldQuant Round 1 (Codeforces Round Div. 1 + Div. 2)",
           "url": "https://codeforces.com/contest/2261",
           "start": 1792247700000,
           "end": 1792258500000
@@ -145,21 +133,9 @@ window.CONTEST_DATA = {
       ]
     },
     "atcoder": {
-      "updatedAt": 1790584311235,
+      "updatedAt": 1791794098304,
       "error": null,
       "contests": [
-        {
-          "name": "AtCoder Regular Contest 218",
-          "url": "https://atcoder.jp/contests/arc218",
-          "start": 1777809600000,
-          "end": 1777816800000
-        },
-        {
-          "name": "AtCoder Regular Contest-- 219",
-          "url": "https://atcoder.jp/contests/arc219",
-          "start": 1778414400000,
-          "end": 1778421600000
-        },
         {
           "name": "AtCoder Regular Contest++ 220",
           "url": "https://atcoder.jp/contests/arc220",
@@ -243,11 +219,23 @@ window.CONTEST_DATA = {
           "url": "https://atcoder.jp/contests/arc232",
           "start": 1791633600000,
           "end": 1791642600000
+        },
+        {
+          "name": "AtCoder Regular Contest++ 233",
+          "url": "https://atcoder.jp/contests/arc233",
+          "start": 1792929600000,
+          "end": 1792938600000
+        },
+        {
+          "name": "AtCoder Grand Contest 079",
+          "url": "https://atcoder.jp/contests/agc079",
+          "start": 1794139200000,
+          "end": 1794150000000
         }
       ]
     },
     "nowcoder": {
-      "updatedAt": 1790584311235,
+      "updatedAt": 1791794098304,
       "error": null,
       "contests": [
         {
@@ -309,15 +297,118 @@ window.CONTEST_DATA = {
           "url": "https://ac.nowcoder.com/acm/contest/140237",
           "start": 1790334000000,
           "end": 1790344800000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b93",
+          "url": "https://ac.nowcoder.com/acm/contest/141878",
+          "start": 1792753200000,
+          "end": 1792764000000
         }
       ]
     }
   },
   "activity": {
     "codeforces": {
-      "updatedAt": 1790584311235,
+      "updatedAt": 1791794098304,
       "error": null,
       "contests": [
+        {
+          "name": "DeepInfra Round 1 (Codeforces Round 1126, Div. 1 + Div. 2)",
+          "url": "https://codeforces.com/contest/2271",
+          "start": 1791644700000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "Robot Odd Moves",
+              "url": "https://codeforces.com/contest/2271/problem/A",
+              "rating": null,
+              "key": "codeforces:2271:A",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1791645015000
+            },
+            {
+              "index": "B",
+              "name": "MEX Game",
+              "url": "https://codeforces.com/contest/2271/problem/B",
+              "rating": null,
+              "key": "codeforces:2271:B",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1791645835000
+            },
+            {
+              "index": "C",
+              "name": "XOR Problem",
+              "url": "https://codeforces.com/contest/2271/problem/C",
+              "rating": null,
+              "key": "codeforces:2271:C",
+              "attempts": 2,
+              "status": "OK",
+              "firstAc": 1791650507000
+            },
+            {
+              "index": "D",
+              "name": "Target Infection",
+              "url": "https://codeforces.com/contest/2271/problem/D",
+              "rating": null,
+              "key": "codeforces:2271:D",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1791650010000
+            },
+            {
+              "index": "E",
+              "name": "Array Emptying",
+              "url": "https://codeforces.com/contest/2271/problem/E",
+              "rating": null,
+              "key": "codeforces:2271:E",
+              "attempts": 2,
+              "status": "OK",
+              "firstAc": 1791652691000
+            },
+            {
+              "index": "F",
+              "name": "Beautiful Pillers",
+              "url": "https://codeforces.com/contest/2271/problem/F",
+              "rating": null,
+              "key": "codeforces:2271:F",
+              "attempts": 3,
+              "status": "OK",
+              "firstAc": 1791655498000
+            },
+            {
+              "index": "G",
+              "name": "Grid Filling",
+              "url": "https://codeforces.com/contest/2271/problem/G",
+              "rating": null,
+              "key": "codeforces:2271:G",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "H1",
+              "name": "Personal Issues (Easy Version)",
+              "url": "https://codeforces.com/contest/2271/problem/H1",
+              "rating": null,
+              "key": "codeforces:2271:H1",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "H2",
+              "name": "Personal Issues (Hard Version)",
+              "url": "https://codeforces.com/contest/2271/problem/H2",
+              "rating": null,
+              "key": "codeforces:2271:H2",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
         {
           "name": "Codeforces Round 1124 (Div. 1)",
           "url": "https://codeforces.com/contest/2268",
@@ -327,7 +418,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "K Is Important",
               "url": "https://codeforces.com/contest/2268/problem/A",
-              "rating": null,
+              "rating": 1200,
               "key": "codeforces:2268:A",
               "attempts": 1,
               "status": "OK",
@@ -337,7 +428,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "What a SauSaGe! It's All Meat",
               "url": "https://codeforces.com/contest/2268/problem/B",
-              "rating": null,
+              "rating": 1500,
               "key": "codeforces:2268:B",
               "attempts": 1,
               "status": "OK",
@@ -347,7 +438,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "KiaKio and Energy Intervals",
               "url": "https://codeforces.com/contest/2268/problem/C",
-              "rating": null,
+              "rating": 2300,
               "key": "codeforces:2268:C",
               "attempts": 0,
               "status": null,
@@ -357,7 +448,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "AghaBalaSar and Hamed",
               "url": "https://codeforces.com/contest/2268/problem/D",
-              "rating": null,
+              "rating": 2600,
               "key": "codeforces:2268:D",
               "attempts": 0,
               "status": null,
@@ -367,7 +458,7 @@ window.CONTEST_DATA = {
               "index": "E",
               "name": "Kia Kio and Tree of Life",
               "url": "https://codeforces.com/contest/2268/problem/E",
-              "rating": null,
+              "rating": 2700,
               "key": "codeforces:2268:E",
               "attempts": 0,
               "status": null,
@@ -377,7 +468,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Deglado",
               "url": "https://codeforces.com/contest/2268/problem/F",
-              "rating": null,
+              "rating": 3500,
               "key": "codeforces:2268:F",
               "attempts": 0,
               "status": null,
@@ -10281,9 +10372,133 @@ window.CONTEST_DATA = {
       ]
     },
     "atcoder": {
-      "updatedAt": 1790584311235,
+      "updatedAt": 1791794098304,
       "error": null,
       "contests": [
+        {
+          "name": "\u7b2c\u4e09\u56de AtCoder Japan Open -\u4e88\u9078-  (AtCoder Regular Contest++ 232)",
+          "url": "https://atcoder.jp/contests/arc232",
+          "start": 1791633600000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "Two in the Range",
+              "url": "https://atcoder.jp/contests/arc232/tasks/arc232_a",
+              "rating": 2331,
+              "key": "atcoder:arc232:arc232_a",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1791641434000
+            },
+            {
+              "index": "B",
+              "name": "Two Flips",
+              "url": "https://atcoder.jp/contests/arc232/tasks/arc232_b",
+              "rating": 2656,
+              "key": "atcoder:arc232:arc232_b",
+              "attempts": 3,
+              "status": "AC",
+              "firstAc": 1791639536000
+            },
+            {
+              "index": "C",
+              "name": "All Add or Single Negate",
+              "url": "https://atcoder.jp/contests/arc232/tasks/arc232_c",
+              "rating": 2360,
+              "key": "atcoder:arc232:arc232_c",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "D",
+              "name": "Delete Different",
+              "url": "https://atcoder.jp/contests/arc232/tasks/arc232_d",
+              "rating": 3085,
+              "key": "atcoder:arc232:arc232_d",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "E",
+              "name": "Doubling",
+              "url": "https://atcoder.jp/contests/arc232/tasks/arc232_e",
+              "rating": 3596,
+              "key": "atcoder:arc232:arc232_e",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
+        {
+          "name": "AtCoder Regular Contest 231",
+          "url": "https://atcoder.jp/contests/arc231",
+          "start": 1791115200000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "Two Dimensional Invader",
+              "url": "https://atcoder.jp/contests/arc231/tasks/arc231_a",
+              "rating": 1646,
+              "key": "atcoder:arc231:arc231_a",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1791117809000
+            },
+            {
+              "index": "B",
+              "name": "Three Mex",
+              "url": "https://atcoder.jp/contests/arc231/tasks/arc231_b",
+              "rating": 1418,
+              "key": "atcoder:arc231:arc231_b",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1791118537000
+            },
+            {
+              "index": "C",
+              "name": "One Sky, Many Stars",
+              "url": "https://atcoder.jp/contests/arc231/tasks/arc231_c",
+              "rating": 2267,
+              "key": "atcoder:arc231:arc231_c",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "D",
+              "name": "Choose Your Role",
+              "url": "https://atcoder.jp/contests/arc231/tasks/arc231_d",
+              "rating": 2437,
+              "key": "atcoder:arc231:arc231_d",
+              "attempts": 2,
+              "status": "AC",
+              "firstAc": 1791121883000
+            },
+            {
+              "index": "E",
+              "name": "Odd Inversion",
+              "url": "https://atcoder.jp/contests/arc231/tasks/arc231_e",
+              "rating": 2393,
+              "key": "atcoder:arc231:arc231_e",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "F",
+              "name": "Two Unbalanced Subtrees",
+              "url": "https://atcoder.jp/contests/arc231/tasks/arc231_f",
+              "rating": 2929,
+              "key": "atcoder:arc231:arc231_f",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
         {
           "name": "AtCoder Regular Contest++ 228",
           "url": "https://atcoder.jp/contests/arc228",
@@ -18542,7 +18757,7 @@ window.CONTEST_DATA = {
       ]
     },
     "nowcoder": {
-      "updatedAt": 1790584311235,
+      "updatedAt": 1791794098304,
       "error": null,
       "contests": [
         {

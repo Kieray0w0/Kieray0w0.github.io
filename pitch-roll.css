@@ -21,7 +21,10 @@ select, input[type="number"] { max-width: 100%; border: 1px solid #b3c4ad; borde
 input[type="number"] { width: 88px; }
 .record-options, .record-actions, .timeline-controls, .track-legend { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; font-size: 12px; margin-top: 16px; }
 .record-options label, .timeline-controls label { display: flex; align-items: center; gap: 8px; }
-.playback-volumes input { width: clamp(80px, 18vw, 160px); min-width: 0; }
+.playback-volumes input[type="range"] { width: clamp(80px, 18vw, 160px); min-width: 0; }
+.track-mixer { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+#accompaniment-name, #accompaniment-status { overflow-wrap: anywhere; }
+.accompaniment-panel { background: #edf2f4; }
 .playback-volumes output { min-width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
 .piano-panel { margin: 20px 0; padding: 0 14px 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
 .piano-row-label { font-size: 12px; color: var(--muted); margin: 16px 0 6px; }

@@ -4,64 +4,64 @@ window.RANKINGS_DATA = {
       "rows": [
         {
           "rank": 1,
-          "handle": "jiangly",
-          "rating": 3810,
-          "color": "#FF0000",
-          "firstLetterBlack": true
-        },
-        {
-          "rank": 2,
           "handle": "Benq",
           "rating": 3676,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
+          "rank": 2,
+          "handle": "jiangly",
+          "rating": 3670,
+          "color": "#FF0000",
+          "firstLetterBlack": true
+        },
+        {
           "rank": 3,
           "handle": "Kevin114514",
-          "rating": 3655,
+          "rating": 3657,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 4,
           "handle": "maroonrk",
-          "rating": 3463,
+          "rating": 3355,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 5,
-          "handle": "strapple",
-          "rating": 3390,
+          "handle": "Um_nik",
+          "rating": 3353,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 6,
-          "handle": "Um_nik",
-          "rating": 3387,
+          "handle": "squareOf105",
+          "rating": 3346,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 7,
           "handle": "tourist",
-          "rating": 3384,
+          "rating": 3343,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 8,
-          "handle": "heuristica",
-          "rating": 3322,
+          "handle": "strapple",
+          "rating": 3324,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 9,
-          "handle": "turmax",
-          "rating": 3319,
+          "handle": "heuristica",
+          "rating": 3322,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
@@ -73,7 +73,7 @@ window.RANKINGS_DATA = {
           "firstLetterBlack": true
         }
       ],
-      "updatedAt": "2026-09-28T08:33:31.672810+00:00",
+      "updatedAt": "2026-10-12T08:36:42.893994+00:00",
       "source": "https://codeforces.com/api/user.ratedList?activeOnly=false&includeRetired=true",
       "scope": "six-months"
     },
@@ -160,7 +160,7 @@ window.RANKINGS_DATA = {
           "badge": "gold"
         }
       ],
-      "updatedAt": "2026-09-28T08:49:25.448163+00:00",
+      "updatedAt": "2026-10-12T08:36:44.322920+00:00",
       "source": "https://atcoder.jp/ranking?contestType=algo&lang=en",
       "scope": "active"
     }

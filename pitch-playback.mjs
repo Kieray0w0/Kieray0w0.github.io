@@ -1,8 +1,19 @@
+export function trackEnd(duration, start = 0) {
+  return [duration,start].every(Number.isFinite) && duration > 0 && start < 600 ? Math.max(0, Math.min(600, start + duration)) : 0;
+}
+
+// File time and timeline time differ by start; clip without modifying source PCM.
+export function playbackSlice(duration, start, cursor, until = 600) {
+  const from = Math.max(0, start, cursor), to = Math.min(600, start + duration, until);
+  if (![duration,start,cursor,until].every(Number.isFinite) || to <= from) return null;
+  return {delay:from-cursor,offset:from-start,duration:to-from,clipped:to < start+duration};
+}
+
 export function createDualPlayback({onState, onPosition, onError, createContext = () => new AudioContext(),
   requestFrame = requestAnimationFrame, cancelFrame = cancelAnimationFrame}) {
   let audio = null, sources = [], state = 'idle', generation = 0, frame = 0;
   let start = 0, when = 0, end = 0, cachedPCM = null, recordingBuffer = null;
-  const volumes = {reference:0.5, recording:0.5};
+  const volumes = {reference:0.5, recording:0.5, accompaniment:0.5};
   const position = () => Math.min(end, start + Math.max(0, audio.currentTime - when));
   function pause({updatePosition = true} = {}) {
     generation++;
@@ -32,9 +43,9 @@ export function createDualPlayback({onState, onPosition, onError, createContext 
         if (sourceTrack === track) gain.gain.setTargetAtTime(volumes[track], audio.currentTime, 0.01);
       }
     },
-    async play({reference, samples, sampleRate, offset}) {
+    async play({reference, accompaniment = null, referenceStart = 0, accompanimentStart = 0, samples, sampleRate, offset}) {
       pause();
-      end = Math.max(reference?.duration || 0, samples.length / sampleRate);
+      end = Math.max(trackEnd(reference?.duration || 0,referenceStart),trackEnd(accompaniment?.duration || 0,accompanimentStart),trackEnd(samples.length / sampleRate));
       if (!Number.isFinite(offset) || offset < 0 || offset >= end) return;
       const current = generation;
       state = 'starting'; onState(state);
@@ -53,12 +64,12 @@ export function createDualPlayback({onState, onPosition, onError, createContext 
           recordingBuffer.copyToChannel(samples, 0); cachedPCM = samples;
         }
         start = offset;
-        // Both sources use one scheduled audio-clock instant, not two media play() calls.
+        // All sources share one audio-clock instant, including muted tracks.
         when = audio.currentTime + 0.04;
-        const buffers = [{track:'reference', buffer:reference}, {track:'recording', buffer:samples.length ? recordingBuffer : null}]
-          .filter(({buffer}) => buffer && buffer.duration > offset);
+        const buffers = [{track:'reference', buffer:reference,start:referenceStart}, {track:'recording', buffer:samples.length ? recordingBuffer : null,start:0}, {track:'accompaniment', buffer:accompaniment,start:accompanimentStart}]
+          .map(item=>({...item,slice:item.buffer&&playbackSlice(item.buffer.duration,item.start,offset)})).filter(item=>item.slice);
         let remaining = buffers.length;
-        for (const {track, buffer} of buffers) {
+        for (const {track, buffer, slice} of buffers) {
           const source = audio.createBufferSource(), gain = audio.createGain();
           source.buffer = buffer; gain.gain.value = volumes[track];
           source.connect(gain); gain.connect(audio.destination); sources.push({source, gain, track});
@@ -66,7 +77,8 @@ export function createDualPlayback({onState, onPosition, onError, createContext 
             if (current !== generation || --remaining > 0) return;
             onPosition(end); pause({updatePosition:false});
           };
-          source.start(when, offset);
+          if(slice.clipped)source.start(when+slice.delay,slice.offset,slice.duration);
+          else source.start(when+slice.delay,slice.offset);
         }
         state = 'playing'; onState(state); tick();
       } catch {

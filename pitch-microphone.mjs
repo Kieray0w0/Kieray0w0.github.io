@@ -1,7 +1,6 @@
 import { detectPitch, SAMPLE_RATE, FRAME_SIZE, HOP_SIZE } from './pitch-core.mjs';
 
-// Read the newest analysis window at the detector's sample rate. Some devices
-// ignore the requested AudioContext rate; average source samples when downsampling.
+// Keep capture at the device rate; only resample the detector's analysis window.
 export function resampleWindow(input, sourceRate, output = new Float32Array(FRAME_SIZE)) {
   const ratio = sourceRate / SAMPLE_RATE;
   const start = input.length - output.length * ratio;
@@ -33,7 +32,7 @@ export function microphoneError(error) {
   }
 }
 
-export function createMicrophone({ onState, onFrame, onError, onTake, onReady }, env = globalThis) {
+export function createMicrophone({ onState, onFrame, onError, onTake, onReady, onPreroll }, env = globalThis) {
   let generation = 0;
   let state = 'idle';
   let resources = null;
@@ -56,6 +55,10 @@ export function createMicrophone({ onState, onFrame, onError, onTake, onReady },
   function stop(reason = 'user') {
     if (state === 'stopping') return resources?.finished;
     if (state === 'idle') return Promise.resolve();
+    // The audio thread can cross the punch-in before the UI timer runs.
+    if (state === 'preroll' && resources.context.currentTime >= resources.startedAt) {
+      state = 'live'; onState(state);
+    }
     generation++;
     const previous = state;
     const resource = resources;
@@ -86,7 +89,7 @@ export function createMicrophone({ onState, onFrame, onError, onTake, onReady },
     dispose(resource); onState('idle', reason);
     return Promise.resolve();
   }
-  async function start({ maxSeconds = 600, input:inputMode = 'microphone' } = {}) {
+  async function start({ maxSeconds = 600, input:inputMode = 'microphone', prerollSeconds = 0 } = {}) {
     if (state !== 'idle') return;
     const current = ++generation;
     const resource = {}; resources = resource;
@@ -96,13 +99,15 @@ export function createMicrophone({ onState, onFrame, onError, onTake, onReady },
       stop('error'); onError(microphoneError(error));
     };
     try {
+      if (!Number.isFinite(prerollSeconds) || prerollSeconds < 0 || prerollSeconds > 600) throw new Error('预播放秒数需在 0–600 之间。');
       const useMicrophone = inputMode !== 'piano';
       if (!env.isSecureContext || (useMicrophone && !env.navigator?.mediaDevices?.getUserMedia)) {
         throw new Error('录音需要 HTTPS 或 localhost，请通过本地服务器或线上网页打开。');
       }
       if (!env.AudioContext) throw new Error('当前浏览器不支持实时音频分析，请使用新版浏览器。');
       resource.timeout = env.setTimeout(() => fail(new Error('录音启动超时，已取消请求；请重新点击开始。')), 30000);
-      resource.context = new env.AudioContext({ sampleRate: SAMPLE_RATE });
+      // Mobile capture may fail or stay silent when forced to a non-native rate.
+      resource.context = new env.AudioContext();
       const audio = resource.context;
       // Microphone input is never monitored; only the separately attached piano is audible.
       const resumed = audio.resume();
@@ -116,6 +121,9 @@ export function createMicrophone({ onState, onFrame, onError, onTake, onReady },
         for (const track of stream.getTracks()) track.onended = () => stop('device-ended');
       }) : Promise.resolve();
       await Promise.all([resumed, permission]);
+      if (current !== generation) return;
+      // Granting permission can switch the mobile audio route and suspend it again.
+      if (audio.state === 'suspended' || audio.state === 'interrupted') await audio.resume();
       if (current !== generation) return;
       if (audio.state !== 'running' || (useMicrophone && !resource.stream?.getAudioTracks().some(track => track.readyState === 'live'))) {
         throw new Error('录音输入未就绪，请检查设备并重新点击开始。');
@@ -131,7 +139,7 @@ export function createMicrophone({ onState, onFrame, onError, onTake, onReady },
           if (data.type === 'chunk') resource.chunks.push(data);
           if (data.type === 'done') {
             resource.recordedLength = data.length;
-            if (state === 'live') stop('limit');
+            if (state === 'live' || state === 'preroll') stop('limit');
             else if (state === 'stopping') resource.finish();
           }
         };
@@ -143,28 +151,41 @@ export function createMicrophone({ onState, onFrame, onError, onTake, onReady },
       resource.source.connect(analyser);
       const input = new Float32Array(analyser.fftSize);
       const samples = new Float32Array(FRAME_SIZE);
-      const startedAt = audio.currentTime + (onTake ? 0.15 : 0);
+      const previewAt = audio.currentTime + (onTake ? 0.15 : 0);
+      const startedAt = previewAt + prerollSeconds;
+      resource.startedAt = startedAt;
       if (resource.capture) {
         resource.source.connect(resource.capture);
         resource.capture.connect(audio.destination);
         resource.capture.port.postMessage({type:'start',at:startedAt,maxSeconds:Math.min(600, Math.max(0, maxSeconds))});
       }
-      resource.stopReference = onReady?.({context:audio,when:startedAt,inputDestinations:[analyser,...(resource.capture ? [resource.capture] : [])]});
+      resource.stopReference = onReady?.({context:audio,when:startedAt,previewAt,inputDestinations:[analyser,...(resource.capture ? [resource.capture] : [])]});
       let lastTime = -1;
       env.clearTimeout(resource.timeout);
       audio.onstatechange = () => { if (current === generation && audio.state !== 'running') stop('interrupted'); };
-      state = 'live'; onState(state);
+      state = prerollSeconds > 0 ? 'preroll' : 'live'; onState(state);
       resource.timer = env.setInterval(() => {
         if (current !== generation) return;
         try {
           const elapsed = audio.currentTime - startedAt;
+          if (state === 'preroll') {
+            if (elapsed < 0) {
+              onPreroll?.({elapsed:Math.max(0, audio.currentTime-previewAt),remaining:-elapsed});
+              return;
+            }
+            state = 'live'; onState(state);
+          }
           if (elapsed >= Math.min(600, maxSeconds)) { stop('limit'); return; }
           if (elapsed < FRAME_SIZE / SAMPLE_RATE || elapsed - lastTime < HOP_SIZE / SAMPLE_RATE * 0.8) return;
           analyser.getFloatTimeDomainData(input);
+          let energy = 0;
+          for (const value of input) energy += value * value;
+          const rms = Math.sqrt(energy / input.length);
+          const inputMuted = useMicrophone && resource.stream.getAudioTracks().every(track => track.muted);
           const pitch = detectPitch(resampleWindow(input, audio.sampleRate, samples));
           const time = elapsed - FRAME_SIZE / SAMPLE_RATE / 2;
           lastTime = elapsed;
-          onFrame({ time, elapsed, midi: pitch?.midi ?? null, hz: pitch?.hz ?? null, confidence: pitch?.confidence ?? 0 });
+          onFrame({ time, elapsed, rms, inputMuted, midi: pitch?.midi ?? null, hz: pitch?.hz ?? null, confidence: pitch?.confidence ?? 0 });
         } catch (error) { fail(error); }
       }, HOP_SIZE / SAMPLE_RATE * 1000);
     } catch (error) { fail(error); }
