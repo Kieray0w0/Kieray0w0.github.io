@@ -1,15 +1,9 @@
 window.CONTEST_DATA = {
   "sources": {
     "codeforces": {
-      "updatedAt": 1791794098304,
+      "updatedAt": 1793018671520,
       "error": null,
       "contests": [
-        {
-          "name": "Codeforces Round 1073 (Div. 1)",
-          "url": "https://codeforces.com/contest/2190",
-          "start": 1768660500000,
-          "end": 1768671300000
-        },
         {
           "name": "Codeforces Round 1077 (Div. 1)",
           "url": "https://codeforces.com/contest/2187",
@@ -125,23 +119,23 @@ window.CONTEST_DATA = {
           "end": 1791750900000
         },
         {
-          "name": "WorldQuant Round 1 (Codeforces Round Div. 1 + Div. 2)",
+          "name": "WorldQuant Round 1 (Codeforces Round 1128, Div. 1 + Div. 2)",
           "url": "https://codeforces.com/contest/2261",
           "start": 1792247700000,
           "end": 1792258500000
+        },
+        {
+          "name": "Codeforces Round (Div. 1)",
+          "url": "https://codeforces.com/contest/2279",
+          "start": 1794062100000,
+          "end": 1794071100000
         }
       ]
     },
     "atcoder": {
-      "updatedAt": 1791794098304,
+      "updatedAt": 1793018671520,
       "error": null,
       "contests": [
-        {
-          "name": "AtCoder Regular Contest++ 220",
-          "url": "https://atcoder.jp/contests/arc220",
-          "start": 1779019200000,
-          "end": 1779028200000
-        },
         {
           "name": "AtCoder Regular Contest++ 221",
           "url": "https://atcoder.jp/contests/arc221",
@@ -231,19 +225,19 @@ window.CONTEST_DATA = {
           "url": "https://atcoder.jp/contests/agc079",
           "start": 1794139200000,
           "end": 1794150000000
+        },
+        {
+          "name": "AtCoder Regular Contest++ 234",
+          "url": "https://atcoder.jp/contests/arc234",
+          "start": 1795348800000,
+          "end": 1795357800000
         }
       ]
     },
     "nowcoder": {
-      "updatedAt": 1791794098304,
+      "updatedAt": 1793018671520,
       "error": null,
       "contests": [
-        {
-          "name": "\u725b\u5ba2\u6311\u6218\u8d5b83",
-          "url": "https://ac.nowcoder.com/acm/contest/121395",
-          "start": 1762513200000,
-          "end": 1762524000000
-        },
         {
           "name": "\u725b\u5ba2\u6311\u6218\u8d5b84",
           "url": "https://ac.nowcoder.com/acm/contest/124146",
@@ -309,9 +303,116 @@ window.CONTEST_DATA = {
   },
   "activity": {
     "codeforces": {
-      "updatedAt": 1791794098304,
+      "updatedAt": 1793018671520,
       "error": null,
       "contests": [
+        {
+          "name": "WorldQuant Round 1 (Codeforces Round 1128, Div. 1 + Div. 2)",
+          "url": "https://codeforces.com/contest/2261",
+          "start": 1792247700000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "Hey, It's Me, Souvlakity",
+              "url": "https://codeforces.com/contest/2261/problem/A",
+              "rating": 800,
+              "key": "codeforces:2261:A",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1792248055000
+            },
+            {
+              "index": "B",
+              "name": "What's the Capital of France?",
+              "url": "https://codeforces.com/contest/2261/problem/B",
+              "rating": 1100,
+              "key": "codeforces:2261:B",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1792248346000
+            },
+            {
+              "index": "C",
+              "name": "I Know About a Million Things",
+              "url": "https://codeforces.com/contest/2261/problem/C",
+              "rating": 1000,
+              "key": "codeforces:2261:C",
+              "attempts": 4,
+              "status": "OK",
+              "firstAc": 1792249716000
+            },
+            {
+              "index": "D1",
+              "name": "Come Be My Friend, Don't Be So Scared (Easy Version)",
+              "url": "https://codeforces.com/contest/2261/problem/D1",
+              "rating": 1300,
+              "key": "codeforces:2261:D1",
+              "attempts": 2,
+              "status": "OK",
+              "firstAc": 1792250581000
+            },
+            {
+              "index": "D2",
+              "name": "Come Be My Friend, Don't Be So Scared (Hard Version)",
+              "url": "https://codeforces.com/contest/2261/problem/D2",
+              "rating": 2400,
+              "key": "codeforces:2261:D2",
+              "attempts": 2,
+              "status": "OK",
+              "firstAc": 1792257085000
+            },
+            {
+              "index": "E",
+              "name": "What Does the Cow Say?",
+              "url": "https://codeforces.com/contest/2261/problem/E",
+              "rating": 1800,
+              "key": "codeforces:2261:E",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1792256987000
+            },
+            {
+              "index": "F1",
+              "name": "Plegma II: Ask Me Any Cell (Easy Version)",
+              "url": "https://codeforces.com/contest/2261/problem/F1",
+              "rating": 2500,
+              "key": "codeforces:2261:F1",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "F2",
+              "name": "Plegma II: Ask Me Any Cell (Hard Version)",
+              "url": "https://codeforces.com/contest/2261/problem/F2",
+              "rating": 3300,
+              "key": "codeforces:2261:F2",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "G",
+              "name": "1 2 3 and XOR, Where Did Everybody Go?",
+              "url": "https://codeforces.com/contest/2261/problem/G",
+              "rating": 2800,
+              "key": "codeforces:2261:G",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "H",
+              "name": "Oh Tree Tree Tree, No Need to Leave",
+              "url": "https://codeforces.com/contest/2261/problem/H",
+              "rating": 3500,
+              "key": "codeforces:2261:H",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
         {
           "name": "DeepInfra Round 1 (Codeforces Round 1126, Div. 1 + Div. 2)",
           "url": "https://codeforces.com/contest/2271",
@@ -321,7 +422,7 @@ window.CONTEST_DATA = {
               "index": "A",
               "name": "Robot Odd Moves",
               "url": "https://codeforces.com/contest/2271/problem/A",
-              "rating": null,
+              "rating": 800,
               "key": "codeforces:2271:A",
               "attempts": 1,
               "status": "OK",
@@ -331,7 +432,7 @@ window.CONTEST_DATA = {
               "index": "B",
               "name": "MEX Game",
               "url": "https://codeforces.com/contest/2271/problem/B",
-              "rating": null,
+              "rating": 1000,
               "key": "codeforces:2271:B",
               "attempts": 1,
               "status": "OK",
@@ -341,7 +442,7 @@ window.CONTEST_DATA = {
               "index": "C",
               "name": "XOR Problem",
               "url": "https://codeforces.com/contest/2271/problem/C",
-              "rating": null,
+              "rating": 1400,
               "key": "codeforces:2271:C",
               "attempts": 2,
               "status": "OK",
@@ -351,7 +452,7 @@ window.CONTEST_DATA = {
               "index": "D",
               "name": "Target Infection",
               "url": "https://codeforces.com/contest/2271/problem/D",
-              "rating": null,
+              "rating": 1700,
               "key": "codeforces:2271:D",
               "attempts": 1,
               "status": "OK",
@@ -361,7 +462,7 @@ window.CONTEST_DATA = {
               "index": "E",
               "name": "Array Emptying",
               "url": "https://codeforces.com/contest/2271/problem/E",
-              "rating": null,
+              "rating": 2100,
               "key": "codeforces:2271:E",
               "attempts": 2,
               "status": "OK",
@@ -371,7 +472,7 @@ window.CONTEST_DATA = {
               "index": "F",
               "name": "Beautiful Pillers",
               "url": "https://codeforces.com/contest/2271/problem/F",
-              "rating": null,
+              "rating": 2300,
               "key": "codeforces:2271:F",
               "attempts": 3,
               "status": "OK",
@@ -381,7 +482,7 @@ window.CONTEST_DATA = {
               "index": "G",
               "name": "Grid Filling",
               "url": "https://codeforces.com/contest/2271/problem/G",
-              "rating": null,
+              "rating": 3100,
               "key": "codeforces:2271:G",
               "attempts": 0,
               "status": null,
@@ -391,7 +492,7 @@ window.CONTEST_DATA = {
               "index": "H1",
               "name": "Personal Issues (Easy Version)",
               "url": "https://codeforces.com/contest/2271/problem/H1",
-              "rating": null,
+              "rating": 2800,
               "key": "codeforces:2271:H1",
               "attempts": 0,
               "status": null,
@@ -401,7 +502,7 @@ window.CONTEST_DATA = {
               "index": "H2",
               "name": "Personal Issues (Hard Version)",
               "url": "https://codeforces.com/contest/2271/problem/H2",
-              "rating": null,
+              "rating": 3300,
               "key": "codeforces:2271:H2",
               "attempts": 0,
               "status": null,
@@ -10372,7 +10473,7 @@ window.CONTEST_DATA = {
       ]
     },
     "atcoder": {
-      "updatedAt": 1791794098304,
+      "updatedAt": 1793018671520,
       "error": null,
       "contests": [
         {
@@ -18757,9 +18858,76 @@ window.CONTEST_DATA = {
       ]
     },
     "nowcoder": {
-      "updatedAt": 1791794098304,
+      "updatedAt": 1793018671520,
       "error": null,
       "contests": [
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b93",
+          "url": "https://ac.nowcoder.com/acm/contest/141878",
+          "start": 1792753200000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "\u6ce2\u7279\u5224\u65ad",
+              "url": "https://ac.nowcoder.com/acm/problem/321222",
+              "rating": null,
+              "key": "nowcoder:141878:321222",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1792754102000
+            },
+            {
+              "index": "B",
+              "name": "\u56fd\u738b\u6e38\u620f",
+              "url": "https://ac.nowcoder.com/acm/problem/321224",
+              "rating": null,
+              "key": "nowcoder:141878:321224",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1792754905000
+            },
+            {
+              "index": "C",
+              "name": "\u51f8\u5305",
+              "url": "https://ac.nowcoder.com/acm/problem/321253",
+              "rating": null,
+              "key": "nowcoder:141878:321253",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1792756117000
+            },
+            {
+              "index": "D",
+              "name": "\u55a7\u56a3",
+              "url": "https://ac.nowcoder.com/acm/problem/321220",
+              "rating": null,
+              "key": "nowcoder:141878:321220",
+              "attempts": 2,
+              "status": "AC",
+              "firstAc": 1792760102000
+            },
+            {
+              "index": "E",
+              "name": "\u6811\u67d3\u8272\u9898",
+              "url": "https://ac.nowcoder.com/acm/problem/321239",
+              "rating": null,
+              "key": "nowcoder:141878:321239",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "F",
+              "name": "\u4f0a\u8336\u6ce2\u6570\u9898",
+              "url": "https://ac.nowcoder.com/acm/problem/309924",
+              "rating": null,
+              "key": "nowcoder:141878:309924",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
         {
           "name": "\u725b\u5ba2\u6311\u6218\u8d5b92",
           "url": "https://ac.nowcoder.com/acm/contest/140237",

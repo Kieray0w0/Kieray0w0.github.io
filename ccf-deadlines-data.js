@@ -1,5 +1,5 @@
 window.CCF_DEADLINE_DATA = {
-  "generatedAt": 1790584044791,
+  "generatedAt": 1793018770965,
   "source": "https://github.com/ccfddl/ccf-deadlines",
   "license": "MIT",
   "venueCount": 58,
@@ -16,114 +16,6 @@ window.CCF_DEADLINE_DATA = {
     "MX": "\u4ea4\u53c9/\u7efc\u5408/\u65b0\u5174"
   },
   "deadlines": [
-    {
-      "title": "IEEE VR",
-      "titleZh": "IEEE \u865a\u62df\u73b0\u5b9e\u4f1a\u8bae",
-      "description": "IEEE Virtual Reality",
-      "category": "CG",
-      "categoryName": "\u56fe\u5f62\u5b66\u4e0e\u591a\u5a92\u4f53",
-      "year": 2027,
-      "round": "\u8f6e\u6b21 1",
-      "url": "https://ieeevr.org/2027/",
-      "timezone": "AoE",
-      "deadline": 1788263999000
-    },
-    {
-      "title": "VLDB",
-      "titleZh": "\u8d85\u5927\u578b\u6570\u636e\u5e93\u56fd\u9645\u4f1a\u8bae",
-      "description": "International Conference on Very Large Data Bases",
-      "category": "DB",
-      "categoryName": "\u6570\u636e\u5e93/\u6570\u636e\u6316\u6398/\u5185\u5bb9\u68c0\u7d22",
-      "year": 2027,
-      "round": "\u8f6e\u6b21 6",
-      "url": "https://www.vldb.org/2027/",
-      "timezone": "PT",
-      "deadline": 1788307200000
-    },
-    {
-      "title": "MobiCom",
-      "titleZh": "ACM \u79fb\u52a8\u8ba1\u7b97\u4e0e\u7f51\u7edc\u56fd\u9645\u4f1a\u8bae",
-      "description": "ACM Annual International Conference On Mobile Computing And Networking",
-      "category": "NW",
-      "categoryName": "\u8ba1\u7b97\u673a\u7f51\u7edc",
-      "year": 2027,
-      "round": "Summer Deadlines",
-      "url": "https://www.sigmobile.org/mobicom/2027/",
-      "timezone": "AoE",
-      "deadline": 1788436799000
-    },
-    {
-      "title": "ASPLOS",
-      "titleZh": "\u7f16\u7a0b\u8bed\u8a00\u548c\u64cd\u4f5c\u7cfb\u7edf\u4f53\u7cfb\u7ed3\u6784\u652f\u6301\u56fd\u9645\u4f1a\u8bae",
-      "description": "International Conference on Architectural Support for Programming Languages and Operating Systems",
-      "category": "DS",
-      "categoryName": "\u4f53\u7cfb\u7ed3\u6784/\u5e76\u884c\u4e0e\u5206\u5e03/\u5b58\u50a8",
-      "year": 2027,
-      "round": "September Cycle Submission Deadline",
-      "url": "https://www.asplos-conference.org/asplos2027/cfp/",
-      "timezone": "AoE",
-      "deadline": 1789041599000
-    },
-    {
-      "title": "CHI",
-      "titleZh": "ACM \u8ba1\u7b97\u7cfb\u7edf\u4eba\u673a\u4ea4\u4e92\u4f1a\u8bae",
-      "description": "ACM Conference on Human Factors in Computing Systems",
-      "category": "HI",
-      "categoryName": "\u4eba\u673a\u4ea4\u4e92\u4e0e\u666e\u9002\u8ba1\u7b97",
-      "year": 2027,
-      "round": "\u8f6e\u6b21 1",
-      "url": "https://chi2027.acm.org/",
-      "timezone": "AoE",
-      "deadline": 1789127999000
-    },
-    {
-      "title": "FAST",
-      "titleZh": "USENIX \u6587\u4ef6\u4e0e\u5b58\u50a8\u6280\u672f\u4f1a\u8bae",
-      "description": "USENIX Conference on File and Storage Technologies",
-      "category": "DS",
-      "categoryName": "\u4f53\u7cfb\u7ed3\u6784/\u5e76\u884c\u4e0e\u5206\u5e03/\u5b58\u50a8",
-      "year": 2027,
-      "round": "Fall deadline",
-      "url": "https://www.usenix.org/conference/fast27",
-      "timezone": "AoE",
-      "deadline": 1789559940000
-    },
-    {
-      "title": "NSDI",
-      "titleZh": "USENIX \u7f51\u7edc\u7cfb\u7edf\u8bbe\u8ba1\u4e0e\u5b9e\u73b0\u7814\u8ba8\u4f1a",
-      "description": "USENIX Symposium on Networked Systems Design and Implementation",
-      "category": "NW",
-      "categoryName": "\u8ba1\u7b97\u673a\u7f51\u7edc",
-      "year": 2027,
-      "round": "\u8f6e\u6b21 2",
-      "url": "https://www.usenix.org/conference/nsdi27",
-      "timezone": "UTC-4",
-      "deadline": 1789703999000
-    },
-    {
-      "title": "EUROCRYPT",
-      "titleZh": "\u6b27\u6d32\u5bc6\u7801\u5b66\u4f1a\u8bae",
-      "description": "European Cryptology Conference",
-      "category": "SC",
-      "categoryName": "\u7f51\u7edc\u4e0e\u4fe1\u606f\u5b89\u5168",
-      "year": 2027,
-      "round": "\u8f6e\u6b21 1",
-      "url": "https://eurocrypt.iacr.org/2027/",
-      "timezone": "AoE",
-      "deadline": 1789732799000
-    },
-    {
-      "title": "EuroSys",
-      "titleZh": "\u6b27\u6d32\u8ba1\u7b97\u673a\u7cfb\u7edf\u4f1a\u8bae",
-      "description": "European Conference on Computer Systems",
-      "category": "DS",
-      "categoryName": "\u4f53\u7cfb\u7ed3\u6784/\u5e76\u884c\u4e0e\u5206\u5e03/\u5b58\u50a8",
-      "year": 2027,
-      "round": "Fall Submission Deadline",
-      "url": "https://2027.eurosys.org/",
-      "timezone": "AoE",
-      "deadline": 1790337599000
-    },
     {
       "title": "ICLR",
       "titleZh": "\u56fd\u9645\u5b66\u4e60\u8868\u5f81\u4f1a\u8bae",
@@ -182,7 +74,7 @@ window.CCF_DEADLINE_DATA = {
       "round": "round 4",
       "url": "https://2027.sigmod.org/",
       "timezone": "AoE",
-      "deadline": 1792324740000
+      "deadline": 1792324799000
     },
     {
       "title": "WWW",
@@ -207,18 +99,6 @@ window.CCF_DEADLINE_DATA = {
       "url": "https://www.vldb.org/2027/",
       "timezone": "PT",
       "deadline": 1793581200000
-    },
-    {
-      "title": "UbiComp/ISWC",
-      "titleZh": "ACM \u666e\u9002\u8ba1\u7b97\u4e0e\u53ef\u7a7f\u6234\u8ba1\u7b97\u8054\u5408\u4f1a\u8bae",
-      "description": "ACM International Joint Conference on Pervasive and Ubiquitous Computing",
-      "category": "HI",
-      "categoryName": "\u4eba\u673a\u4ea4\u4e92\u4e0e\u666e\u9002\u8ba1\u7b97",
-      "year": 2026,
-      "round": "fourth round",
-      "url": "https://www.ubicomp.org/ubicomp-iswc-2026",
-      "timezone": "AoE",
-      "deadline": 1793620799000
     },
     {
       "title": "STOC",
@@ -266,7 +146,19 @@ window.CCF_DEADLINE_DATA = {
       "round": "\u8f6e\u6b21 1",
       "url": "https://cvpr.thecvf.com/Conferences/2027",
       "timezone": "UTC-12",
-      "deadline": 1794916740000
+      "deadline": 1794916799000
+    },
+    {
+      "title": "ISCA",
+      "titleZh": "\u8ba1\u7b97\u673a\u4f53\u7cfb\u7ed3\u6784\u56fd\u9645\u7814\u8ba8\u4f1a",
+      "description": "International Symposium on Computer Architecture",
+      "category": "DS",
+      "categoryName": "\u4f53\u7cfb\u7ed3\u6784/\u5e76\u884c\u4e0e\u5206\u5e03/\u5b58\u50a8",
+      "year": 2027,
+      "round": "Main Track; rebuttal/revision period: February 16-March 8, 2027",
+      "url": "https://iscaconf.org/isca2027/",
+      "timezone": "AoE",
+      "deadline": 1794916799000
     },
     {
       "title": "S&P",
@@ -329,6 +221,18 @@ window.CCF_DEADLINE_DATA = {
       "deadline": 1798851600000
     },
     {
+      "title": "ACL",
+      "titleZh": "\u8ba1\u7b97\u8bed\u8a00\u5b66\u534f\u4f1a\u5e74\u4f1a",
+      "description": "Annual Meeting of the Association for Computational Linguistics",
+      "category": "AI",
+      "categoryName": "\u4eba\u5de5\u667a\u80fd",
+      "year": 2027,
+      "round": "ARR Submission",
+      "url": "https://2027.aclweb.org/",
+      "timezone": "UTC-12",
+      "deadline": 1799150399000
+    },
+    {
       "title": "ISSTA",
       "titleZh": "ACM \u8f6f\u4ef6\u6d4b\u8bd5\u4e0e\u5206\u6790\u56fd\u9645\u7814\u8ba8\u4f1a",
       "description": "ACM SIGSOFT International Symposium on Software Testing and Analysis",
@@ -389,6 +293,18 @@ window.CCF_DEADLINE_DATA = {
       "deadline": 1801530000000
     },
     {
+      "title": "SIGCOMM",
+      "titleZh": "ACM \u6570\u636e\u901a\u4fe1\u4f1a\u8bae",
+      "description": "ACM International Conference on Applications, Technologies, Architectures, and Protocols for Computer Communication",
+      "category": "NW",
+      "categoryName": "\u8ba1\u7b97\u673a\u7f51\u7edc",
+      "year": 2027,
+      "round": "\u8f6e\u6b21 1",
+      "url": "https://conferences.sigcomm.org/sigcomm/2027/",
+      "timezone": "AoE",
+      "deadline": 1801655999000
+    },
+    {
       "title": "VLDB",
       "titleZh": "\u8d85\u5927\u578b\u6570\u636e\u5e93\u56fd\u9645\u4f1a\u8bae",
       "description": "International Conference on Very Large Data Bases",
@@ -414,17 +330,6 @@ window.CCF_DEADLINE_DATA = {
     }
   ],
   "pending": [
-    {
-      "title": "ACL",
-      "titleZh": "\u8ba1\u7b97\u8bed\u8a00\u5b66\u534f\u4f1a\u5e74\u4f1a",
-      "description": "Annual Meeting of the Association for Computational Linguistics",
-      "category": "AI",
-      "categoryName": "\u4eba\u5de5\u667a\u80fd",
-      "year": 2027,
-      "round": "ARR Submission",
-      "url": "https://2027.aclweb.org/",
-      "timezone": "UTC-12"
-    },
     {
       "title": "ICCV",
       "titleZh": "IEEE/CVF \u56fd\u9645\u8ba1\u7b97\u673a\u89c6\u89c9\u4f1a\u8bae",
@@ -459,25 +364,14 @@ window.CCF_DEADLINE_DATA = {
       "timezone": "AoE"
     },
     {
-      "title": "ISCA",
-      "titleZh": "\u8ba1\u7b97\u673a\u4f53\u7cfb\u7ed3\u6784\u56fd\u9645\u7814\u8ba8\u4f1a",
-      "description": "International Symposium on Computer Architecture",
-      "category": "DS",
-      "categoryName": "\u4f53\u7cfb\u7ed3\u6784/\u5e76\u884c\u4e0e\u5206\u5e03/\u5b58\u50a8",
+      "title": "UbiComp/ISWC",
+      "titleZh": "ACM \u666e\u9002\u8ba1\u7b97\u4e0e\u53ef\u7a7f\u6234\u8ba1\u7b97\u8054\u5408\u4f1a\u8bae",
+      "description": "ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+      "category": "HI",
+      "categoryName": "\u4eba\u673a\u4ea4\u4e92\u4e0e\u666e\u9002\u8ba1\u7b97",
       "year": 2027,
       "round": "\u8f6e\u6b21 1",
-      "url": "https://www.iscaconf.org/",
-      "timezone": "AoE"
-    },
-    {
-      "title": "SIGCOMM",
-      "titleZh": "ACM \u6570\u636e\u901a\u4fe1\u4f1a\u8bae",
-      "description": "ACM International Conference on Applications, Technologies, Architectures, and Protocols for Computer Communication",
-      "category": "NW",
-      "categoryName": "\u8ba1\u7b97\u673a\u7f51\u7edc",
-      "year": 2027,
-      "round": "\u8f6e\u6b21 1",
-      "url": "https://conferences.sigcomm.org/sigcomm/2027/",
+      "url": "https://sigchi.org/events/ubicomp-2027/",
       "timezone": "AoE"
     },
     {

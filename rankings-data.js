@@ -11,69 +11,69 @@ window.RANKINGS_DATA = {
         },
         {
           "rank": 2,
-          "handle": "jiangly",
-          "rating": 3670,
+          "handle": "Kevin114514",
+          "rating": 3659,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 3,
-          "handle": "Kevin114514",
-          "rating": 3657,
+          "handle": "jiangly",
+          "rating": 3640,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 4,
-          "handle": "maroonrk",
-          "rating": 3355,
+          "handle": "turmax",
+          "rating": 3450,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 5,
-          "handle": "Um_nik",
-          "rating": 3353,
+          "handle": "tourist",
+          "rating": 3382,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 6,
-          "handle": "squareOf105",
-          "rating": 3346,
+          "handle": "strapple",
+          "rating": 3360,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 7,
-          "handle": "tourist",
-          "rating": 3343,
+          "handle": "Um_nik",
+          "rating": 3354,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 8,
-          "handle": "strapple",
-          "rating": 3324,
+          "handle": "squareOf105",
+          "rating": 3348,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 9,
-          "handle": "heuristica",
-          "rating": 3322,
+          "handle": "maroonrk",
+          "rating": 3312,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
         {
           "rank": 10,
-          "handle": "jiangbowen",
-          "rating": 3291,
+          "handle": "idontwannadothisanymore",
+          "rating": 3191,
           "color": "#FF0000",
           "firstLetterBlack": true
         }
       ],
-      "updatedAt": "2026-10-12T08:36:42.893994+00:00",
+      "updatedAt": "2026-10-26T12:47:15.521069+00:00",
       "source": "https://codeforces.com/api/user.ratedList?activeOnly=false&includeRetired=true",
       "scope": "six-months"
     },
@@ -160,7 +160,7 @@ window.RANKINGS_DATA = {
           "badge": "gold"
         }
       ],
-      "updatedAt": "2026-10-12T08:36:44.322920+00:00",
+      "updatedAt": "2026-10-26T12:47:15.908101+00:00",
       "source": "https://atcoder.jp/ranking?contestType=algo&lang=en",
       "scope": "active"
     }
