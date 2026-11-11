@@ -1,15 +1,9 @@
 window.CONTEST_DATA = {
   "sources": {
     "codeforces": {
-      "updatedAt": 1793018671520,
+      "updatedAt": 1794383764932,
       "error": null,
       "contests": [
-        {
-          "name": "Codeforces Round 1077 (Div. 1)",
-          "url": "https://codeforces.com/contest/2187",
-          "start": 1769697300000,
-          "end": 1769708100000
-        },
         {
           "name": "Codeforces Round 1079 (Div. 1)",
           "url": "https://codeforces.com/contest/2196",
@@ -125,23 +119,23 @@ window.CONTEST_DATA = {
           "end": 1792258500000
         },
         {
-          "name": "Codeforces Round (Div. 1)",
+          "name": "Codeforces Round 1133 (Div. 1)",
           "url": "https://codeforces.com/contest/2279",
           "start": 1794062100000,
           "end": 1794071100000
+        },
+        {
+          "name": "Codeforces Round (Div. 1)",
+          "url": "https://codeforces.com/contest/2287",
+          "start": 1795271700000,
+          "end": 1795278900000
         }
       ]
     },
     "atcoder": {
-      "updatedAt": 1793018671520,
+      "updatedAt": 1794383764932,
       "error": null,
       "contests": [
-        {
-          "name": "AtCoder Regular Contest++ 221",
-          "url": "https://atcoder.jp/contests/arc221",
-          "start": 1780228800000,
-          "end": 1780237800000
-        },
         {
           "name": "Japanese Student Championship 2026 Qualification (AtCoder Regular Contest 222)",
           "url": "https://atcoder.jp/contests/arc222",
@@ -224,18 +218,30 @@ window.CONTEST_DATA = {
           "name": "AtCoder Grand Contest 079",
           "url": "https://atcoder.jp/contests/agc079",
           "start": 1794139200000,
-          "end": 1794150000000
+          "end": 1794151800000
         },
         {
           "name": "AtCoder Regular Contest++ 234",
           "url": "https://atcoder.jp/contests/arc234",
           "start": 1795348800000,
           "end": 1795357800000
+        },
+        {
+          "name": "AtCoder Grand Contest 080",
+          "url": "https://atcoder.jp/contests/agc080",
+          "start": 1797163200000,
+          "end": 1797174000000
+        },
+        {
+          "name": "AtCoder Grand Contest 081",
+          "url": "https://atcoder.jp/contests/agc081",
+          "start": 1798372800000,
+          "end": 1798383600000
         }
       ]
     },
     "nowcoder": {
-      "updatedAt": 1793018671520,
+      "updatedAt": 1794383764932,
       "error": null,
       "contests": [
         {
@@ -297,15 +303,88 @@ window.CONTEST_DATA = {
           "url": "https://ac.nowcoder.com/acm/contest/141878",
           "start": 1792753200000,
           "end": 1792764000000
+        },
+        {
+          "name": "\u725b\u5ba2\u6311\u6218\u8d5b94",
+          "url": "https://ac.nowcoder.com/acm/contest/143407",
+          "start": 1795172400000,
+          "end": 1795183200000
         }
       ]
     }
   },
   "activity": {
     "codeforces": {
-      "updatedAt": 1793018671520,
+      "updatedAt": 1794383764932,
       "error": null,
       "contests": [
+        {
+          "name": "Codeforces Round 1133 (Div. 1)",
+          "url": "https://codeforces.com/contest/2279",
+          "start": 1794062100000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "Reverse and Double",
+              "url": "https://codeforces.com/contest/2279/problem/A",
+              "rating": null,
+              "key": "codeforces:2279:A",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1794064094000
+            },
+            {
+              "index": "B",
+              "name": "Balanced Subsets",
+              "url": "https://codeforces.com/contest/2279/problem/B",
+              "rating": null,
+              "key": "codeforces:2279:B",
+              "attempts": 1,
+              "status": "OK",
+              "firstAc": 1794065459000
+            },
+            {
+              "index": "C",
+              "name": "Anti-Productive",
+              "url": "https://codeforces.com/contest/2279/problem/C",
+              "rating": null,
+              "key": "codeforces:2279:C",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "D",
+              "name": "Meta Graph",
+              "url": "https://codeforces.com/contest/2279/problem/D",
+              "rating": null,
+              "key": "codeforces:2279:D",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "E",
+              "name": "Save Me!",
+              "url": "https://codeforces.com/contest/2279/problem/E",
+              "rating": null,
+              "key": "codeforces:2279:E",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "F",
+              "name": "The Stones of Nim",
+              "url": "https://codeforces.com/contest/2279/problem/F",
+              "rating": null,
+              "key": "codeforces:2279:F",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
         {
           "name": "WorldQuant Round 1 (Codeforces Round 1128, Div. 1 + Div. 2)",
           "url": "https://codeforces.com/contest/2261",
@@ -10473,9 +10552,56 @@ window.CONTEST_DATA = {
       ]
     },
     "atcoder": {
-      "updatedAt": 1793018671520,
+      "updatedAt": 1794383764932,
       "error": null,
       "contests": [
+        {
+          "name": "AtCoder Grand Contest 079",
+          "url": "https://atcoder.jp/contests/agc079",
+          "start": 1794139200000,
+          "problems": [
+            {
+              "index": "A",
+              "name": "Tree Contraction Sequence",
+              "url": "https://atcoder.jp/contests/agc079/tasks/agc079_a",
+              "rating": 2005,
+              "key": "atcoder:agc079:agc079_a",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1794143417000
+            },
+            {
+              "index": "B",
+              "name": "Range Record",
+              "url": "https://atcoder.jp/contests/agc079/tasks/agc079_b",
+              "rating": 3310,
+              "key": "atcoder:agc079:agc079_b",
+              "attempts": 1,
+              "status": "AC",
+              "firstAc": 1794146467000
+            },
+            {
+              "index": "C",
+              "name": "Sort by Queue and Reverse",
+              "url": "https://atcoder.jp/contests/agc079/tasks/agc079_c",
+              "rating": 3540,
+              "key": "atcoder:agc079:agc079_c",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            },
+            {
+              "index": "D",
+              "name": "Yet Another Degree Sequence Problem",
+              "url": "https://atcoder.jp/contests/agc079/tasks/agc079_d",
+              "rating": 3919,
+              "key": "atcoder:agc079:agc079_d",
+              "attempts": 0,
+              "status": null,
+              "firstAc": null
+            }
+          ]
+        },
         {
           "name": "\u7b2c\u4e09\u56de AtCoder Japan Open -\u4e88\u9078-  (AtCoder Regular Contest++ 232)",
           "url": "https://atcoder.jp/contests/arc232",
@@ -18858,7 +18984,7 @@ window.CONTEST_DATA = {
       ]
     },
     "nowcoder": {
-      "updatedAt": 1793018671520,
+      "updatedAt": 1794383764932,
       "error": null,
       "contests": [
         {

@@ -33,7 +33,7 @@ window.RANKINGS_DATA = {
         {
           "rank": 5,
           "handle": "tourist",
-          "rating": 3382,
+          "rating": 3408,
           "color": "#FF0000",
           "firstLetterBlack": true
         },
@@ -73,7 +73,7 @@ window.RANKINGS_DATA = {
           "firstLetterBlack": true
         }
       ],
-      "updatedAt": "2026-10-26T12:47:15.521069+00:00",
+      "updatedAt": "2026-11-11T07:59:26.842193+00:00",
       "source": "https://codeforces.com/api/user.ratedList?activeOnly=false&includeRetired=true",
       "scope": "six-months"
     },
@@ -82,7 +82,7 @@ window.RANKINGS_DATA = {
         {
           "rank": 1,
           "handle": "tourist",
-          "rating": 3730,
+          "rating": 3672,
           "color": "#FF0000",
           "countryCode": "BY",
           "badge": "champion"
@@ -113,34 +113,34 @@ window.RANKINGS_DATA = {
         },
         {
           "rank": 5,
-          "handle": "ksun48",
-          "rating": 3608,
-          "color": "#FF00FF",
-          "countryCode": "CA",
-          "badge": "gold"
-        },
-        {
-          "rank": 6,
           "handle": "ecnerwala",
-          "rating": 3560,
+          "rating": 3572,
           "color": "#FF0000",
           "countryCode": "US",
           "badge": "gold"
         },
         {
+          "rank": 6,
+          "handle": "ksun48",
+          "rating": 3536,
+          "color": "#FF00FF",
+          "countryCode": "CA",
+          "badge": "gold"
+        },
+        {
           "rank": 7,
-          "handle": "tour1st",
-          "rating": 3381,
-          "color": "#FF0000",
-          "countryCode": "CN",
+          "handle": "Radewoosh",
+          "rating": 3478,
+          "color": "#800080",
+          "countryCode": "PL",
           "badge": "gold"
         },
         {
           "rank": 8,
-          "handle": "Nachia",
-          "rating": 3379,
-          "color": "#7878DB",
-          "countryCode": "JP",
+          "handle": "tour1st",
+          "rating": 3381,
+          "color": "#FF0000",
+          "countryCode": "CN",
           "badge": "gold"
         },
         {
@@ -153,14 +153,14 @@ window.RANKINGS_DATA = {
         },
         {
           "rank": 10,
-          "handle": "Radewoosh",
-          "rating": 3371,
-          "color": "#800080",
-          "countryCode": "PL",
+          "handle": "f3e6g4",
+          "rating": 3349,
+          "color": "#66CCFF",
+          "countryCode": "CN",
           "badge": "gold"
         }
       ],
-      "updatedAt": "2026-10-26T12:47:15.908101+00:00",
+      "updatedAt": "2026-11-11T07:59:28.469312+00:00",
       "source": "https://atcoder.jp/ranking?contestType=algo&lang=en",
       "scope": "active"
     }
